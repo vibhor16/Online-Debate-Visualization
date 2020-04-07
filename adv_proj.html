@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="javascript.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-7 col-sm-7" id="left">
+        <div id="left_top">
+          <div id="video_url">
+            <input type="text" placeholder="Enter the URL of the video"
+              style="font-size:9pt;margin-top: 3em;border-radius: 20px;padding: 1em" />
+          </div>
+          <br />
+          <iframe id="player" class="embed-responsive-item"
+            src="https://www.youtube.com/embed/9hYLSoTH_2I?enablejsapi=1" allowfullscreen></iframe>
+        </div>
+
+        <div class="col-sm-12" id="left_bottom">
+          <div class="col-sm-4" id="sideA">
+            <label>SIDE A</label><br/>
+            <button class="btn btn-primary dropdown-toggle" type="button" style="width: 12em;" data-toggle="dropdown"
+              onclick="populate_debater_dropdowns(this)">Select Debater A &nbsp<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+            </ul>
+            <br />
+
+            <button type="button" class="btn btn-default btn-sm" style="margin-top: 1em;" onclick="add_item_A(this)">
+              <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+          </div>
+
+          <div class="col-sm-4" id="attacks_label">
+            <p>ATTACKS</p>
+            <button id="tag_btn" class="btn btn-success btn-sm" style="width: 10em;" onclick="perform_tag()">Tag</button><br />
+            <button id="save_btn" class="btn btn-success btn-sm" style="width: 10em;" onclick="save()">Save</button>
+            <p id="attack_time"></p><br/>
+
+          </div>
+
+          <div class="col-sm-4" id="sideB">
+            <label>SIDE B</label><br/>
+            <button class="btn btn-primary dropdown-toggle" type="button" style="width: 12em;" data-toggle="dropdown"
+              onclick="populate_debater_dropdowns(this)">Select Debater B &nbsp<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+            </ul>
+            <br />
+
+            <button type="button" class="btn btn-default btn-sm" style="margin-top: 1em;" onclick="add_item_B(this)">
+              <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+          </div>
+
+
+        </div>
+
+      </div>
+      <div class="col-sm-5 col-sm-5" id="right">
+        <div id="right_top">
+          <label>TOPICS</label>
+          <br/>
+          <img id="topics" src="Topics.png"></img>
+        </div>
+        <div id="right_bottom">
+            <div id="profiles"></div>
+            <div id="image_name"></div>
+            <div id="timeline">
+              <img src="timeline.jpeg"></img>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="main.css">
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+#player{
+    width: 100%;
+    height: 50vh;
+}
+
+body{
+    background: #2d3e5021;
+}
+
+#left_top{
+    height: 60vh;
+}
+
+#left_bottom{
+    background: #2d3e50;
+    height: 38vh;
+    /* border: 1px solid white; */
+    width: 100%;
+    text-align: center;
+    padding: 2em 0;
+    border-radius: 5px;
+}
+
+#left{
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+#right{
+    height: 100vh;
+    padding-left: 6em;
+}
+
+#tagger button{
+    margin: 0 5em;
+}
+
+#video_url{
+    padding: 0 2em;
+}
+
+#video_url input{
+    width: 100%;
+}
+
+#player{
+    border: 0;
+    border-radius: 5px;
+    height: 45vh;
+}
+
+#sideA label{
+    color: white;
+}
+
+#sideB label{
+    color: white;
+}
+
+.dropdown-menu{
+    margin-left: 2.9em;
+    top: -4em;
+}
+
+#attacks_label{
+    padding-top: 4em;
+    color: white;
+}
+
+.vericaltext{
+    width: 1px;
+    word-wrap: break-word;
+    font-family: monospace;
+    color: white;
+    font-weight: bold;
+}
+
+.list_item{
+    padding: 0 1em;
+    cursor: pointer;
+}
+
+#attack_time{
+    margin-top: 1em;
+    height: 1em;
+}
+
+#topics{
+    width: 33em;
+    border-radius: 5px;
+}
+
+#right_top{
+    margin-top: 5.3em;
+}
+
+#right_top label{
+    color: black;
+}
+
+#profiles {
+    position: absolute;
+    top: 4em;
+    left: -55em;
+}
+
+#profiles img{
+    width: 4em;
+    margin-top: 1em;
+    border-radius: 4em;
+    background: #2c3e50;
+    cursor: pointer;
+}
+
+#profiles label{
+    color: black;
+}
+
+#timeline img{
+    width: 33em;
+    margin-top: 6em;
+    height: 22em;
+    border-radius: 5px;
+}
+
+#image_name{
+    background: orange;
+    color: black;
+    padding: 0.5em;
+    position: absolute;
+    top: 4em;
+    left: -50em;
+    border-radius: 6px;
+    z-index: 100;
+}
+
+#save_btn{
+    margin-top: 1em;
+}
