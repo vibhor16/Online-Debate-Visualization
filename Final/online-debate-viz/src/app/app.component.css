@@ -1,0 +1,18 @@
+.container{
+  margin: 0 !important;
+  width: 100% !important;
+  height: 88%;
+}
+
+#main-row{
+  height: 100%;
+  width: 58em;
+}
+
+#left{
+  height: 100%;
+}
+
+#right{
+  height: 100%;
+}
