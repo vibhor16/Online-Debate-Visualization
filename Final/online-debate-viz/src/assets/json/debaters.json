@@ -1,0 +1,64 @@
+{
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Amy Klobuchar",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/klobucha.png",
+      "party": "democratic"
+    },
+    {
+      "id": 2,
+      "name": "Cory Booker",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/booker.png",
+      "party": "republican"
+    },
+    {
+      "id": 3,
+      "name": "Pete Buttigieg",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/buttigieg.png",
+      "party": "democratic"
+    },
+    {
+      "id": 4,
+      "name": "Bernie Sanders",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/sanders.png",
+      "party": "republican"
+    },
+    {
+      "id": 5,
+      "name": "Joseph R. Biden Jr.",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/biden.png",
+      "party": "democratic"
+    },
+    {
+      "id": 6,
+      "name": "Elizabeth Warren",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/warren.png",
+      "party": "republican"
+    },
+    {
+      "id": 7,
+      "name": "Kamala Harris",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/harris.png",
+      "party": "democratic"
+    },
+    {
+      "id": 8,
+      "name": "Andrew Yang",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/yang.png",
+      "party": "democratic"
+    },
+    {
+      "id": 9,
+      "name": "Beto O'Rourke",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/orourke.png",
+      "party": "democratic"
+    },
+    {
+      "id": 10,
+      "name": "Julián Castro",
+      "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/castro.png",
+      "party": "republican"
+    }
+  ]
+}

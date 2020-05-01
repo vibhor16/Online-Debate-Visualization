@@ -1,4 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+html{
+  background: #e2e2e2;
+}
 body{
   height: 100vh;
+}
+
+#left {
+  height: 100%;
+  border: 1px solid #c5baba;
+  border-radius: 5px;
+  background: snow;
+  text-align: center;
+}
+
+
+#right{
+  height: 100%;
+}
+
+#right .row{
+  height: 50%;
+}
+
+#right-section-video{
+  height: 100%;
+  border: 1px solid #c5baba;
+  border-radius: 5px;
+  background: snow;
+}
+
+
+#right-section-topics{
+  height: 100%;
+  border: 1px solid #c5baba;
+  border-radius: 5px;
+  background: snow;
+}
+
+
+#right-section-tagging{
+  height: 100%;
+  border: 1px solid #c5baba;
+  border-radius: 5px;
+  background: snow;
+}
+
+
+#right-section-fish{
+  height: 100%;
+  border: 1px solid #c5baba;
+  border-radius: 5px;
+  background: snow;
+}
+
+#top-nav-bar{
+  height: 8%;
+}
+
+.container{
+  margin: 0 !important;
+  max-width: 100% !important;
+  height: 88%;
+}
+
+#main-row{
+  height: 100%;
+}
+
+.democratic-img{
+  border-radius: 50%;
+  width: 100%;
+}
+
+.republican-img{
+  border-radius: 50%;
+  width: 100%;
 }

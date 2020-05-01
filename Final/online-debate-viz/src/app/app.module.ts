@@ -10,6 +10,7 @@ import { RightSectionVideoComponent } from './right-section-video/right-section-
 import { RightSectionTaggingComponent } from './right-section-tagging/right-section-tagging.component';
 import { RightSectionTopicsComponent } from './right-section-topics/right-section-topics.component';
 import { RightSectionFishComponent } from './right-section-fish/right-section-fish.component';
+import { AddCandidateComponent } from './left-section/add-candidate/add-candidate.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RightSectionFishComponent } from './right-section-fish/right-section-fi
     RightSectionVideoComponent,
     RightSectionTaggingComponent,
     RightSectionTopicsComponent,
-    RightSectionFishComponent
+    RightSectionFishComponent,
+    AddCandidateComponent
   ],
   imports: [
     BrowserModule,

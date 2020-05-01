@@ -1,0 +1,35 @@
+#add-candidate{
+  background: #343a40;
+  color: white;
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  margin: 8% auto;
+}
+
+#candidate-img {
+  width: 15em;
+  display: flex;
+  margin: auto;
+  border-radius: 50%;
+}
+
+#dropdownMenuLink{
+  width: 100%;
+}
+
+#close-pop-up{
+  margin: 0 90%;
+  cursor: pointer;
+}
+
+#title-pop-up{
+  display: flex;
+  margin: auto;
+}
+
+#save-pop-up{
+  display: flex;
+  margin: auto;
+}
