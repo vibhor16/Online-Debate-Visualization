@@ -8,7 +8,6 @@ declare var $: any
   selector: 'app-video',
 })
 export class VideoComponent implements OnInit {
-  @Input() public VideoID;
   @ViewChild('videoPlayer', { static: true }) youtube_player: ElementRef;
 
   ngOnInit() {
@@ -16,12 +15,21 @@ export class VideoComponent implements OnInit {
 
     tag.src = "https://www.youtube.com/iframe_api";
     document.body.appendChild(tag);
-    console.log("Video ID");
     // @ts-ignore
-    console.log("changing id to :"+this.VideoID);
     // @ts-ignore
-    this.youtube_player._videoId._value = this.VideoID;
+
+
     VideoObject.obj = this.youtube_player;
+
+    let videoId = VideoObject.DUMMY_URL.split("v=")[1];
+    VideoObject.obj._videoId._value =  videoId;
+
+    $('#input_video_url').on('keypress', (event) => {
+      if(event.which == 13) {
+        VideoObject.inputVideoURL = $("#input_video_url").val();
+        VideoObject.obj._videoId._value =  VideoObject.inputVideoURL;
+      }
+    });
   }
 
    public onPlayerStateChange(event) {

@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 html{
-  background: #e2e2e2;
+  background: black;
 }
 body{
   height: 100vh;
@@ -8,15 +8,19 @@ body{
 
 #left {
   height: 100%;
-  border: 1px solid #c5baba;
+  color: white;
+  border: 1px solid grey;
   border-radius: 5px;
-  background: snow;
+  background: #0c131b;
   text-align: center;
+  margin-top: 1em;
+  margin-right: 1%;
 }
 
 
 #right{
-  height: 100%;
+  height: 99%;
+  margin-top: 1em;
 }
 
 #right .row{
@@ -25,9 +29,9 @@ body{
 
 #right-section-video{
   height: 100%;
-  border: 1px solid #c5baba;
+  /*border: 1px solid #c5baba;*/
   border-radius: 5px;
-  background: snow;
+  background: #0c131b;
 }
 
 
@@ -35,15 +39,16 @@ body{
   height: 100%;
   border: 1px solid #c5baba;
   border-radius: 5px;
-  background: snow;
+  background: #0c131b;
 }
 
 
 #right-section-tagging{
   height: 100% !important;
+  color: white;
   border: 1px solid #c5baba;
   border-radius: 5px;
-  background: snow;
+  background: #0c131b;
 }
 
 .sub-titles{
@@ -60,7 +65,7 @@ body{
   height: 100%;
   border: 1px solid #c5baba;
   border-radius: 5px;
-  background: snow;
+  background: #0c131b;
 }
 
 #top-nav-bar{
@@ -88,7 +93,7 @@ body{
 }
 
 .red {
-  background: red;
+  background: red !important;
 }
 
 #tag_btn{
@@ -102,9 +107,61 @@ body{
 #side_democrats{
   height: 13em;
   overflow: scroll;
+  background: #07074e;
+  padding: initial;
 }
 
 #side_republican{
   height: 13em;
   overflow: scroll;
+  background: #520101;
+  padding: initial;
+}
+
+iframe{
+  /*noinspection CssInvalidPropertyValue*/
+  height: -webkit-fill-available !important;
+}
+
+#add-candidate-btn{
+  color: white;
+  width: 100%;
+}
+
+#debaters_democrats {
+  background: #07074e;
+}
+
+#debaters_democrats img{
+  margin: 0.5em 0;
+  background: black;
+  margin-left: 0.5em;
+}
+
+#debaters_republicans{
+  background: #520101;
+}
+#debaters_republicans img{
+  margin: 0.5em 0;
+  background: black;
+  margin-right: 1em !important;
+}
+
+.right-border {
+  border-right: 1px solid grey;
+}
+
+#side_center{
+  text-align: center;
+}
+
+#image_name{
+  background: orange;
+  color: black;
+  padding: 0.5em;
+  position: absolute;
+  top: 4em;
+  left: -50em;
+  border-radius: 6px;
+  z-index: 100;
 }

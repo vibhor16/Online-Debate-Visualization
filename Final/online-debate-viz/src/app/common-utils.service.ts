@@ -30,4 +30,6 @@ export class VideoObject {
   static obj: any;
   static currentTime: any;
   static taggedEntriesObject: any[];
+  static inputVideoURL: any;
+  static DUMMY_URL = "https://www.youtube.com/watch?v=F_TYe2wdaGg";
 }

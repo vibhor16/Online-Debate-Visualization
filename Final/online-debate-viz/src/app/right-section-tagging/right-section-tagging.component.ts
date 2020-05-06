@@ -7,6 +7,7 @@ declare var $: any;
   selector: 'app-right-section-tagging',
   templateUrl: './right-section-tagging.component.html',
   styleUrls: ['./right-section-tagging.component.css',
+    '../../../node_modules/@fortawesome/fontawesome-free/css/all.css',
     '../../../node_modules/bootstrap/dist/css/bootstrap.css']
 })
 export class RightSectionTaggingComponent implements OnInit {
@@ -20,29 +21,53 @@ export class RightSectionTaggingComponent implements OnInit {
     this.democrats = debaters["democrats"];
     this.republicans = debaters["republicans"];
 
+    $("#tag_direction_left").hide();
+
     $('#tag_btn').on('click', () => {
       this.perform_tag();
     });
+
+    $('#save_btn').on('click', () => {
+      this.addToTaggedEntriesObject();
+    });
+
+    $('.tag_direction').on('click', () => {
+
+      let direction = this.getAttackDirection();
+      if(direction == "from"){
+        $("#tag_direction_left").hide();
+        $("#tag_direction_right").show();
+      } else {
+        $("#tag_direction_right").hide();
+        $("#tag_direction_left").show();
+      }
+
+    });
   }
 
+  getAttackDirection(): string {
+    let direction = "to";
+    if ($("#tag_direction_left").is(":visible")) {
+      direction = "from";
+    }
+    return direction;
+  }
   perform_tag(): void {
     this.playerElem = VideoObject.obj;
     this.playerElem.pauseVideo();
-    var time = this.playerElem.getCurrentTime().toFixed(2);
+    let time = this.playerElem.getCurrentTime().toFixed(2);
     if(time != 0.00)
     $("#tag_time").html("<b>"+this.secondsToMs(VideoObject.currentTime)+"</b>");
-
-    this.addToTaggedEntriesObject();
   }
 
   addToTaggedEntriesObject(): void{
     let entry = {};
-    var democrats = [];
+    let democrats = [];
     $('.democrats-check:checkbox:checked').each(function() {
       democrats.push($(this).attr('id'));
     });
 
-    var republicans = [];
+    let republicans = [];
     $('.republican-check:checkbox:checked').each(function() {
       republicans.push($(this).attr('id'));
     });
@@ -50,8 +75,18 @@ export class RightSectionTaggingComponent implements OnInit {
     entry['democrats'] = democrats;
     entry['republican'] = republicans;
     entry['timestamp'] = VideoObject.currentTime;
+    entry['direction'] = this.getAttackDirection();
+
+    if(democrats.length == 0)
+      alert("Please select at least 1 democrat!")
+
+    else if(republicans.length == 0)
+      alert("Please select at least 1 republican!")
+
+    else if(VideoObject.currentTime == null)
+      alert("Press Tag button before tagging!");
     debugger;
-    VideoObject.taggedEntriesObject.push(entry);
+    // VideoObject.taggedEntriesObject.push(entry);
   }
 
   // var myData = [
