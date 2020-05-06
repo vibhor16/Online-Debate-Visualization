@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12" id="section-title">
+  <div class="col-md-12 sub-titles" id="section-title">
     <p>CANDIDATES</p>
   </div>
 </div>
@@ -12,8 +12,9 @@
 
 <div class="row" id="debaters_profile">
   <div class="col-md-6" id="debaters_democrats">
-
+    <img id="left_democrat_{{democrat.id}}" *ngFor="let democrat of democrats;" class="democratic-img" src="{{democrat.pic}}" alt="{{democrat.name}}" onmouseover="showImgName(this)" onmouseout="hideImgName(this)"><br/>
   </div>
   <div class="col-md-6" id="debaters_republicans">
+    <img id="left_republican_{{republican.id}}" *ngFor="let republican of republicans;" class="democratic-img" src="{{republican.pic}}" alt="{{republican.name}}" onmouseover="showImgName(this)" onmouseout="hideImgName(this)"><br/>
   </div>
 </div>

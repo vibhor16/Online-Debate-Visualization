@@ -1,1 +1,39 @@
-<p>right-section-tagging works!</p>
+<br/>
+<div class="row">
+  <div class="col-md-5">
+    <button type="button" class="btn btn-success" id="tag_btn">Tag</button>
+  </div>
+  <div class="col-md-2">
+    <label id="tag_time"></label>
+  </div>
+  <div class="col-md-5">
+    <button type="button" class="btn btn-success" id="save_btn">Save</button>
+  </div>
+  </div>
+<br/>
+<div class="row">
+  <div class="col-md-5">
+    <p>DEMOCRATIC PARTY</p>
+    <div class="form-check" id="side_democrats">
+      <ul style="list-style-type: none;">
+        <li *ngFor="let democrat of democrats;"><input  class="form-check-input democrats-check" type="checkbox" id="{{democrat.name}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>
+          <label for="{{democrat.name}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>{{democrat.name}}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-2" id="side_center">
+<!--    <p>ATTACK</p>-->
+  </div>
+  <div class="col-md-5">
+    <p>REPUBLICAN PARTY</p>
+    <div class="form-check" id="side_republican">
+      <ul style="list-style-type: none;">
+        <li *ngFor="let debater of republicans;"><input  class="form-check-input republican-check" type="checkbox" id="{{debater.name}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>
+          <label for="{{debater.name}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>{{debater.name}}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

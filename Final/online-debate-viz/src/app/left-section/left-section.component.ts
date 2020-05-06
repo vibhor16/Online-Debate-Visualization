@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GET_DEBATERS_JSON } from 'src/app/common-utils.service';
+
 declare var $: any;
 
 function populateDebatersList() {
@@ -30,10 +32,16 @@ function populateDebatersList() {
 })
 export class LeftSectionComponent implements OnInit {
 
+  democrats: any[];
+  republicans: any[];
   constructor() { }
 
   ngOnInit(): void {
-    populateDebatersList();
+    let debaters = GET_DEBATERS_JSON();
+    this.democrats = debaters["democrats"];
+    this.republicans = debaters["republicans"];
+
+    // populateDebatersList();
 
     $('#add-candidate-btn').on('click', () => {
       $('#add-candidate').show();
