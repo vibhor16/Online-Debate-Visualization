@@ -165,3 +165,23 @@ iframe{
   border-radius: 6px;
   z-index: 100;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-select-arrow{
+  color: white;
+}
+
+.topic_placeholder{
+color: white;
+  font-size: 0.785em;
+}
+
+.mat-form-field-infix{
+  border-bottom: 1px solid white;
+}
+
+.mat-form-field{
+  width: 9em;
+}

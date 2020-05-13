@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import * as d3timeline from 'd3-timeline';
-// import * as d3 from 'd3';
-// import * as d3 from 'd3-selection';
-// import * as d3Scale from 'd3-scale';
-// import * as d3Shape from 'd3-shape';
-// import * as d3Array from 'd3-array';
-// import * as d3Axis from 'd3-axis';
+import {  Utilities, DataService } from 'src/app/common-utils.service';
 
 
+declare var $: any;
+declare var d3: any;
 @Component({
   selector: 'app-right-section-topics',
   templateUrl: './right-section-topics.component.html',
@@ -15,37 +11,74 @@ import * as d3timeline from 'd3-timeline';
 })
 export class RightSectionTopicsComponent implements OnInit {
 
-  constructor() { }
+  all_tag_entries_topics: any[];
+  myData: any[];
+
+  constructor(private data: DataService) { }
 
   ngOnInit(): void {
-    // this.timelineLabelColor()
-  }
-
-  timelineLabelColor() {
-    // debugger;
-    var myData = [
-      {icon:"guns.png", times: [{"color":"green", "starting_time": 1355752800000, "display_icon":"biden.png"}, {"color":"blue", "starting_time": 1355767900000, "display":"rect"}]},
-      {icon:"economic.png", times: [{"color":"pink", "starting_time": 1355759910000, "display_icon":"elizabeth.png"} ]},
-      {icon:"immigration.png", times: [{"color":"yellow", "starting_time": 1355761910000, "display_icon":"bernie.png"}, {"color":"blue", "starting_time": 1355767900000, "display_icon":"elizabeth.png"}]}
+    this.all_tag_entries_topics = [];
+    this.myData = [{
+      icon: '../../assets/images/empty_profile.png',
+      times: [
+        {
+          'color': 'green',
+          'starting_time': 1355752800000,
+          'ending_time': 1355759900000,
+          'display_icon': '../../assets/images/empty_profile.png'
+        }
+      ]
+    },
+      {
+        icon: '../../assets/images/empty_profile.png',
+        times: [{
+          'color': 'pink',
+          'starting_time': 1355759910000,
+          'ending_time': 1355761900000,
+          'display_icon': '../../assets/images/empty_profile.png'
+        }]
+      },
+      {
+        icon: '../../assets/images/empty_profile.png',
+        times: [{
+          'color': 'yellow',
+          'starting_time': 1355761910000,
+          'ending_time': 1355763910000,
+          'display_icon': 'https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/klobucha.png'
+        }]
+      }
     ];
-    var width = 500;
-    // var chart = d3timeline.timeline()
-    //   .beginning(1355752800000) // we can optionally add beginning and ending times to speed up rendering a little
-    //   .ending(1355774400000)
-    //   .stack() // toggles graph stacking
-    //   .margin({left:70, right:30, top:0, bottom:0})
-    //   ;
+    this.data.currentMessage.subscribe(message => this.onNewTagEntry(message));
 
-    var chart = d3timeline.timeline()
-      .relativeTime()
-      .tickFormat({
-        format: function(d) { return d3timeline.time.format("%H:%M")(d) },
-        tickTime: d3timeline.time.minutes,
-        tickInterval: 30,
-        tickSize: 15,
-      });  
-    // var svg = d3timeline.select("#timeline6").append("svg").attr("width", width)
-    //   .datum(myData).call(chart);
   }
 
+  onNewTagEntry(newEntry): void{
+    if(newEntry != '') {
+
+      this.all_tag_entries_topics.push(newEntry);
+      this.myData.push(newEntry);
+      this.D3TimelineFunctions(this.myData);
+    }
+  }
+
+  D3TimelineFunctions(myData): void{
+    d3.selectAll("svg > *").remove();
+    var width = 500;
+    function timelineLabelColor() {
+
+      var chart = d3.timeline()
+        .relativeTime()
+        .stack()
+        .margin({left:70, right:30, top:0, bottom:0})
+        .tickFormat({
+          format: function(d) { return d3.time.format("%H:%M:%S")(d) },
+          tickTime: d3.time.minutes,
+          tickInterval: 30,
+          tickSize: 10 ,
+        });
+      var svg = d3.select("svg").attr("width", width)
+        .datum(myData).call(chart);
+    }
+    timelineLabelColor();
+  }
 }

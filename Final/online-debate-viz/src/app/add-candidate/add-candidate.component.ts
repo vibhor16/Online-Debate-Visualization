@@ -19,25 +19,6 @@ function populateDebatersList(debaters) {
   });
 }
 
-function retrieveDebaterJSON(){
-  var json = [];
-
-  $.ajax({
-    type: 'GET',
-    url: '../../assets/json/debaters.json',
-    dataType: 'json',
-    success: function(result) {
-      $.each(result['profiles'], function(i, field){
-        json.push(field);
-      });
-    },
-    data: {},
-    async: false
-  });
-
-  return json;
-}
-
 @Component({
   selector: 'app-add-candidate',
   templateUrl: './add-candidate.component.html',

@@ -1,17 +1,17 @@
 <br/>
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     <button type="button" class="btn btn-success" id="tag_btn">Tag</button>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
   </div>
-  <div class="col-md-5">
+  <div class="col-md-4">
     <button type="button" class="btn btn-success" id="save_btn">Save</button>
   </div>
   </div>
 <br/>
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-4">
     <div class="form-check" id="side_democrats">
       <ul style="list-style-type: none">
         <li *ngFor="let democrat of democrats;"><input  class="form-check-input democrats-check" type="checkbox" id="{{democrat.name}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>
@@ -20,14 +20,25 @@
       </ul>
     </div>
   </div>
-  <div class="col-md-2" id="side_center">
+  <div class="col-md-4" id="side_center">
       <button type="button" class="btn btn-danger tag_direction" id="tag_direction_right"><i class="fa fa-arrow-right"></i></button>
       <button type="button" class="btn btn-danger tag_direction" id="tag_direction_left"><i class="fa fa-arrow-left"></i></button>
       <br/>
       <br/>
       <label id="tag_time"></label>
+
+
+    <mat-form-field>
+      <mat-placeholder class="topic_placeholder">Topic of Discussion</mat-placeholder>
+      <mat-select (selectionChange)="changeTopic($event.value)" style="color: white">
+        <mat-option *ngFor="let topic of topics" [value]="topic.name">
+          {{topic.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
-  <div class="col-md-5">
+  <div class="col-md-4">
     <div class="form-check" id="side_republican">
       <ul style="list-style-type: none; ">
         <li *ngFor="let debater of republicans;"><input  class="form-check-input republican-check" type="checkbox" id="{{debater.name}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>
