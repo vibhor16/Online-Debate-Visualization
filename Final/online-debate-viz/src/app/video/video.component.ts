@@ -1,35 +1,40 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import { VideoObject } from 'src/app/common-utils.service'
+import { VideoObject,DataService } from 'src/app/common-utils.service'
 
 
-declare var $: any
+declare var $: any;
 @Component({
   template: '<youtube-player #videoPlayer (stateChange)=onPlayerStateChange($event) width="100%"></youtube-player>',
   selector: 'app-video',
 })
 export class VideoComponent implements OnInit {
   @ViewChild('videoPlayer', { static: true }) youtube_player: ElementRef;
+  youtubeVideoURL : any;
+
+  constructor(private data: DataService) {
+  }
 
   ngOnInit() {
-    const tag = document.createElement('script');
+    this.data.currentVideo.subscribe(message =>  this.createYoutubePlayer(message));
+  }
 
+  createYoutubePlayer(message){
+
+    this.youtubeVideoURL = message;
+    const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     document.body.appendChild(tag);
-    // @ts-ignore
-    // @ts-ignore
-
 
     VideoObject.obj = this.youtube_player;
+    let videoId = this.youtubeVideoURL.split("v=")[1];
+    console.log("this.youtubeVideoURL = " + this.youtubeVideoURL);
 
-    let videoId = VideoObject.DUMMY_URL.split("v=")[1];
-    VideoObject.obj._videoId._value =  videoId;
+    if($("iframe").length > 0) {
+      $("iframe").attr("src","https://www.youtube.com/embed/"+videoId);
+    } else {
+      VideoObject.obj._videoId._value =  videoId;
+    }
 
-    $('#input_video_url').on('keypress', (event) => {
-      if(event.which == 13) {
-        VideoObject.inputVideoURL = $("#input_video_url").val();
-        VideoObject.obj._videoId._value =  VideoObject.inputVideoURL;
-      }
-    });
   }
 
    public onPlayerStateChange(event) {
@@ -43,7 +48,6 @@ export class VideoComponent implements OnInit {
         // @ts-ignore
         this.record('video paused at ' + this.youtube_player.getCurrentTime());
         // @ts-ignore
-        VideoObject.currentTime = this.youtube_player.getCurrentTime();
     }
   }
 

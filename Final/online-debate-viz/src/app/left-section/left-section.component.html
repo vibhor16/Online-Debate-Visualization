@@ -1,32 +1,42 @@
-<div class="row">
-  <div class="col-md-12 sub-titles" id="section-title">
-    <p><b>Candidates</b></p>
-  </div>
-</div>
+<!--<div class="row">-->
+<!--  <div class="col-md-12 sub-titles" id="section-title">-->
+<!--    <p><b>Candidates</b></p>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div class="row" style="border-bottom: 1px solid grey">
   <div class="col-md-12">
-    <button type="button" class="btn btn-default" id="add-candidate-btn"><i class="fa fa-plus"></i>Add</button>
+    <button type="button" class="btn btn-default" id="add-candidate-btn"><i class="fa fa-plus"></i>ADD</button>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-6 sub-titles right-border" >
-    <p>Democrats</p>
+    <p>DEMOCRATS</p>
   </div>
   <div class="col-md-6 sub-titles">
-    <p>Republicans</p>
+    <p>REPUBLICANS</p>
   </div>
 </div>
 
-<div class="row" style="height: 80%; overflow-y:scroll; overflow-x: hidden">
+<div class="row" style="height: 88%; overflow-y:scroll; overflow-x: hidden">
 
   <div class="row" id="debaters_profile">
     <div class="col-md-6 right-border " id="debaters_democrats">
-      <img id="left_democrat_{{democrat.id}}" *ngFor="let democrat of democrats;" class="democratic-img" src="{{democrat.pic}}" alt="{{democrat.name}}" onmouseover="showImgName(this)" onmouseout="hideImgName(this)"><br/>
+      <ul style="list-style-type:none; display: inline">
+        <li *ngFor="let democrat of democrats;" style="min-height: 10em;">
+          <img id="left_democrat_{{democrat.id}}"  class="democratic-img" src="{{democrat.pic}}" alt="{{democrat.name}}" (mouseover)="toggleLabel($event)" (mouseleave)="toggleLabel($event)"><br/>
+          <label id="label_left_democrat_{{democrat.id}}" style="display: none">{{democrat.name}}</label>
+        </li>
+      </ul>
     </div>
     <div class="col-md-6" id="debaters_republicans">
-      <img id="left_republican_{{republican.id}}" *ngFor="let republican of republicans;" class="democratic-img" src="{{republican.pic}}" alt="{{republican.name}}" onmouseover="showImgName(this)" onmouseout="hideImgName(this)"><br/>
+      <ul style="list-style-type:none; display: inline">
+        <li *ngFor="let republican of republicans;" style="min-height: 10em">
+          <img id="left_republican_{{republican.id}}"  class="democratic-img" src="{{republican.pic}}" alt="{{republican.name}}" (mouseover)="toggleLabel($event)" (mouseleave)="toggleLabel($event)"><br/>
+          <label id="label_left_republican_{{republican.id}}" style="display:none;: hidden">{{republican.name}}</label>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

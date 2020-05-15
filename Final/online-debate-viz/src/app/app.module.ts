@@ -17,6 +17,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {DataService} from './common-utils.service';
 import { RightSectionTopicsNewComponent } from './right-section-topics-new/right-section-topics-new.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -31,14 +32,15 @@ import { RightSectionTopicsNewComponent } from './right-section-topics-new/right
     AddCandidateComponent,
     RightSectionTopicsNewComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    VideoModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        VideoModule,
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatIconModule
+    ],
   providers: [DataService],
   bootstrap: [AppComponent]
 })

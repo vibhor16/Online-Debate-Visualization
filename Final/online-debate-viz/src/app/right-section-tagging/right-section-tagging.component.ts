@@ -60,8 +60,10 @@ export class RightSectionTaggingComponent implements OnInit {
     this.playerElem = VideoObject.obj;
     this.playerElem.pauseVideo();
     let time = this.playerElem.getCurrentTime().toFixed(2);
+    VideoObject.currentTime = time;
     if(time != 0.00)
-       $("#tag_time").html("<b>"+this.secondsToMs(VideoObject.currentTime)+"</b>");
+       $("#tag_time").html("<b>"+this.secondsToMs(time)+"</b>");
+
   }
 
   addToTaggedEntriesObject(): void{
@@ -88,25 +90,36 @@ export class RightSectionTaggingComponent implements OnInit {
       alert("Press Tag button before tagging!");
 
     else if(this.topicSelected == null)
-      alert("Select a topic from the list!")
+      alert("Select a topic from the list!");
     else {
-      entry['democrats'] = democrats;
-      entry['republican'] = republicans;
-      entry['timestamp'] = VideoObject.currentTime;
-      entry['direction'] = this.getAttackDirection();
+      // entry['democrats'] = democrats;
+      // entry['republican'] = republicans;
+      // entry['timestamp'] = VideoObject.currentTime;
+      // entry['direction'] = this.getAttackDirection();
 
-      let time = new Date(VideoObject.currentTime * parseInt('1000'));
+      let time = new Date(this.playerElem.getCurrentTime() * parseInt('1000'));
       console.log("time youtube = "+time);
 
-      let startingTime = new Date(2020,5,5,time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
-      time = new Date(VideoObject.currentTime  * parseInt('1000') + parseInt('2000'));
-      let endingTime = new Date(2020,5,5,time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
+      let startingTime = new Date(0,0,0,time.getHours(), time.getMinutes(), time.getSeconds());
+      time = new Date(this.playerElem.getCurrentTime()  * parseInt('1000') + parseInt('2000'));
+      let endingTime = new Date(0,0,0,time.getHours(), time.getMinutes(), time.getSeconds());
 
       let topicRecord = Utilities.getRecordByName(this.topicSelected);
       let debaterRecord = Utilities.getDebaterRecordByName(democrats[0]);
 
 
-      entry = [topicRecord.name, debaterRecord.name, startingTime, endingTime];
+      // entry = [topicRecord.name, debaterRecord.name, startingTime, endingTime];
+      let seconds1 = Number(this.playerElem.getCurrentTime());
+      let seconds2 = Number(this.playerElem.getCurrentTime()) + 2;
+
+      let tooltip = '<p style="text-align: center">'+ debaterRecord.name+'<br/>' + this.secondsToMs(this.playerElem.getCurrentTime()) + '</p>';
+      entry = [
+        topicRecord.name,
+        debaterRecord.name,
+        tooltip,
+        new Date(0,0,0,  Math.floor(seconds1 / 3600), Math.floor(seconds1 % 3600 / 60), Math.floor(seconds1 % 3600 % 60)),
+        new Date(0,0,0,  Math.floor(seconds1 / 3600),  Math.floor(seconds2 % 3600 / 60), Math.floor(seconds2 % 3600 % 60))
+      ];
       this.data.changeMessage(entry);
     }
   }
@@ -134,7 +147,7 @@ export class RightSectionTaggingComponent implements OnInit {
 
   highlightDebaterPic(party, pic_id) {
     party += "_";
-    $("#left_"+ party + pic_id).toggleClass("red");
+    $("#left_"+ party + pic_id).toggleClass("blue");
   }
 
   changeTopic(value) {

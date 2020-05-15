@@ -71,10 +71,10 @@ export class RightSectionTopicsComponent implements OnInit {
         .stack()
         .margin({left:70, right:30, top:0, bottom:0})
         .tickFormat({
-          format: function(d) { return d3.time.format("%H:%M:%S")(d) },
+          format: function(d) { return d3.time.format("%S")(d) },
           tickTime: d3.time.minutes,
           tickInterval: 30,
-          tickSize: 10 ,
+          tickSize: 10
         });
       var svg = d3.select("svg").attr("width", width)
         .datum(myData).call(chart);

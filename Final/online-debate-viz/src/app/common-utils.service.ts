@@ -45,35 +45,34 @@ export function GET_DEBATERS_JSON() {
 export class VideoObject {
   static obj: any;
   static currentTime: any;
-  static inputVideoURL: any;
   static DUMMY_URL = "https://www.youtube.com/watch?v=F_TYe2wdaGg";
 }
 
 export class Utilities {
   static topics = [
-    {name:"Cybersecurity", icon:"fa fa-lock", img:'https://img.icons8.com/color/48/000000/user-credentials.png'},
+    // {name:"Cybersecurity", icon:"fa fa-lock", img:'https://img.icons8.com/color/48/000000/user-credentials.png'},
     {name:"Economy", icon:"fa fa-dollar-sign", img:'https://img.icons8.com/color/48/000000/money-bag.png'},
     {name:"Education", icon:"fa fa-book", img:'https://img.icons8.com/color/48/000000/book.png'},
     {name:"Elections", icon:"fa fa-person-booth", img:'https://img.icons8.com/color/48/000000/elections.png'},
     {name:"Food", icon:"fa fa-hamburger", img:'https://img.icons8.com/color/48/000000/food.png'},
-    {name:"Gun Control", icon:"fa fa-fighter-jet", img:'https://img.icons8.com/color/48/000000/space-fighter.png'},
+    // {name:"Gun Control", icon:"fa fa-fighter-jet", img:'https://img.icons8.com/color/48/000000/space-fighter.png'},
     {name:"Health Care", icon:"fa fa-file-medical", img:'https://img.icons8.com/color/48/000000/medical-doctor.png'},
     {name:"Immigration", icon:"fa fa-user-friends", img:'https://img.icons8.com/color/48/000000/customs-officer.png'},
-    {name:"Infrastructure", icon:"fa fa-building", img:'https://img.icons8.com/color/48/000000/rope-bridge.png'},
+    // {name:"Infrastructure", icon:"fa fa-building", img:'https://img.icons8.com/color/48/000000/rope-bridge.png'},
     {name:"Military", icon:"fa fa-meteor", img:'https://img.icons8.com/color/48/000000/wwi-german-helmet.png'},
     {name:"Taxes", icon:"fa fa-passport", img:'https://img.icons8.com/color/48/000000/refund-2--v1.png'}
   ];
 
   static topicNames = [
-    "Cybersecurity",
+    // "Cybersecurity",
     "Economy",
     "Education",
     "Elections",
     "Food",
-    "Gun Control",
+    // "Gun Control",
     "Health Care",
     "Immigration",
-    "Infrastructure",
+    // "Infrastructure",
     "Military",
     "Taxes"
   ];
@@ -124,7 +123,7 @@ export class Utilities {
       },
       {
         "id": 5,
-        "name": "Joseph R. Biden Jr.",
+        "name": "Joseph R. Biden",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/biden.png",
         "party": "democratic"
       },
@@ -169,10 +168,17 @@ export class DataService {
   private messageSource = new BehaviorSubject('');
   currentMessage = this.messageSource.asObservable();
 
+  private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
+  currentVideo = this.videoMsgSource.asObservable();
+
   constructor() { }
 
   changeMessage(tag_entry: any) {
     this.messageSource.next(tag_entry);
+  }
+
+  changeVideoURL(newURL: any){
+    this.videoMsgSource.next(newURL);
   }
 
 }

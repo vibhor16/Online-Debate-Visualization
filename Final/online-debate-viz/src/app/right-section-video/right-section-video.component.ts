@@ -8,7 +8,6 @@ import { VideoComponent} from '../video/video.component';
 })
 
 export class RightSectionVideoComponent implements OnInit {
-  public videoID = "BGy8DdGw_WE";
   constructor() { }
 
   ngOnInit(): void {

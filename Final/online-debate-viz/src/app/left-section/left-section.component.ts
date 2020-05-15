@@ -29,4 +29,8 @@ export class LeftSectionComponent implements OnInit {
   }
 
 
+  toggleLabel(el) {
+    $("#"+el.target.id).toggleClass("blue");
+    $("#label_"+el.target.id).fadeToggle();
+  }
 }

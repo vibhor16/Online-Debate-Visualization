@@ -1,16 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 html{
+  overflow: hidden;
   background: black;
+  font-family: sans-serif;
 }
 body{
   height: 100vh;
+  font-size: 0.7em !important;
+  letter-spacing: 1px !important;
+  font-family: OpenSans,sans-serif,arial;
+}
+
+.blue_border_bottom{
+  border-bottom: 4px solid #0078f2;
+}
+
+.navbar-right{
+  margin-left: 80%;
+}
+.nav-item:hover{
+  border-bottom: 6px solid #0078f2;
+}
+
+.nav-item{
+  display: flex;
+  align-items: center;
+}
+
+#navbarNav{
+  margin-left: 11em;
+}
+#mainLogo{
+  position: absolute;
+  width: 10em;
+  margin-top: 5px;
 }
 
 #left {
-  height: 100%;
+  height: 97%;
   color: white;
   border: 1px solid grey;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   background: #0c131b;
   text-align: center;
   margin-top: 1em;
@@ -19,7 +49,7 @@ body{
 
 
 #right{
-  height: 99%;
+  height: 95.4%;
   margin-top: 1em;
 }
 
@@ -30,15 +60,14 @@ body{
 #right-section-video{
   height: 100%;
   /*border: 1px solid #c5baba;*/
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   background: #0c131b;
 }
 
 
 #right-section-topics{
   height: 100%;
-  border: 1px solid #c5baba;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   background: #0c131b;
 }
 
@@ -47,7 +76,7 @@ body{
   height: 100% !important;
   color: white;
   border: 1px solid #c5baba;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   background: #0c131b;
 }
 
@@ -64,12 +93,13 @@ body{
 #right-section-fish{
   height: 100%;
   border: 1px solid #c5baba;
-  border-radius: 5px;
   background: #0c131b;
 }
 
 #top-nav-bar{
-  height: 8%;
+  padding: 0;
+  height: 7%;
+  background: #2a2a2a !important;
 }
 
 .container{
@@ -84,16 +114,16 @@ body{
 
 .democratic-img{
   border-radius: 50%;
-  width: 100%;
+  width: 70%;
 }
 
 .republican-img{
   border-radius: 50%;
-  width: 100%;
+  width: 70%;
 }
 
-.red {
-  background: red !important;
+.blue {
+  background: #0078f2 !important;
 }
 
 #tag_btn{
@@ -121,6 +151,7 @@ body{
 iframe{
   /*noinspection CssInvalidPropertyValue*/
   height: -webkit-fill-available !important;
+  border: 1px solid grey;
 }
 
 #add-candidate-btn{
@@ -174,8 +205,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .topic_placeholder{
-color: white;
-  font-size: 0.785em;
+color: aliceblue;
+  font-size: 0.9em;
 }
 
 .mat-form-field-infix{
@@ -183,5 +214,43 @@ color: white;
 }
 
 .mat-form-field{
-  width: 9em;
+  width: 10em;
+}
+
+.tag_direction{
+  width: 100%;
+}
+
+.mat-select-value-text{
+  color: white;
+}
+
+#input_video_url{
+  padding-left: 3em;
+  padding-right: 2em;
+  border-radius: 0 !important;
+  border: 0;
+  width: 38em;
+  font-size: 1.2em;
+  background: #1f1e1e;
+  color: white;
+}
+
+#search-icon{
+  position: absolute;
+  top: 33%;
+  left: 3%;
+  color: grey;
+}
+
+#search-clear{
+  position: absolute;
+  color: grey;
+  top: 29%;
+  left: 51%;
+  cursor: pointer;
+}
+
+#search-clear:hover{
+  color: white;
 }

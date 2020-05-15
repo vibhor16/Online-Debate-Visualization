@@ -23,7 +23,36 @@ export class RightSectionTopicsNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.all_tag_entries_topics = [];
+    let presentTopics = this.remainingTopics();
+
+
+    for(let i=0;i<Utilities.topicNames.length;i++) {
+
+      let thisTopic = Utilities.topicNames[i];
+      if(!presentTopics.includes(thisTopic)){
+        let newEntry = [
+          Utilities.topicNames[i],
+          '',
+          '00:00',
+          new Date(0,0,0,0,0,0),
+          new Date(0,0,0,0,0,0)
+        ];
+        this.all_tag_entries_topics.push(newEntry);
+      }
+    }
+    this.drawTimeline(this.all_tag_entries_topics);
     this.data.currentMessage.subscribe(message => this.onNewTagEntry(message));
+  }
+
+  remainingTopics(){
+    let presentTopics = [];
+    for(var i=0;i<this.all_tag_entries_topics.length;i++) {
+      let topic = this.all_tag_entries_topics[i][0];
+      if(!presentTopics.includes(topic)){
+        presentTopics.push(topic);
+      }
+    }
+    return presentTopics;
   }
 
   drawTimeline(all_entries): void {
@@ -31,12 +60,12 @@ export class RightSectionTopicsNewComponent implements OnInit {
     GoogleCharts.load(drawChart, {packages:["timeline"]});
 
     function drawChart() {
-
       var container = document.getElementById('topics-chart');
       var chart = new google.visualization.Timeline(container);
       var dataTable = new google.visualization.DataTable();
       dataTable.addColumn({ type: 'string', id: 'Position' });
       dataTable.addColumn({ type: 'string', id: 'Name' });
+      dataTable.addColumn({ type: 'string', role: 'tooltip'});
       dataTable.addColumn({ type: 'date', id: 'Start' });
       dataTable.addColumn({ type: 'date', id: 'End' });
       dataTable.addRows(all_entries);
@@ -48,8 +77,15 @@ export class RightSectionTopicsNewComponent implements OnInit {
       //   [ 'Secretary of State', 'James Madison', new Date(1801, 4, 2), new Date(1809, 2, 3)]
       // ]);
 
+      var options = {
+        timeline: { colorByRowLabel: true,
+          rowLabelStyle: {color: 'white' },
+          barLabelStyle:{color: 'white'}},
+        backgroundColor: 'black'
+      };
 
-      chart.draw(dataTable);
+
+      chart.draw(dataTable, options);
       // configureChart();
     }
 
