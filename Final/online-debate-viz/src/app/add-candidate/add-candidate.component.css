@@ -2,7 +2,7 @@
   background: #343a40;
   color: white;
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
   left: 0;
   right: 0;
   margin: 8% auto;

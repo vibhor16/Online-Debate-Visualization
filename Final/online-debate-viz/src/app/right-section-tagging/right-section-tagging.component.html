@@ -1,35 +1,36 @@
-<br/>
+<div class="row" style="padding-left: 1em">
+  <div style="padding-top: 1em"><label style="color: white">TAGGER</label></div>
+</div>
 <div class="row">
   <div class="col-md-4">
-    <button type="button" class="btn btn-success" id="tag_btn">Tag</button>
   </div>
   <div class="col-md-4">
+    <button type="button" class="btn btn-success" id="play_btn"><i class="fa fa-play"></i></button>
+    <button type="button" class="btn btn-success" id="pause_btn"><i class="fa fa-pause"></i></button>
   </div>
   <div class="col-md-4">
-    <button type="button" class="btn btn-success" id="save_btn">Save</button>
   </div>
   </div>
 <br/>
-<div class="row">
+<div class="row" id="tagging-section" style="height: 23vh !important;">
+  <div id="tagging-overlay"></div>
   <div class="col-md-4">
     <div class="form-check" id="side_democrats">
-      <ul style="list-style-type: none">
-        <li *ngFor="let democrat of democrats;"><input  class="form-check-input democrats-check" type="checkbox" id="{{democrat.name}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>
-          <label for="{{democrat.name}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>{{democrat.name}}</label>
+      <ul style="list-style-type: none;padding: 0 ">
+        <li *ngFor="let democrat of democrats;">
+          <input  class="form-check-input" type="checkbox" id="{{democrat.id}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>
+          <label  class="democrats-check" id="label_{{democrat.id}}" for="{{democrat.id}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)' (click)="selectDemocrat($event)">{{democrat.name}}</label>
         </li>
-      </ul>
+    </ul>
     </div>
   </div>
   <div class="col-md-4" id="side_center">
-      <button type="button" class="btn btn-danger tag_direction" id="tag_direction_right"><i class="fa fa-arrow-right"></i></button>
-      <button type="button" class="btn btn-danger tag_direction" id="tag_direction_left"><i class="fa fa-arrow-left"></i></button>
-      <br/>
-      <br/>
-      <label id="tag_time"></label>
-
+      <label id="tag_time">00:00</label>
+      <button type="button" class="btn  tag_direction" id="tag_direction_right">LEFT ATTACKS RIGHT <i class="fa fa-arrow-right" style="color: white"></i></button>
+      <button type="button" class="btn  tag_direction" id="tag_direction_left">RIGHT ATTACKS LEFT <i class="fa fa-arrow-left"></i></button>
 
     <mat-form-field>
-      <mat-placeholder class="topic_placeholder">Topic of Discussion</mat-placeholder>
+      <mat-placeholder class="topic_placeholder">TALKING ABOUT</mat-placeholder>
       <mat-select (selectionChange)="changeTopic($event.value)" style="color: white">
         <mat-option *ngFor="let topic of topics" [value]="topic.name">
           {{topic.name}}
@@ -40,12 +41,23 @@
   </div>
   <div class="col-md-4">
     <div class="form-check" id="side_republican">
-      <ul style="list-style-type: none; ">
-        <li *ngFor="let debater of republicans;"><input  class="form-check-input republican-check" type="checkbox" id="{{debater.name}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>
-          <label for="{{debater.name}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>{{debater.name}}</label>
+      <ul style="list-style-type: none;padding: 0 ">
+        <li *ngFor="let debater of republicans;">
+          <input  class="form-check-input" type="checkbox" id="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>
+          <label class="republican-check" id="label_{{debater.id}}" for="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)' (click)="selectRepublican($event)">{{debater.name}}</label>
         </li>
       </ul>
     </div>
   </div>
 
+</div>
+<div class="row">
+  <div class="col-md-4">
+
+  </div>
+  <div class="col-md-4">
+    <button type="button" class="btn btn-success" id="save_btn"><i class="fas fa-share-square"></i></button>
+  </div>
+  <div class="col-md-4">
+  </div>
 </div>

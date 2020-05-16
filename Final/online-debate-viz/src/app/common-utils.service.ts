@@ -95,6 +95,15 @@ export class Utilities {
     }
   }
 
+  static  getDebaterRecordById(id){
+    let index;
+    for (index=0;index < Utilities.debatersList.profiles.length; index++){
+      if(Utilities.debatersList.profiles[index].id == id){
+        return Utilities.debatersList.profiles[index];
+      }
+    }
+  }
+
   static debatersList = {
     "profiles": [
       {

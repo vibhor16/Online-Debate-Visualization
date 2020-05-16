@@ -11,6 +11,23 @@ body{
   font-family: OpenSans,sans-serif,arial;
 }
 
+
+/*body::-webkit-scrollbar {*/
+/*  width: 1em;*/
+/*background-color: white;*/
+/*}*/
+
+/*body::-webkit-scrollbar-track {*/
+/*  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
+/*  background-color: white;*/
+
+/*}*/
+
+/*body::-webkit-scrollbar-thumb {*/
+/*  background-color: darkgrey;*/
+/*  outline: 1px solid slategrey;*/
+/*}*/
+
 .blue_border_bottom{
   border-bottom: 4px solid #0078f2;
 }
@@ -41,7 +58,7 @@ body{
   color: white;
   border: 1px solid grey;
   /*border-radius: 5px;*/
-  background: #0c131b;
+  background: black;
   text-align: center;
   margin-top: 1em;
   margin-right: 1%;
@@ -58,26 +75,26 @@ body{
 }
 
 #right-section-video{
-  height: 100%;
+  height: 96%;
   /*border: 1px solid #c5baba;*/
   /*border-radius: 5px;*/
-  background: #0c131b;
+  background: black;
 }
 
 
 #right-section-topics{
   height: 100%;
   /*border-radius: 5px;*/
-  background: #0c131b;
+  background: black;
 }
 
 
 #right-section-tagging{
   height: 100% !important;
   color: white;
-  border: 1px solid #c5baba;
+  /*border: 1px solid #c5baba;*/
   /*border-radius: 5px;*/
-  background: #0c131b;
+  background: black;
 }
 
 .sub-titles{
@@ -92,8 +109,8 @@ body{
 
 #right-section-fish{
   height: 100%;
-  border: 1px solid #c5baba;
-  background: #0c131b;
+  /*border: 1px solid #c5baba;*/
+  background: black;
 }
 
 #top-nav-bar{
@@ -132,20 +149,40 @@ body{
 
 #save_btn{
   width: 100%;
+  background: black;
+  border: 1px solid grey;
+  border-radius: 0;
 }
 
+#save_btn:hover{
+  background: #2a2a2a;
+}
 #side_democrats{
-  height: 13em;
+  height: 12.5em;
   overflow: scroll;
-  background: #07074e;
+  /*background: #07074e;*/
   padding: initial;
 }
+#side_democrats label{
+  min-width: 100%;
+  border: 1px solid grey;
+  text-align: center;
+  background: #07074e;
+}
+
 
 #side_republican{
-  height: 13em;
+  height: 12.5em;
   overflow: scroll;
-  background: #520101;
+  /*background: #520101;*/
   padding: initial;
+}
+
+#side_republican label{
+  min-width: 100%;
+  border: 1px solid grey;
+  text-align: center;
+  background: #520101;
 }
 
 iframe{
@@ -157,6 +194,11 @@ iframe{
 #add-candidate-btn{
   color: white;
   width: 100%;
+  font-size: 1.5em;
+}
+
+#add-candidate-btn:hover{
+  background: #2a2a2a;;
 }
 
 #debaters_democrats {
@@ -205,8 +247,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .topic_placeholder{
-color: aliceblue;
-  font-size: 0.9em;
+  color: aliceblue;
+  font-size: 1.1em;
 }
 
 .mat-form-field-infix{
@@ -214,11 +256,22 @@ color: aliceblue;
 }
 
 .mat-form-field{
-  width: 10em;
+  width: 100%;
+  margin-top: 2em;
 }
 
 .tag_direction{
   width: 100%;
+  font-size: 1em !important;
+  border-radius: 0 !important;
+  background: black;
+  color: white !important;
+  border: 1px solid grey !important;
+  padding: 2em !important;
+}
+
+.tag_direction:hover{
+  background: grey !important;
 }
 
 .mat-select-value-text{
@@ -253,4 +306,104 @@ color: aliceblue;
 
 #search-clear:hover{
   color: white;
+}
+
+#play_btn{
+  border-radius: 0;
+  width: 48%;
+  margin-right: 2%;
+  background: black;
+  border: 1px solid grey;
+}
+
+#play_btn:hover{
+  background: #2a2a2a;
+}
+
+#pause_btn{
+  border-radius: 0;
+  width: 48%;
+  background: black;
+  border: 1px solid grey;
+}
+
+#pause_btn:hover{
+  background: #2a2a2a;
+}
+
+.democrats-check{
+  padding: 2%;
+}
+
+.republican-check{
+  padding: 2%;
+}
+
+.democrats-check:hover{
+  cursor: pointer;
+  background: #00008f !important;
+  /*visibility: hidden;*/
+}
+
+.republican-check:hover{
+  cursor: pointer;
+  background: #9c0000 !important;
+  /*visibility: hidden;*/
+}
+
+.selectRepublican{
+  background: red !important;
+}
+
+.selectDemocrat{
+  background: blue !important;
+}
+
+#tagging-overlay{
+  position: absolute;
+  width: 100%;
+  height: 33vh;
+  z-index: 100;
+  background: black;
+  opacity: 0.8;
+}
+
+.userName{
+  text-align: center;
+  width: 10em;
+  background: #0078f2;
+}
+
+
+/* Latest news*/
+
+.blue {
+  background: black;
+}
+
+.news {
+  box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4), 0 5px 10px rgba(0,0,0,0.5);
+  width: auto;
+  overflow: hidden;
+  padding: 1px;
+  -webkit-user-select: none;
+}
+
+.news span {
+  float: left;
+  color: #fff;
+  padding: 2px;
+  position: relative;
+  top: 1%;
+  box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4);
+  font: 16px 'Raleway', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.text1{
+
+  box-shadow:none !important;
+  width: 750px;
 }
