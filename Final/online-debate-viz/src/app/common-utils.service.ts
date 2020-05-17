@@ -183,6 +183,7 @@ export class DataService {
   constructor() { }
 
   changeMessage(tag_entry: any) {
+    console.log("tag_entry is: ", tag_entry);
     this.messageSource.next(tag_entry);
   }
 

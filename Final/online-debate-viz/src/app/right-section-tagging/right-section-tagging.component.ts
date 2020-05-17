@@ -115,7 +115,8 @@ export class RightSectionTaggingComponent implements OnInit {
       alert("Press Tag button before tagging!");
 
     else if(this.topicSelected == null)
-      alert("Select a topic from the list!");
+      console.log("ok");
+      // alert("Select a topic from the list!");
     else {
       // entry['democrats'] = democrats;
       // entry['republican'] = republicans;
@@ -129,7 +130,7 @@ export class RightSectionTaggingComponent implements OnInit {
       time = new Date(this.playerElem.getCurrentTime()  * parseInt('1000') + parseInt('2000'));
       let endingTime = new Date(0,0,0,time.getHours(), time.getMinutes(), time.getSeconds());
 
-      let topicRecord = Utilities.getRecordByName(this.topicSelected);
+      let topicRecord = Utilities.getRecordByName("Economy");
       let debaterRecord = Utilities.getDebaterRecordById(democrats[0]);
 
 

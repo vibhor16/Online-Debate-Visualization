@@ -74,6 +74,10 @@ body{
   height: 50%;
 }
 
+#mydiv.row{
+  height: 100%;
+}
+
 #right-section-video{
   height: 96%;
   /*border: 1px solid #c5baba;*/
