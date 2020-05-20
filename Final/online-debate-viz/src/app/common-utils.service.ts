@@ -177,6 +177,9 @@ export class DataService {
   private messageSource = new BehaviorSubject('');
   currentMessage = this.messageSource.asObservable();
 
+  private fishSource = new BehaviorSubject('');
+  currentFishMessage = this.fishSource.asObservable();
+
   private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
   currentVideo = this.videoMsgSource.asObservable();
 
@@ -189,6 +192,11 @@ export class DataService {
 
   changeVideoURL(newURL: any){
     this.videoMsgSource.next(newURL);
+  }
+
+  changeFishEntry(new_fish_entry : any){
+    console.log("new_fish_entry is: ", new_fish_entry);
+    this.fishSource.next(new_fish_entry);
   }
 
 }

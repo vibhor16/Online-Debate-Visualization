@@ -18,11 +18,14 @@ export class RightSectionFishComponent implements OnInit {
   // constructor() { }
 
   onNewTagEntry(newEntry): void{
+    // debugger
     console.log("newEntry: ", newEntry);
     if(newEntry != '') {
       console.log("newEntry is: ");
       console.log(newEntry);
       this.all_tag_entries_topics.push(newEntry);
+      // debugger
+      this.drawFishDiagram(this.all_tag_entries_topics);
     }
   }
 
@@ -30,20 +33,60 @@ export class RightSectionFishComponent implements OnInit {
   ngOnInit(): void {
     this.all_tag_entries_topics = [];
     console.log("subscribing");
-    this.data.currentMessage.subscribe(message => this.onNewTagEntry(message));
+    this.data.currentFishMessage.subscribe(message => this.onNewTagEntry(message));
     console.log("subscribed");
   }
 
-  ngAfterContentInit(): void {
+  drawFishDiagram(all_tag_entries_topics): void {
     document.getElementById("mydiv").innerHTML = "";
     console.log("hello");
-    var margin = {top: 0, right: 20, bottom: 0, left: 80},
+    var margin = {top: 0, right: 20, bottom: 0, left: 130},
     width = document.getElementById("mydiv").clientWidth - margin.left - margin.right,
-    height = document.getElementById("mydiv").clientHeight - margin.top - margin.bottom;
+    height = document.getElementById("mydiv").clientHeight - margin.top - margin.bottom-50;
 
     // set the ranges
-    var people = ["Bernie","Elizabeth", "Trump", "Obama", "Kamala"];
-    var colors = ["red", "yellow", "green", "blue", "purple"];
+    
+    let index:any;
+    var people = [];
+    var colors = [];
+    for (index=0;index < Utilities.debatersList.profiles.length; index++){
+      people.push(Utilities.debatersList.profiles[index].name);
+      colors.push(this.Colors[index]);
+    }
+
+    var data = [];
+    for (index=0;index < all_tag_entries_topics.length; index++){
+      console.log("preparing data", this.all_tag_entries_topics[index]);
+      var democrats = this.all_tag_entries_topics[index].democrats;
+      var republican = this.all_tag_entries_topics[index].republican;
+      var direction = this.all_tag_entries_topics[index].direction;
+      var time = this.all_tag_entries_topics[index].timestamp;
+      let i: any;
+      let j: any;
+      for(i=0; i< democrats.length; i++){
+        for(j=0; j<republican.length; j++){
+          var temp_entry = [];
+          if("to" == direction){
+            temp_entry = [time
+              , Utilities.getDebaterRecordById(democrats[i]).name
+              , Utilities.getDebaterRecordById(republican[j]).name];
+            console.log("ppp", temp_entry);
+            data.push(temp_entry);
+          }else{
+            temp_entry = [time
+              , Utilities.getDebaterRecordById(republican[j]).name
+              , Utilities.getDebaterRecordById(democrats[i]).name];
+            console.log("ppp", temp_entry);
+            data.push(temp_entry);
+          }
+        }
+      }
+
+    }
+    
+    // var people = ["Bernie","Elizabeth", "Trump", "Obama", "Kamala"];
+
+    // var colors = ["red", "yellow", "green", "blue", "purple"];
     console.log("people",people);
     console.log(colors);
     console.log("xxxx");
@@ -67,18 +110,18 @@ export class RightSectionFishComponent implements OnInit {
     
     console.log("svg: ", svg);
 
-      var data = [
-  [0,"Bernie", "Elizabeth"],
-  [10,"Elizabeth", "Trump"],
-  [20,"Bernie", "Trump"],
-  [30,"Trump", "Bernie"],
-  [40, "Kamala", "Bernie"],
-  [5,"Bernie", "Elizabeth"],
-  [15,"Elizabeth", "Trump"],
-  [25,"Bernie", "Trump"],
-  [35,"Trump", "Bernie"],
-  [33, "Kamala", "Bernie"],
-  [45, "Kamala", "Bernie"]];
+  //     var data = [
+  // [0,"Bernie", "Elizabeth"],
+  // [10,"Elizabeth", "Trump"],
+  // [20,"Bernie", "Trump"],
+  // [30,"Trump", "Bernie"],
+  // [40, "Kamala", "Bernie"],
+  // [5,"Bernie", "Elizabeth"],
+  // [15,"Elizabeth", "Trump"],
+  // [25,"Bernie", "Trump"],
+  // [35,"Trump", "Bernie"],
+  // [33, "Kamala", "Bernie"],
+  // [45, "Kamala", "Bernie"]];
   console.log(data);
   var data2 = []
   //   if (error) throw error;
@@ -108,8 +151,8 @@ export class RightSectionFishComponent implements OnInit {
       .attr("id", "triangle")
       .attr("refX", 6)
       .attr("refY", 6)
-      .attr("markerWidth", 30)
-      .attr("markerHeight", 30)
+      .attr("markerWidth", 15)
+      .attr("markerHeight", 15)
       .attr("markerUnits","userSpaceOnUse")
       .attr("orient", "auto")
       .append("path")
@@ -141,6 +184,7 @@ export class RightSectionFishComponent implements OnInit {
       
       .attr("x1", function(d) {
         console.log("gagan");
+        console.log(d);
         console.log(d.time); 
         return x(d.time); 
       })
@@ -182,5 +226,32 @@ export class RightSectionFishComponent implements OnInit {
         // debugger
 
   }
+
+  ngAfterContentInit(): void {
+    this.drawFishDiagram(this.all_tag_entries_topics);
+  }
+
+  Colors = [
+    "darkblue",
+    "darkcyan",
+    "darkgrey",
+    "darkgreen",
+    "darkkhaki",
+    "darkmagenta",
+    "darkolivegreen",
+    "darkorange",
+    "darkorchid",
+    "darkred",
+    "darksalmon",
+    "darkviolet",
+    "fuchsia",
+    "gold",
+    "green",
+    "indigo",
+    "red",
+    "silver",
+    "white",
+    "yellow"
+  ];
 
 }

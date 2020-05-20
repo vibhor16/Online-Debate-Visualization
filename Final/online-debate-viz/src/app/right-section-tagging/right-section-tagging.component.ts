@@ -88,6 +88,7 @@ export class RightSectionTaggingComponent implements OnInit {
   addToTaggedEntriesObject(): void{
     let entry = {};
     let democrats = [];
+    let fishEntry = {};
     $('.democrats-check').each(function() {
       if($(this).hasClass("selectDemocrat")) {
         let id = $(this).attr('id').split("_")[1];
@@ -118,10 +119,10 @@ export class RightSectionTaggingComponent implements OnInit {
       console.log("ok");
       // alert("Select a topic from the list!");
     else {
-      // entry['democrats'] = democrats;
-      // entry['republican'] = republicans;
-      // entry['timestamp'] = VideoObject.currentTime;
-      // entry['direction'] = this.getAttackDirection();
+      fishEntry['democrats'] = democrats;
+      fishEntry['republican'] = republicans;
+      fishEntry['timestamp'] = VideoObject.currentTime;
+      fishEntry['direction'] = this.getAttackDirection();
 
       let time = new Date(this.playerElem.getCurrentTime() * parseInt('1000'));
       console.log("time youtube = "+time);
@@ -130,7 +131,7 @@ export class RightSectionTaggingComponent implements OnInit {
       time = new Date(this.playerElem.getCurrentTime()  * parseInt('1000') + parseInt('2000'));
       let endingTime = new Date(0,0,0,time.getHours(), time.getMinutes(), time.getSeconds());
 
-      let topicRecord = Utilities.getRecordByName("Economy");
+      let topicRecord = Utilities.getRecordByName(this.topicSelected);
       let debaterRecord = Utilities.getDebaterRecordById(democrats[0]);
 
 
@@ -146,7 +147,9 @@ export class RightSectionTaggingComponent implements OnInit {
         new Date(0,0,0,  Math.floor(seconds1 / 3600), Math.floor(seconds1 % 3600 / 60), Math.floor(seconds1 % 3600 % 60)),
         new Date(0,0,0,  Math.floor(seconds1 / 3600),  Math.floor(seconds2 % 3600 / 60), Math.floor(seconds2 % 3600 % 60))
       ];
+
       this.data.changeMessage(entry);
+      this.data.changeFishEntry(fishEntry);
     }
   }
 
