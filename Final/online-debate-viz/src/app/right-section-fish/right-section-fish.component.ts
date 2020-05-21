@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as d3 from "d3";
 import {  Utilities, DataService } from 'src/app/common-utils.service';
 
+declare var d3: any;
 @Component({
   selector: 'app-right-section-fish',
   templateUrl: './right-section-fish.component.html',
@@ -9,7 +9,7 @@ import {  Utilities, DataService } from 'src/app/common-utils.service';
 })
 export class RightSectionFishComponent implements OnInit {
   all_tag_entries_topics: any[];
-  constructor(private data: DataService) { 
+  constructor(private data: DataService) {
     // debugger
     console.log("constructor", data);
     // console.log(data);
@@ -45,7 +45,7 @@ export class RightSectionFishComponent implements OnInit {
     height = document.getElementById("mydiv").clientHeight - margin.top - margin.bottom-50;
 
     // set the ranges
-    
+
     let index:any;
     var people = [];
     var colors = [];
@@ -53,6 +53,9 @@ export class RightSectionFishComponent implements OnInit {
       people.push(Utilities.debatersList.profiles[index].name);
       colors.push(this.Colors[index]);
     }
+
+    var myColor = d3.scaleLinear().domain([0, Utilities.debatersList.profiles.length])
+      .range(this.Colors);
 
     var data = [];
     for (index=0;index < all_tag_entries_topics.length; index++){
@@ -83,10 +86,12 @@ export class RightSectionFishComponent implements OnInit {
       }
 
     }
-    
+
     // var people = ["Bernie","Elizabeth", "Trump", "Obama", "Kamala"];
 
     // var colors = ["red", "yellow", "green", "blue", "purple"];
+
+
     console.log("people",people);
     console.log(colors);
     console.log("xxxx");
@@ -95,7 +100,7 @@ export class RightSectionFishComponent implements OnInit {
     var x = d3.scaleLinear()
             .range([0, width]);
     console.log("x: ", x);
-                
+
 
     var y = d3.scaleBand()
             .range([height, 0]);
@@ -104,10 +109,11 @@ export class RightSectionFishComponent implements OnInit {
     var svg = d3.select("#mydiv").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      // .style("color", "white")
       .append("g")
-      .attr("transform", 
+      .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
-    
+
     console.log("svg: ", svg);
 
   //     var data = [
@@ -128,8 +134,8 @@ export class RightSectionFishComponent implements OnInit {
 
     // format the data
     data.forEach(function(d) {
-      data2.push({time:d[0], attacker:d[1], victim: d[2]}) 
-      // console.log(data2) 
+      data2.push({time:d[0], attacker:d[1], victim: d[2]})
+      // console.log(data2)
       // d.sales = +d.sales;
     });
   //   debugger
@@ -157,48 +163,49 @@ export class RightSectionFishComponent implements OnInit {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M 0 0 12 6 0 12 3 6")
-      .style("fill", "black");
+      .style("fill", "white");
       // path
       // svg.append("path")
       //       .attr("marker-end", "url(#triangle)")
       //       .attr("d", "M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80")
       //       .attr("stroke", "grey")
-      //       .attr("stroke-width", "1.5")          
+      //       .attr("stroke-width", "1.5")
       //       .attr("fill", "transparent")
       //       .attr("class", "edges");
 
 
       // debugger
-      
+
     svg.selectAll(".bar")
       .data(data)
       .enter().append("line")
       .attr("class", "bar")
+      .attr("color", "grey")
       //   .attr("x", function(d) { return x(d.time); })
       //   .attr("width", 2)
       //   .attr("y", function(d) { return pady+Math.min(y(d.attacker), y(d.victim)); })
-      //   .attr("height", function(d) { 
-      //       return Math.abs(y(d.attacker) - y(d.victim)); 
+      //   .attr("height", function(d) {
+      //       return Math.abs(y(d.attacker) - y(d.victim));
       //     })
       //     .attr("marker-end", "url(#triangle)");
-      
+
       .attr("x1", function(d) {
-        console.log("gagan");
         console.log(d);
-        console.log(d.time); 
-        return x(d.time); 
+        console.log(d.time);
+        return x(d.time);
       })
       .attr("y1", function(d) { return pady+y(d.attacker)})
       .attr("x2", function(d) { return x(d.time); })
       .attr("y2", function(d) { return pady+y(d.victim)})
       .attr("stroke-width", 1)
-      .attr("stroke", function(d) { 
+      .attr("stroke", function(d) {
           // debugger
           console.log(d.attacker);
           console.log(people.indexOf(d.attacker ));
           console.log(colors[people.indexOf(d.attacker)]);
-          return colors[people.indexOf(d.attacker)];
+          return myColor(people.indexOf(d.attacker));
       })
+      .attr("stroke","white")
       .attr("marker-end", "url(#triangle)");
 
       svg.selectAll(".bar-axis")
@@ -209,7 +216,7 @@ export class RightSectionFishComponent implements OnInit {
         .attr("width", width)
         .attr("y", function(d) { return pady+y(d)})
         .attr("height", 1)
-        .attr("stroke", "black");
+        .attr("fill", "grey");
 
 
 
@@ -253,5 +260,7 @@ export class RightSectionFishComponent implements OnInit {
     "white",
     "yellow"
   ];
+
+
 
 }

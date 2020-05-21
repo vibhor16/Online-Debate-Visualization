@@ -74,6 +74,8 @@ body{
   height: 50%;
 }
 
+
+
 #mydiv.row{
   height: 100%;
 }
@@ -410,4 +412,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   box-shadow:none !important;
   width: 750px;
+}
+
+.bar{
+  color: grey !important;
+}
+
+#mydiv{
+  background: black !important;
+}
+
+svg{
+  color: white;
+  margin-top: 1em;
+}
+
+text{
+  fill:white
 }
