@@ -137,7 +137,7 @@ body{
 
 .democratic-img{
   border-radius: 50%;
-  width: 70%;
+  width: 30%;
 }
 
 .republican-img{
@@ -170,7 +170,7 @@ body{
   padding: initial;
 }
 #side_democrats label{
-  min-width: 100%;
+  min-width: 70%;
   border: 1px solid grey;
   text-align: center;
   background: #07074e;
@@ -185,7 +185,7 @@ body{
 }
 
 #side_republican label{
-  min-width: 100%;
+  min-width: 70%;
   border: 1px solid grey;
   text-align: center;
   background: #520101;
@@ -198,6 +198,7 @@ iframe{
 }
 
 #add-candidate-btn{
+  margin: 50% 0;
   color: white;
   width: 100%;
   font-size: 1.5em;

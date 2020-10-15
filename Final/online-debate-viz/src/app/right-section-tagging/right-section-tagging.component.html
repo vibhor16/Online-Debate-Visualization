@@ -19,7 +19,8 @@
       <ul style="list-style-type: none;padding: 0 ">
         <li *ngFor="let democrat of democrats;">
           <input  class="form-check-input" type="checkbox" id="{{democrat.id}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)'>
-          <label  class="democrats-check" id="label_{{democrat.id}}" for="{{democrat.id}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)' (click)="selectDemocrat($event)">{{democrat.name}}</label>
+          <img id="left_democrat_{{democrat.id}}"  class="democratic-img" src="{{democrat.pic}}" alt="{{democrat.name}}">
+          <label  class="democrats-check" id="demo_label_{{democrat.id}}" for="{{democrat.id}}" (mouseover)='highlightDebaterPic("democrat",democrat.id)' (mouseleave)='highlightDebaterPic("democrat",democrat.id)' (click)="selectDemocrat($event)">{{democrat.name}}</label>
         </li>
     </ul>
     </div>
@@ -42,10 +43,15 @@
   <div class="col-md-4">
     <div class="form-check" id="side_republican">
       <ul style="list-style-type: none;padding: 0 ">
-        <li *ngFor="let debater of republicans;">
-          <input  class="form-check-input" type="checkbox" id="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>
-          <label class="republican-check" id="label_{{debater.id}}" for="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)' (click)="selectRepublican($event)">{{debater.name}}</label>
+        <li *ngFor="let democrat of democrats;">
+          <input  class="form-check-input" type="checkbox" id="{{democrat.id}}" (mouseover)='highlightDebaterPic("republican",democrat.id)' (mouseleave)='highlightDebaterPic("republican",democrat.id)'>
+          <img id="left_republican_{{democrat.id}}"  class="democratic-img" src="{{democrat.pic}}" alt="{{democrat.name}}">
+          <label  class="republican-check" id="rep_label_{{democrat.id}}" for="{{democrat.id}}" (mouseover)='highlightDebaterPic("republican",democrat.id)' (mouseleave)='highlightDebaterPic("republican",democrat.id)' (click)="selectRepublican($event)">{{democrat.name}}</label>
         </li>
+<!--        <li *ngFor="let debater of republicans;">-->
+<!--          <input  class="form-check-input" type="checkbox" id="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>-->
+<!--          <label class="republican-check" id="label_{{debater.id}}" for="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)' (click)="selectRepublican($event)">{{debater.name}}</label>-->
+<!--        </li>-->
       </ul>
     </div>
   </div>

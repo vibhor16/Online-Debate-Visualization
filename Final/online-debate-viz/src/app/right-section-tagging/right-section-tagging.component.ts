@@ -31,9 +31,11 @@ export class RightSectionTaggingComponent implements OnInit {
     $("#tag_direction_left").hide();
 
     $('#play_btn').on('click', () => {
+      // $('#left').css('visibility', 'hidden');
       this.playVideo();
     });
     $('#pause_btn').on('click', () => {
+      // $('#left').css('visibility', 'visible');
       this.pauseVideo();
     });
 
@@ -91,7 +93,7 @@ export class RightSectionTaggingComponent implements OnInit {
     let fishEntry = {};
     $('.democrats-check').each(function() {
       if($(this).hasClass("selectDemocrat")) {
-        let id = $(this).attr('id').split("_")[1];
+        let id = $(this).attr('id').split("_")[2];
         democrats.push(id);
       }
     });
@@ -99,7 +101,7 @@ export class RightSectionTaggingComponent implements OnInit {
     let republicans = [];
     $('.republican-check').each(function() {
       if($(this).hasClass("selectRepublican")) {
-        let id = $(this).attr('id').split("_")[1];
+        let id = $(this).attr('id').split("_")[2];
         republicans.push(id);
       }
     });

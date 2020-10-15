@@ -116,7 +116,7 @@ export class Utilities {
         "id": 2,
         "name": "Cory Booker",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/booker.png",
-        "party": "republican"
+        "party": "democratic"
       },
       {
         "id": 3,
@@ -128,7 +128,7 @@ export class Utilities {
         "id": 4,
         "name": "Bernie Sanders",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/sanders.png",
-        "party": "republican"
+        "party": "democratic"
       },
       {
         "id": 5,
@@ -140,7 +140,7 @@ export class Utilities {
         "id": 6,
         "name": "Elizabeth Warren",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/warren.png",
-        "party": "republican"
+        "party": "democratic"
       },
       {
         "id": 7,
@@ -164,7 +164,7 @@ export class Utilities {
         "id": 10,
         "name": "Julián Castro",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/castro.png",
-        "party": "republican"
+        "party": "democratic"
       }
     ]
   };
