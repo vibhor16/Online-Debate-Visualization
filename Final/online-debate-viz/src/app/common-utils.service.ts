@@ -116,7 +116,7 @@ export class Utilities {
         "id": 2,
         "name": "Cory Booker",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/booker.png",
-        "party": "republican"
+        "party": "democratic"
       },
       {
         "id": 3,
@@ -128,7 +128,7 @@ export class Utilities {
         "id": 4,
         "name": "Bernie Sanders",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/sanders.png",
-        "party": "republican"
+        "party": "democratic"
       },
       {
         "id": 5,
@@ -140,7 +140,7 @@ export class Utilities {
         "id": 6,
         "name": "Elizabeth Warren",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/warren.png",
-        "party": "republican"
+        "party": "democratic"
       },
       {
         "id": 7,
@@ -164,7 +164,7 @@ export class Utilities {
         "id": 10,
         "name": "Julián Castro",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/castro.png",
-        "party": "republican"
+        "party": "democratic"
       }
     ]
   };
@@ -177,17 +177,26 @@ export class DataService {
   private messageSource = new BehaviorSubject('');
   currentMessage = this.messageSource.asObservable();
 
+  private fishSource = new BehaviorSubject('');
+  currentFishMessage = this.fishSource.asObservable();
+
   private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
   currentVideo = this.videoMsgSource.asObservable();
 
   constructor() { }
 
   changeMessage(tag_entry: any) {
+    console.log("tag_entry is: ", tag_entry);
     this.messageSource.next(tag_entry);
   }
 
   changeVideoURL(newURL: any){
     this.videoMsgSource.next(newURL);
+  }
+
+  changeFishEntry(new_fish_entry : any){
+    console.log("new_fish_entry is: ", new_fish_entry);
+    this.fishSource.next(new_fish_entry);
   }
 
 }

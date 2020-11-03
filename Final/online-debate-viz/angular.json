@@ -29,8 +29,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/d3/d3.min.js",
-              "./node_modules/google-charts/dist/googleCharts.js"
+              "./node_modules/google-charts/dist/googleCharts.js",
+              "node_modules/d3/dist/d3.js"
             ]
           },
           "configurations": {
@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "online-debate-viz"
+  "defaultProject": "online-debate-viz",
+  "cli": {
+    "analytics": "a9d4f7d2-9961-452c-a808-f55287a38ecb"
+  }
 }
