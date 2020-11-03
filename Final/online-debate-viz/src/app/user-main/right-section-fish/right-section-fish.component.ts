@@ -66,9 +66,13 @@ export class RightSectionFishComponent implements OnInit {
       var time = this.all_tag_entries_topics[index].timestamp;
       let i: any;
       let j: any;
+      var previousTime = time;
       for(i=0; i< democrats.length; i++){
         for(j=0; j<republican.length; j++){
           var temp_entry = [];
+          if(time == previousTime){
+            time = parseFloat(time) + 2;
+          }
           if("to" == direction){
             temp_entry = [time
               , Utilities.getDebaterRecordById(democrats[i]).name
@@ -82,6 +86,7 @@ export class RightSectionFishComponent implements OnInit {
             console.log("ppp", temp_entry);
             data.push(temp_entry);
           }
+          previousTime = time;
         }
       }
 

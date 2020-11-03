@@ -7,8 +7,8 @@ declare var $: any;
   selector: 'app-left-section',
   templateUrl: './left-section.component.html',
   styleUrls: ['./left-section.component.css',
-    '../../../node_modules/bootstrap/dist/css/bootstrap.css',
-    '../../../node_modules/@fortawesome/fontawesome-free/css/all.css']
+    '../../../../node_modules/bootstrap/dist/css/bootstrap.css',
+    '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css']
 })
 export class LeftSectionComponent implements OnInit {
 

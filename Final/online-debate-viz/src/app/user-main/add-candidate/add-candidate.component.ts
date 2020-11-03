@@ -23,8 +23,8 @@ function populateDebatersList(debaters) {
   selector: 'app-add-candidate',
   templateUrl: './add-candidate.component.html',
   styleUrls: ['./add-candidate.component.css',
-  '../../../node_modules/@fortawesome/fontawesome-free/css/all.css',
-  '../../../node_modules/bootstrap/dist/css/bootstrap.css']
+  '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css',
+  '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
 })
 
 export class AddCandidateComponent implements OnInit {

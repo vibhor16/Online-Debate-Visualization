@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoObject, DataService } from 'src/app/common-utils.service';
+import {DataService} from '../../common-utils.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-top-section',
-  templateUrl: './top-section.component.html',
-  styleUrls: ['./top-section.component.css',
-    '../../../node_modules/@fortawesome/fontawesome-free/css/all.css',
-  '../../../node_modules/bootstrap/dist/css/bootstrap.css']
+  selector: 'app-top-section-cust',
+  templateUrl: './top-section-cust.component.html',
+  styleUrls: ['./top-section-cust.component.css',
+    '../../../../node_modules/@fortawesome/fontawesome-free/css/all.css',
+    '../../../../node_modules/bootstrap/dist/css/bootstrap.css']
 })
-export class TopSectionComponent implements OnInit {
-
+export class TopSectionCustComponent implements OnInit {
   constructor(private data: DataService) { }
   youtubeVideoURL: any;
 
@@ -33,6 +32,5 @@ export class TopSectionComponent implements OnInit {
     // let newURL = "https://www.youtube.com/embed/" + videoId;
     // $("iframe").attr("src", newURL);
   }
+
 }
-
-

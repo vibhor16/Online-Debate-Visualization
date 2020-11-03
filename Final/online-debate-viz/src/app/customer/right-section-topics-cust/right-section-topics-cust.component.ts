@@ -1,22 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService, Utilities} from '../../common-utils.service';
 import {GoogleCharts} from 'google-charts';
-import {  Utilities, DataService } from 'src/app/common-utils.service';
 
 declare var $: any;
 declare var google: any;
 @Component({
-  selector: 'app-right-section-topics-new',
-  templateUrl: './right-section-topics-new.component.html',
-  styleUrls: ['./right-section-topics-new.component.css']
+  selector: 'app-right-section-topics-cust',
+  templateUrl: './right-section-topics-cust.component.html',
+  styleUrls: ['./right-section-topics-cust.component.css']
 })
-export class RightSectionTopicsNewComponent implements OnInit {
+export class RightSectionTopicsCustComponent implements OnInit {
+
   all_tag_entries_topics: any[];
   constructor(private data: DataService) { }
 
   onNewTagEntry(newEntry): void{
     if(newEntry != '') {
 
-      this.all_tag_entries_topics.push(newEntry);
+      const thisEntry = [];
+
+      const temp = newEntry.replace('[','').replace(']','').replaceAll('\'','').split(',');
+      const topic = temp[0].trim();
+      const debater = temp[1].trim();
+      const tooltip = temp[2].trim();
+      const start = new Date(temp[3].trim());
+      const end = new Date(temp[4].trim());
+
+      thisEntry.push(topic);
+      thisEntry.push(debater);
+      thisEntry.push(tooltip);
+      thisEntry.push(start);
+      thisEntry.push(end);
+      this.all_tag_entries_topics.push(thisEntry);
       this.drawTimeline(this.all_tag_entries_topics);
     }
   }
@@ -124,8 +139,6 @@ export class RightSectionTopicsNewComponent implements OnInit {
       return image;
     }
   }
-
-
 
 
 

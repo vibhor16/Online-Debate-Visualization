@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import { VideoComponent} from '../video/video.component';
+import { VideoComponent} from '../../video/video.component';
 
 @Component({
   selector: 'app-right-section-video',
