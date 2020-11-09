@@ -39,7 +39,7 @@ export class RightSectionTaggingComponent implements OnInit {
     $('#pause_btn').prop('disabled', true);
     this.disableTaggingSection(true);
 
-    $('#tag_direction_left').hide();
+    // $('#tag_direction_left').hide();
 
     $('#play_btn').on('click', () => {
       // $('#left').css('visibility', 'hidden');
@@ -54,26 +54,26 @@ export class RightSectionTaggingComponent implements OnInit {
       this.addToTaggedEntriesObject();
     });
 
-    $('.tag_direction').on('click', () => {
-
-      const direction = this.getAttackDirection();
-      if (direction == 'from'){
-        $('#tag_direction_left').hide();
-        $('#tag_direction_right').show();
-      } else {
-        $('#tag_direction_right').hide();
-        $('#tag_direction_left').show();
-      }
-
-    });
+    // $('.tag_direction').on('click', () => {
+    //
+    //   const direction = this.getAttackDirection();
+    //   if (direction == 'from'){
+    //     $('#tag_direction_left').hide();
+    //     $('#tag_direction_right').show();
+    //   } else {
+    //     $('#tag_direction_right').hide();
+    //     $('#tag_direction_left').show();
+    //   }
+    //
+    // });
   }
 
   getAttackDirection(): string {
-    let direction = 'to';
-    if ($('#tag_direction_left').is(':visible')) {
-      direction = 'from';
-    }
-    return direction;
+    // let direction = 'to';
+    // if ($('#tag_direction_left').is(':visible')) {
+    //   direction = 'from';
+    // }
+    return 'to';
   }
 
   playVideo(): void {
@@ -171,7 +171,6 @@ export class RightSectionTaggingComponent implements OnInit {
         endTime
       ];
 
-      debugger;
       this.data.changeMessage(entry);
       this.data.changeFishEntry(fishEntry);
 
@@ -206,8 +205,11 @@ export class RightSectionTaggingComponent implements OnInit {
     $('#left_' + party + pic_id).toggleClass('blue');
   }
 
-  changeTopic(value) {
-    this.topicSelected = value;
+  selectTopic(el){
+
+    $('#side_center label').css('background', '#19569f')
+    this.topicSelected = el.target.id.split('_')[1];
+    $('#' + el.target.id).css('background', 'red');
   }
 
   selectRepublican(el) {

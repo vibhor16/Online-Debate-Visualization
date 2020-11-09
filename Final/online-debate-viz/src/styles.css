@@ -12,22 +12,6 @@ body{
 }
 
 
-/*body::-webkit-scrollbar {*/
-/*  width: 1em;*/
-/*background-color: white;*/
-/*}*/
-
-/*body::-webkit-scrollbar-track {*/
-/*  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
-/*  background-color: white;*/
-
-/*}*/
-
-/*body::-webkit-scrollbar-thumb {*/
-/*  background-color: darkgrey;*/
-/*  outline: 1px solid slategrey;*/
-/*}*/
-
 .blue_border_bottom{
   border-bottom: 4px solid #0078f2;
 }
@@ -137,7 +121,7 @@ body{
 
 .democratic-img{
   border-radius: 50%;
-  width: 30%;
+  width: 15%;
 }
 
 .republican-img{
@@ -164,9 +148,8 @@ body{
   background: #2a2a2a;
 }
 #side_democrats{
-  height: 12.5em;
+  height: 90%;
   overflow: scroll;
-  /*background: #07074e;*/
   padding: initial;
 }
 #side_democrats label{
@@ -176,11 +159,12 @@ body{
   background: #07074e;
 }
 
-
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 #side_republican{
-  height: 12.5em;
+  height: 90%;
   overflow: scroll;
-  /*background: #520101;*/
   padding: initial;
 }
 
@@ -189,6 +173,24 @@ body{
   border: 1px solid grey;
   text-align: center;
   background: #520101;
+}
+
+#side_center{
+  margin-top: 0.5em;
+  height: 53%;
+  overflow: scroll;
+  padding: initial;
+}
+
+#side_center label{
+  min-width: 70%;
+  border: 1px solid grey;
+  text-align: center;
+  background: #19569f;
+}
+
+#side_center input{
+  opacity: 0;
 }
 
 iframe{
@@ -319,6 +321,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 0;
   width: 48%;
   margin-right: 2%;
+  margin-left: 20em;
   background: black;
   border: 1px solid grey;
 }
@@ -369,7 +372,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 #tagging-overlay{
   position: absolute;
   width: 100%;
-  height: 33vh;
+  height: 100%;
   z-index: 100;
   background: black;
   opacity: 0.8;

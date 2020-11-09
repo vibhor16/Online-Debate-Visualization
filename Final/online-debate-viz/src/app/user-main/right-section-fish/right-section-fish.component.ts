@@ -10,7 +10,6 @@ declare var d3: any;
 export class RightSectionFishComponent implements OnInit {
   all_tag_entries_topics: any[];
   constructor(private data: DataService) {
-    // debugger
     console.log("constructor", data);
     // console.log(data);
   }
@@ -18,13 +17,11 @@ export class RightSectionFishComponent implements OnInit {
   // constructor() { }
 
   onNewTagEntry(newEntry): void{
-    // debugger
     console.log("newEntry: ", newEntry);
     if(newEntry != '') {
       console.log("newEntry is: ");
       console.log(newEntry);
       this.all_tag_entries_topics.push(newEntry);
-      // debugger
       this.drawFishDiagram(this.all_tag_entries_topics);
     }
   }
@@ -100,7 +97,6 @@ export class RightSectionFishComponent implements OnInit {
     console.log("people",people);
     console.log(colors);
     console.log("xxxx");
-    // debugger
     // d3.scaleLinear
     var x = d3.scaleLinear()
             .range([0, width]);
@@ -143,12 +139,10 @@ export class RightSectionFishComponent implements OnInit {
       // console.log(data2)
       // d.sales = +d.sales;
     });
-  //   debugger
   data = data2
   console.log("data is: ", data);
   console.log(data);
 
-  // debugger
   //   Scale the range of the data in the domains
     // x.domain(data.map(function(d) { return d.salesperson; }));
     x.domain([0, 120]);
@@ -179,7 +173,6 @@ export class RightSectionFishComponent implements OnInit {
       //       .attr("class", "edges");
 
 
-      // debugger
 
     svg.selectAll(".bar")
       .data(data)
@@ -204,7 +197,6 @@ export class RightSectionFishComponent implements OnInit {
       .attr("y2", function(d) { return pady+y(d.victim)})
       .attr("stroke-width", 1)
       .attr("stroke", function(d) {
-          // debugger
           console.log(d.attacker);
           console.log(people.indexOf(d.attacker ));
           console.log(colors[people.indexOf(d.attacker)]);
@@ -235,7 +227,6 @@ export class RightSectionFishComponent implements OnInit {
     svg.append("g")
         .call(d3.axisLeft(y));
 
-        // debugger
 
   }
 

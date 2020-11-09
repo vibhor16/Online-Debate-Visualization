@@ -16,7 +16,6 @@ export class RightSectionFishCustComponent implements OnInit {
   ws: WebSocket;
   mainData: DataService;
   constructor(private data: DataService) {
-    // debugger
     console.log('constructor', data);
     // console.log(data);
 
@@ -25,7 +24,6 @@ export class RightSectionFishCustComponent implements OnInit {
     let that = this;
     this.ws = new WebSocket(`ws://localhost:8000/ws/${this.client_id}`);
     this.ws.onmessage = function(event) {
-      debugger;
       if(event.data.indexOf('democrats') > 0){
         that.mainData.changeFishEntry(JSON.parse(event.data));
       } else {
@@ -37,14 +35,12 @@ export class RightSectionFishCustComponent implements OnInit {
   // constructor() { }
 
   onNewTagEntry(newEntry): void{
-    // debugger
     console.log('newEntry: ', newEntry);
     if(newEntry != '') {
 
       // {'democrats': ['1'], 'republican': ['2'], 'timestamp': '0.24', 'direction': 'to'}
       // ["'democrats'", " ['1', '2', '3'], 'republican'", " ['4'], 't
 
-      debugger;
       const temp = newEntry.replace('{','').replace('}','').split(":");
       const t_demo = temp[1].split("],")[0].trim().replace('[','').split(',');
       const demoArr = [];
@@ -70,7 +66,6 @@ export class RightSectionFishCustComponent implements OnInit {
       };
 
       this.all_tag_entries_topics.push(thisEntry);
-      // debugger
       this.drawFishDiagram(this.all_tag_entries_topics);
     }
   }
@@ -146,7 +141,6 @@ export class RightSectionFishCustComponent implements OnInit {
     console.log("people",people);
     console.log(colors);
     console.log("xxxx");
-    // debugger
     // d3.scaleLinear
     var x = d3.scaleLinear()
       .range([0, width]);
@@ -189,12 +183,10 @@ export class RightSectionFishCustComponent implements OnInit {
       // console.log(data2)
       // d.sales = +d.sales;
     });
-    //   debugger
     data = data2
     console.log("data is: ", data);
     console.log(data);
 
-    // debugger
     //   Scale the range of the data in the domains
     // x.domain(data.map(function(d) { return d.salesperson; }));
     x.domain([0, 120]);
@@ -225,7 +217,6 @@ export class RightSectionFishCustComponent implements OnInit {
     //       .attr("class", "edges");
 
 
-    // debugger
 
     svg.selectAll(".bar")
       .data(data)
@@ -250,7 +241,6 @@ export class RightSectionFishCustComponent implements OnInit {
       .attr("y2", function(d) { return pady+y(d.victim)})
       .attr("stroke-width", 1)
       .attr("stroke", function(d) {
-        // debugger
         console.log(d.attacker);
         console.log(people.indexOf(d.attacker ));
         console.log(colors[people.indexOf(d.attacker)]);
@@ -281,7 +271,6 @@ export class RightSectionFishCustComponent implements OnInit {
     svg.append("g")
       .call(d3.axisLeft(y));
 
-    // debugger
 
   }
 
