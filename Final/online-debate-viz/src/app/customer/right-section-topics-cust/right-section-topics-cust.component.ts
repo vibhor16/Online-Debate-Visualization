@@ -96,7 +96,7 @@ export class RightSectionTopicsCustComponent implements OnInit {
         timeline: { colorByRowLabel: true,
           rowLabelStyle: {color: 'white' },
           barLabelStyle:{color: 'white'}},
-        backgroundColor: 'black'
+        backgroundColor: 'white'
       };
 
 

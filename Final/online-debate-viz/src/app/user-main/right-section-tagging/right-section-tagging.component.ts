@@ -246,16 +246,16 @@ export class RightSectionTaggingComponent implements OnInit {
       this.data.changeMessage(entry, this.data.taggerType);
       this.data.changeFishEntry(fishEntry, this.data.taggerType);
 
-      if ("democrat" == this.data.taggerType){
-        this.wsDemocrat.send(JSON.stringify(entry));
-        this.wsDemocrat.send(JSON.stringify(fishEntry));  
-      }else if("republican" == this.data.taggerType){
-        this.wsRepublican.send(JSON.stringify(entry));
-        this.wsRepublican.send(JSON.stringify(fishEntry));  
-      }else{
-        this.wsNeutral.send(JSON.stringify(entry));
-        this.wsNeutral.send(JSON.stringify(fishEntry));  
-      }
+      // if ("democrat" == this.data.taggerType){
+      //   this.wsDemocrat.send(JSON.stringify(entry));
+      //   this.wsDemocrat.send(JSON.stringify(fishEntry));  
+      // }else if("republican" == this.data.taggerType){
+      //   this.wsRepublican.send(JSON.stringify(entry));
+      //   this.wsRepublican.send(JSON.stringify(fishEntry));  
+      // }else{
+      //   this.wsNeutral.send(JSON.stringify(entry));
+      //   this.wsNeutral.send(JSON.stringify(fishEntry));  
+      // }
 
 
       // Interaction summary object
@@ -370,9 +370,26 @@ export class RightSectionTaggingComponent implements OnInit {
       this.data.changeInteractionSummaryEntry(this.interactionSummaryEntries);
       this.data.changeRankEvolutionEntry(this.rankEvolutionEntries);
 
+      if ("democrat" == this.data.taggerType){
+        this.wsDemocrat.send(JSON.stringify(entry));
+        this.wsDemocrat.send(JSON.stringify(fishEntry)); 
+        this.wsDemocrat.send(JSON.stringify(this.interactionSummaryEntries));
+        this.wsDemocrat.send(JSON.stringify(this.rankEvolutionEntries));
+   
+      }else if("republican" == this.data.taggerType){
+        this.wsRepublican.send(JSON.stringify(entry));
+        this.wsRepublican.send(JSON.stringify(fishEntry)); 
+        this.wsRepublican.send(JSON.stringify(this.interactionSummaryEntries));
+        this.wsRepublican.send(JSON.stringify(this.rankEvolutionEntries));
+ 
+      }else{
+        this.wsNeutral.send(JSON.stringify(entry));
+        this.wsNeutral.send(JSON.stringify(fishEntry));  
+        this.wsNeutral.send(JSON.stringify(this.interactionSummaryEntries));
+        this.wsNeutral.send(JSON.stringify(this.rankEvolutionEntries));
 
-      this.ws.send(JSON.stringify(entry));
-      this.ws.send(JSON.stringify(fishEntry));
+      }
+      
     }
   }
 

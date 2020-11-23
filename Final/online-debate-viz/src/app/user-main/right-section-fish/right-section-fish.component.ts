@@ -141,7 +141,7 @@ export class RightSectionFishComponent implements OnInit {
 
     temptry.append("line")
       .attr("class", "bar")
-      .attr("color", "white")
+      .attr("stroke", "black")
       //   .attr("x", function(d) { return x(d.time); })
       //   .attr("width", 2)
       //   .attr("y", function(d) { return pady+Math.min(y(d.attacker), y(d.victim)); })
@@ -217,10 +217,15 @@ export class RightSectionFishComponent implements OnInit {
         .call(d3.axisBottom(x));
 
     // add the y Axis
-    svg.append("g")
+    let yaxis = svg.append("g")
         .call(d3.axisLeft(y));
 
+        yaxis.selectAll("text").style("stroke","black");
 
+        yaxis.selectAll("line").style("stroke","white");
+
+        yaxis.selectAll("path").style("stroke","white");
+        
   }
 
   ngAfterContentInit(): void {
