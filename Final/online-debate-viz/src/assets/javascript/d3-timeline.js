@@ -49,7 +49,7 @@
         showAxisHeaderBackground = false,
         showAxisNav = false,
         showAxisCalendarYear = false,
-        axisBgColor = "white",
+        axisBgColor = "black",
         chartData = {}
       ;
 
@@ -62,6 +62,7 @@
       var axis = g.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(" + 0 + "," + yPosition + ")")
+        .attr("color", "black")
         .call(xAxis);
     };
 
@@ -77,6 +78,7 @@
         .attr("x", 0)
         .attr("y", 14)
         .attr("class", "calendarYear")
+        .attr("color", "black")
         .text(calendarLabel)
       ;
     };
@@ -89,6 +91,7 @@
       var nav = g.append('g')
           .attr("class", "axis")
           .attr("transform", "translate(0, 20)")
+          .attr("color", "black")
         ;
 
       if(showAxisCalendarYear) { appendTimeAxisCalendarYear(nav) };
@@ -98,6 +101,7 @@
         .attr("x", 0)
         .attr("y", 14)
         .attr("class", "chevron")
+        .attr("color", "black")
         .text("<")
         .on("click", function () {
           return navigateLeft(beginning, chartData);
@@ -109,6 +113,7 @@
         .attr("x", 0)
         .attr("y", 14)
         .attr("class", "chevron")
+        .attr("color", "black")
         .text(">")
         .on("click", function () {
           return navigateRight(ending, chartData);
@@ -123,7 +128,8 @@
         .attr("width", width)
         .attr("y", yAxis)
         .attr("height", itemHeight)
-        .attr("fill", axisBgColor);
+        .attr("fill", axisBgColor)
+        .attr("color", "black");
     };
 
     var appendTimeAxisTick = function(g, xAxis, maxStack) {
@@ -131,6 +137,7 @@
         .attr("class", "axis")
         .attr("transform", "translate(" + 0 + "," + (margin.top + (itemHeight + itemMargin) * maxStack) + ")")
         .attr(timeAxisTickFormat.stroke, timeAxisTickFormat.spacing)
+        .attr("color", "black")
         .call(xAxis.tickFormat("").tickSize(-(margin.top + (itemHeight + itemMargin) * (maxStack - 1) + 3), 0, 0));
     };
 
@@ -143,7 +150,10 @@
         .attr("width", fullLengthBackgrounds ? width : (width - margin.right - margin.left))
         .attr("y", greenbarYAxis)
         .attr("height", itemHeight)
+        .attr("color", "black")
         .attr("fill", backgroundColor instanceof Function ? backgroundColor(datum, index) : backgroundColor)
+        .attr("fill", "black")
+      
       ;
     };
 
@@ -154,6 +164,7 @@
       gParent.append("text")
         .attr("class", "timeline-label")
         .attr("transform", "translate(" + labelMargin + "," + rowsDown + ")")
+        .attr("color", "black")
         .text(hasLabel ? labelFunction(datum.label) : datum.id)
         .on("click", function (d, i) { click(d, index, datum); });
     };
@@ -360,7 +371,8 @@
               }
 
               return d.id ? d.id : "timelineItem_"+index+"_"+i;
-            })
+            }).attr("color", "black")
+            .attr("background-color", "black")
           ;
 
           g.selectAll("svg").data(data).enter()
@@ -369,7 +381,7 @@
             .attr("y", getStackTextPosition)
             .text(function(d) {
               return d.label;
-            })
+            }).attr("color", "black")
           ;
 
           if (rowSeparatorsColor) {
@@ -381,7 +393,8 @@
               .attr("y1", lineYAxis)
               .attr("y2", lineYAxis)
               .attr("stroke-width", 1)
-              .attr("stroke", rowSeparatorsColor);
+              .attr("stroke", rowSeparatorsColor)
+              .attr("color", "black");
           }
 
           // add the label
@@ -393,7 +406,8 @@
               .attr("transform", "translate("+ 0 +","+ (margin.top + (itemHeight + itemMargin) * yAxisMapping[index])+")")
               .attr("xlink:href", datum.icon)
               .attr("width", margin.left)
-              .attr("height", itemHeight);
+              .attr("height", itemHeight)
+              .attr("color", "black");
           }
 
           function getStackPosition(d, i) {
@@ -429,6 +443,7 @@
 
         gParent
           .attr("class", "scrollable")
+          .attr("color", "black")
           .call(zoom);
       }
 
@@ -438,7 +453,7 @@
             return "rotate(" + rotateTicks + ")translate("
               + (this.getBBox().width / 2 + 10) + "," // TODO: change this 10
               + this.getBBox().height / 2 + ")";
-          });
+          }).attr("color", "black");
       }
 
       var gSize = g[0][0].getBoundingClientRect();
@@ -514,8 +529,9 @@
           .attr("y1", lineFormat.marginTop)
           .attr("x2", lineScale)
           .attr("y2", height - lineFormat.marginBottom)
-          .style("stroke", lineFormat.color)//"rgb(6,120,155)")
-          .style("stroke-width", lineFormat.width);
+          .style("stroke", "black")//"rgb(6,120,155)")
+          .style("stroke-width", lineFormat.width)
+          .attr("color", "black");
       }
 
     }

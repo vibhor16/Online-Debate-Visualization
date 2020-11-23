@@ -63,7 +63,7 @@ export class RightSectionTopicsNewComponent implements OnInit {
       var container = document.getElementById('topics-chart');
       var chart = new google.visualization.Timeline(container);
       var dataTable = new google.visualization.DataTable();
-      debugger;
+      // debugger;
       dataTable.addColumn({ type: 'string', id: 'Position' });
       dataTable.addColumn({ type: 'string', id: 'Name' });
       dataTable.addColumn({ type: 'string', role: 'tooltip'});
@@ -82,7 +82,7 @@ export class RightSectionTopicsNewComponent implements OnInit {
         timeline: { colorByRowLabel: true,
           rowLabelStyle: {color: 'white' },
           barLabelStyle:{color: 'white'}},
-        backgroundColor: 'black'
+        backgroundColor: 'white'
       };
 
 

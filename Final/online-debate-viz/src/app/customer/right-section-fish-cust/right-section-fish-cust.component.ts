@@ -13,7 +13,10 @@ export class RightSectionFishCustComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   all_tag_entries_topics: any[];
   client_id: any;
-  ws: WebSocket;
+  tagger_type: any;
+  wsNeutral: WebSocket;
+  wsDemocrat: WebSocket;
+  wsRepublican: WebSocket;
   mainData: DataService;
   constructor(private data: DataService) {
     // debugger
@@ -23,13 +26,32 @@ export class RightSectionFishCustComponent implements OnInit {
     this.mainData = data;
     this.client_id = Date.now();
     let that = this;
-    this.ws = new WebSocket(`ws://localhost:8000/ws/${this.client_id}`);
-    this.ws.onmessage = function(event) {
-      debugger;
+    this.tagger_type = this.data.taggerType;
+    this.wsNeutral = new WebSocket(`ws://localhost:8000/ws/neutral`);
+    this.wsDemocrat = new WebSocket(`ws://localhost:8000/ws/democrat`);
+    this.wsRepublican = new WebSocket(`ws://localhost:8000/ws/republican`);
+
+    this.wsNeutral.onmessage = function(event) {
       if(event.data.indexOf('democrats') > 0){
-        that.mainData.changeFishEntry(JSON.parse(event.data));
+        that.mainData.changeFishEntry(JSON.parse(event.data),"neutral");
       } else {
-        that.mainData.changeMessage(JSON.parse(event.data));
+        that.mainData.changeMessage(JSON.parse(event.data),"neutral");
+      }
+    };
+
+    this.wsDemocrat.onmessage = function(event) {
+      if(event.data.indexOf('democrats') > 0){
+        that.mainData.changeFishEntry(JSON.parse(event.data),"democrat");
+      } else {
+        that.mainData.changeMessage(JSON.parse(event.data),"democrat");
+      }
+    };
+
+    this.wsRepublican.onmessage = function(event) {
+      if(event.data.indexOf('democrats') > 0){
+        that.mainData.changeFishEntry(JSON.parse(event.data),"republican");
+      } else {
+        that.mainData.changeMessage(JSON.parse(event.data),"republican");
       }
     };
   }

@@ -424,10 +424,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 svg{
-  color: white;
+  color:black;
   margin-top: 1em;
 }
 
 text{
-  fill:white
+  fill:black
 }

@@ -183,20 +183,34 @@ export class DataService {
   private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
   currentVideo = this.videoMsgSource.asObservable();
 
-  constructor() { }
+  taggerType = "neutral";
+  
+  constructor() { 
+  }
 
-  changeMessage(tag_entry: any) {
-    console.log("tag_entry is: ", tag_entry);
-    this.messageSource.next(tag_entry);
+  changeMessage(tag_entry: any, tagger_type : any) {
+    console.log("BBBBBBBBBB");
+    console.log(this.taggerType);
+    console.log(tagger_type);
+    if(this.taggerType == tagger_type){
+      console.log("tag_entry is: ", tag_entry);
+      this.messageSource.next(tag_entry);
+    }
   }
 
   changeVideoURL(newURL: any){
     this.videoMsgSource.next(newURL);
   }
 
-  changeFishEntry(new_fish_entry : any){
-    console.log("new_fish_entry is: ", new_fish_entry);
-    this.fishSource.next(new_fish_entry);
+  changeFishEntry(new_fish_entry : any, tagger_type : any){
+    console.log("BBBBBBBBBB");
+    console.log(this.taggerType);
+    console.log(tagger_type);
+
+    if(this.taggerType == tagger_type){  
+      console.log("new_fish_entry is: ", new_fish_entry);
+      this.fishSource.next(new_fish_entry);
+    }
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ElementFinder } from 'protractor';
 import { GET_DEBATERS_JSON, VideoObject, Utilities, DataService } from 'src/app/common-utils.service';
 
 declare var $: any;
@@ -18,13 +19,20 @@ export class RightSectionTaggingComponent implements OnInit {
   topicSelected: string;
   // tslint:disable-next-line:variable-name
   client_id: any;
-  ws: WebSocket;
+  wsNeutral: WebSocket;
+  wsDemocrat: WebSocket;
+  wsRepublican: WebSocket;
   constructor(private data: DataService) {
 
     this.client_id = Date.now();
-    this.ws = new WebSocket(`ws://localhost:8000/ws/${this.client_id}`);
-    // tslint:disable-next-line:only-arrow-functions
-    this.ws.onmessage = function(event) {
+    this.wsNeutral = new WebSocket(`ws://localhost:8000/ws/neutral`);
+    this.wsDemocrat = new WebSocket(`ws://localhost:8000/ws/democrat`);
+    this.wsRepublican = new WebSocket(`ws://localhost:8000/ws/republican`);
+    this.wsNeutral.onmessage = function(event) {
+    };
+    this.wsDemocrat.onmessage = function(event) {
+    };
+    this.wsRepublican.onmessage = function(event) {
     };
 
   }
@@ -32,8 +40,8 @@ export class RightSectionTaggingComponent implements OnInit {
   ngOnInit(): void {
     this.topics = Utilities.topics;
     const debaters = GET_DEBATERS_JSON();
-    this.democrats = debaters.democrats;
-    this.republicans = debaters.republicans;
+    this.democrats = debaters['democrats'];
+    this.republicans = debaters['republicans'];
 
     $('#play_btn').prop('disabled', false);
     $('#pause_btn').prop('disabled', true);
@@ -137,10 +145,11 @@ export class RightSectionTaggingComponent implements OnInit {
  }
       // alert("Select a topic from the list!");
     else {
-      fishEntry.democrats = democrats;
-      fishEntry.republican = republicans;
-      fishEntry.timestamp = VideoObject.currentTime;
-      fishEntry.direction = this.getAttackDirection();
+      fishEntry['democrats'] = democrats;
+      fishEntry['republican'] = republicans;
+      fishEntry['timestamp'] = VideoObject.currentTime;
+      fishEntry['direction'] = this.getAttackDirection();
+      fishEntry['category'] = this.data.taggerType;
 
       let time = new Date(this.playerElem.getCurrentTime() * parseInt('1000'));
       console.log('time youtube = ' + time);
@@ -171,12 +180,20 @@ export class RightSectionTaggingComponent implements OnInit {
         endTime
       ];
 
-      debugger;
-      this.data.changeMessage(entry);
-      this.data.changeFishEntry(fishEntry);
+      // debugger;
+      this.data.changeMessage(entry, this.data.taggerType);
+      this.data.changeFishEntry(fishEntry, this.data.taggerType);
 
-      this.ws.send(JSON.stringify(entry));
-      this.ws.send(JSON.stringify(fishEntry));
+      if ("democrat" == this.data.taggerType){
+        this.wsDemocrat.send(JSON.stringify(entry));
+        this.wsDemocrat.send(JSON.stringify(fishEntry));  
+      }else if("republican" == this.data.taggerType){
+        this.wsRepublican.send(JSON.stringify(entry));
+        this.wsRepublican.send(JSON.stringify(fishEntry));  
+      }else{
+        this.wsNeutral.send(JSON.stringify(entry));
+        this.wsNeutral.send(JSON.stringify(fishEntry));  
+      }
     }
   }
 

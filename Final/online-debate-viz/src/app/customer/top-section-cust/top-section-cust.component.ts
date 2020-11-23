@@ -33,4 +33,10 @@ export class TopSectionCustComponent implements OnInit {
     // $("iframe").attr("src", newURL);
   }
 
+  recordTaggerType(){
+    this.data.taggerType = $("#tagger_type").val();  
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log(this.data.taggerType);
+  }
+
 }

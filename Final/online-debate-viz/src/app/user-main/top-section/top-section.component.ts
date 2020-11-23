@@ -33,6 +33,12 @@ export class TopSectionComponent implements OnInit {
     // let newURL = "https://www.youtube.com/embed/" + videoId;
     // $("iframe").attr("src", newURL);
   }
+
+  recordTaggerType(){
+    this.data.taggerType = $("#tagger_type").val();  
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log(this.data.taggerType);
+  }
 }
 
 
