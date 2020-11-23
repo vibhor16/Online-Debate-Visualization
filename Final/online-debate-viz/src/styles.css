@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 html{
   overflow: hidden;
-  background: black;
+  background: white;
   font-family: sans-serif;
 }
 body{
@@ -11,22 +11,6 @@ body{
   font-family: OpenSans,sans-serif,arial;
 }
 
-
-/*body::-webkit-scrollbar {*/
-/*  width: 1em;*/
-/*background-color: white;*/
-/*}*/
-
-/*body::-webkit-scrollbar-track {*/
-/*  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);*/
-/*  background-color: white;*/
-
-/*}*/
-
-/*body::-webkit-scrollbar-thumb {*/
-/*  background-color: darkgrey;*/
-/*  outline: 1px solid slategrey;*/
-/*}*/
 
 .blue_border_bottom{
   border-bottom: 4px solid #0078f2;
@@ -58,7 +42,7 @@ body{
   color: white;
   border: 1px solid grey;
   /*border-radius: 5px;*/
-  background: black;
+  background: white;
   text-align: center;
   margin-top: 1em;
   margin-right: 1%;
@@ -66,6 +50,10 @@ body{
 
 
 #right{
+  height: 95.4%;
+  margin-top: 1em;
+}
+#right1{
   height: 95.4%;
   margin-top: 1em;
 }
@@ -81,26 +69,27 @@ body{
 }
 
 #right-section-video{
-  height: 96%;
+  height: 80%;
   /*border: 1px solid #c5baba;*/
   /*border-radius: 5px;*/
-  background: black;
+  background: white;
 }
 
 
 #right-section-topics{
   height: 100%;
   /*border-radius: 5px;*/
-  background: black;
+  background: white;
 }
 
 
 #right-section-tagging{
   height: 100% !important;
+  margin-top: -3.5em;
   color: white;
   /*border: 1px solid #c5baba;*/
   /*border-radius: 5px;*/
-  background: black;
+  background: white;
 }
 
 .sub-titles{
@@ -116,7 +105,7 @@ body{
 #right-section-fish{
   height: 100%;
   /*border: 1px solid #c5baba;*/
-  background: black;
+  background: white;
 }
 
 #top-nav-bar{
@@ -137,7 +126,7 @@ body{
 
 .democratic-img{
   border-radius: 50%;
-  width: 30%;
+  width: 15%;
 }
 
 .republican-img{
@@ -164,9 +153,8 @@ body{
   background: #2a2a2a;
 }
 #side_democrats{
-  height: 12.5em;
+  height: 90%;
   overflow: scroll;
-  /*background: #07074e;*/
   padding: initial;
 }
 #side_democrats label{
@@ -176,11 +164,12 @@ body{
   background: #07074e;
 }
 
-
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 #side_republican{
-  height: 12.5em;
+  height: 90%;
   overflow: scroll;
-  /*background: #520101;*/
   padding: initial;
 }
 
@@ -189,6 +178,24 @@ body{
   border: 1px solid grey;
   text-align: center;
   background: #520101;
+}
+
+#side_center{
+  margin-top: 0.5em;
+  height: 53%;
+  overflow: scroll;
+  padding: initial;
+}
+
+#side_center label{
+  min-width: 70%;
+  border: 1px solid grey;
+  text-align: center;
+  background: #19569f;
+}
+
+#side_center input{
+  opacity: 0;
 }
 
 iframe{
@@ -214,7 +221,7 @@ iframe{
 
 #debaters_democrats img{
   margin: 0.5em 0;
-  background: black;
+  background: white;
   margin-left: 0.5em;
 }
 
@@ -223,7 +230,7 @@ iframe{
 }
 #debaters_republicans img{
   margin: 0.5em 0;
-  background: black;
+  background: white;
   margin-right: 1em !important;
 }
 
@@ -319,6 +326,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 0;
   width: 48%;
   margin-right: 2%;
+  margin-left: 20em;
   background: black;
   border: 1px solid grey;
 }
@@ -369,10 +377,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 #tagging-overlay{
   position: absolute;
   width: 100%;
-  height: 33vh;
+  height: 100%;
   z-index: 100;
-  background: black;
-  opacity: 0.8;
+  background: grey;
+  opacity: 0.5;
 }
 
 .userName{

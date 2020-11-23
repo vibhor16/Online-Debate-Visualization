@@ -4,8 +4,13 @@
     <li class="nav-item blue_border_bottom">
       <a id="nav-home" class="nav-link " href="#">HOME</a>
     </li>
-  </ul>
-  <ul class="navbar-nav navbar-right" style="height: 100%;">
+    <li>
+      <div class="md-form mt-0">
+        <i class="fa fa-search fa-lg" id="search-icon"></i>
+<!--        <i class="fa fa-times fa-lg" id="search-clear" (click)="clearSearchBox()"></i>-->
+        <input id="input_video_url" class="form-control mr-sm-2" type="text" placeholder="Enter video URL" (keypress)="playYoutubeVide($event)">
+      </div>
+    </li>
     <li class="nav-item userName">
       <i class="fa fa-user fa-1x" style="color: white; margin-left: 1.3em"></i>
       <!-- <a id="nav-home2" class="nav-link " href="#" style="color: white">Viewer1</a> -->
@@ -16,13 +21,7 @@
   <!--  </div>-->
 </nav>
 <div class="row" style="margin-top: 1em">
-  <div class="col-md-8" style="margin-left: 24em;">
-    <div class="md-form mt-0">
-      <i class="fa fa-search fa-lg" id="search-icon"></i>
-      <i class="fa fa-times fa-lg" id="search-clear" (click)="clearSearchBox()"></i>
-      <input id="input_video_url" class="form-control mr-sm-2" type="text" placeholder="Enter video URL" (keypress)="playYoutubeVide($event)">
-    </div>
-  </div>
+
   <div class="col-md-2">
   </div>
 </div>

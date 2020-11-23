@@ -1,0 +1,10 @@
+#interaction_summary{
+  margin:5em;
+}
+.x-labels{
+  fill: grey !important;
+}
+
+.y-labels{
+  fill: grey !important;
+}

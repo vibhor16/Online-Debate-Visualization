@@ -56,7 +56,7 @@ export class Utilities {
     {name:"Elections", icon:"fa fa-person-booth", img:'https://img.icons8.com/color/48/000000/elections.png'},
     {name:"Food", icon:"fa fa-hamburger", img:'https://img.icons8.com/color/48/000000/food.png'},
     // {name:"Gun Control", icon:"fa fa-fighter-jet", img:'https://img.icons8.com/color/48/000000/space-fighter.png'},
-    {name:"Health Care", icon:"fa fa-file-medical", img:'https://img.icons8.com/color/48/000000/medical-doctor.png'},
+    {name:"Healthcare", icon:"fa fa-file-medical", img:'https://img.icons8.com/color/48/000000/medical-doctor.png'},
     {name:"Immigration", icon:"fa fa-user-friends", img:'https://img.icons8.com/color/48/000000/customs-officer.png'},
     // {name:"Infrastructure", icon:"fa fa-building", img:'https://img.icons8.com/color/48/000000/rope-bridge.png'},
     {name:"Military", icon:"fa fa-meteor", img:'https://img.icons8.com/color/48/000000/wwi-german-helmet.png'},
@@ -70,7 +70,7 @@ export class Utilities {
     "Elections",
     "Food",
     // "Gun Control",
-    "Health Care",
+    "Healthcare",
     "Immigration",
     // "Infrastructure",
     "Military",
@@ -180,11 +180,21 @@ export class DataService {
   private fishSource = new BehaviorSubject('');
   currentFishMessage = this.fishSource.asObservable();
 
+
   private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
   currentVideo = this.videoMsgSource.asObservable();
 
+  private defaultIntSumm = this.initializeIntSummaryObj();
+  private intSummSource = new BehaviorSubject(this.defaultIntSumm);
+  currentIntSummMessage = this.intSummSource.asObservable();
+
+  private defaultRankEvol = this.initializeRankEvolObj();
+  private intRankEvolSource = new BehaviorSubject(this.defaultRankEvol);
+  currentRankEvolMessage = this.intRankEvolSource.asObservable();
+
   taggerType = "neutral";
-  
+
+
   constructor() { 
   }
 
@@ -197,7 +207,7 @@ export class DataService {
       this.messageSource.next(tag_entry);
     }
   }
-
+  
   changeVideoURL(newURL: any){
     this.videoMsgSource.next(newURL);
   }
@@ -211,6 +221,22 @@ export class DataService {
       console.log("new_fish_entry is: ", new_fish_entry);
       this.fishSource.next(new_fish_entry);
     }
+  }
+
+  changeInteractionSummaryEntry(new_int_summary: any){
+    this.intSummSource.next(new_int_summary);
+  }
+
+  changeRankEvolutionEntry(new_rank_evol: any){
+    this.intRankEvolSource.next(new_rank_evol);
+  }
+
+  initializeIntSummaryObj() {
+    return '';
+  }
+
+  initializeRankEvolObj() {
+    return '';
   }
 
 }

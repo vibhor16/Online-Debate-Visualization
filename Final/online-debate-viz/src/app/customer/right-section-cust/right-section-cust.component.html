@@ -1,16 +1,40 @@
-<div class="row" style="margin-bottom: 1%">
-  <div class="col-md-6" id="right-section-video">
-    <app-right-section-video-cust></app-right-section-video-cust>
-  </div>
-  <div class="col-md-6" id="right-section-topics">
-    <app-right-section-topics-cust></app-right-section-topics-cust>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row" style="height: 30em; margin-top: -13.5em">
+        <div class="col-md-12">
+          <app-right-section-video-cust></app-right-section-video-cust>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 18em">
+        <div class="col-md-12">
+          <div id="interaction_summary">
+            <app-interaction-summary-cust></app-interaction-summary-cust>
+          </div>
+          <div id="rank_evolution" style="display: none">
+            <app-rank-evolution-cust></app-rank-evolution-cust>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <div class="row" style="height: 35em;">
+        <div class="col-md-12">
+          <app-right-section-topics-cust></app-right-section-topics-cust>
+        </div>
+      </div>
+
+      <div class="row" style="height: 30em">
+        <div class="col-md-12">
+          <app-right-section-fish-cust></app-right-section-fish-cust>
+        </div>
+
+      </div>
+      <button type="button" class="btn btn-primary" style="margin-top: 5em" (click)="switchGraph()">Switch Graph</button>
+    </div>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-md-6" id="right-section-tagging">
-  </div>
-  <div class="col-md-6" id="right-section-fish">
-    <app-right-section-fish-cust></app-right-section-fish-cust>
-  </div>
-</div>
+

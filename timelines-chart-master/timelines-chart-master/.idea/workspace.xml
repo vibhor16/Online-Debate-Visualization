@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="933a7df9-7854-448b-8c1a-d11e63202a6e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/src/assets/javascript/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/user-main/right-section-tagging/right-section-tagging.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/user-main/right-section-tagging/right-section-tagging.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/user-main/right-section-topics-new/right-section-topics-new.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/user-main/right-section-topics-new/right-section-topics-new.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/user-main/right-section/right-section.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/src/app/user-main/right-section/right-section.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Final/online-debate-viz/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Final/online-debate-viz/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1k4xYnHHrwjpxd8PcOZMxbI0Ggv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="933a7df9-7854-448b-8c1a-d11e63202a6e" name="Default Changelist" comment="" />
+      <created>1604973714942</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604973714942</updated>
+      <workItem from="1604973717847" duration="11384000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="386" y="207" width="853" height="486" key="find.popup" timestamp="1604985697166">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="386" y="207" width="853" height="486" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1604985697166" />
+    <state x="114" y="145" key="new project wizard" timestamp="1605035756942">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="114" y="145" key="new project wizard/0.0.1440.900@0.0.1440.900" timestamp="1605035756942" />
+  </component>
+</project>
