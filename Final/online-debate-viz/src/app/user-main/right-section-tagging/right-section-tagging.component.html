@@ -1,16 +1,10 @@
-<div class="row" style="padding-left: 1em">
-  <div style="padding-top: 1em"><label style="color: white">TAGGER</label></div>
-</div>
-<div class="row">
-  <div class="col-md-4">
-  </div>
-  <div class="col-md-4">
+<div class="row" style="padding-left: 1em; ">
+  <div style="padding-top: 1em; display: flex">
+    <label style="color: white; margin-left: 5px">TAGGER</label>
     <button type="button" class="btn btn-success" id="play_btn"><i class="fa fa-play"></i></button>
     <button type="button" class="btn btn-success" id="pause_btn"><i class="fa fa-pause"></i></button>
   </div>
-  <div class="col-md-4">
-  </div>
-  </div>
+</div>
 <br/>
 <div class="row" id="tagging-section" style="height: 23vh !important;">
   <div id="tagging-overlay"></div>
@@ -25,21 +19,23 @@
     </ul>
     </div>
   </div>
-  <div class="col-md-4" id="side_center">
+  <div class="col-md-4" >
       <label id="tag_time">00:00</label>
-      <button type="button" class="btn  tag_direction" id="tag_direction_right">LEFT ATTACKS RIGHT <i class="fa fa-arrow-right" style="color: white"></i></button>
-      <button type="button" class="btn  tag_direction" id="tag_direction_left">RIGHT ATTACKS LEFT <i class="fa fa-arrow-left"></i></button>
+     <button type="button" class="btn btn-success" id="save_btn">ATTACK &nbsp;<i class="far fa-hand-rock"></i></button>
 
-    <mat-form-field>
-      <mat-placeholder class="topic_placeholder">TALKING ABOUT</mat-placeholder>
-      <mat-select (selectionChange)="changeTopic($event.value)" style="color: white">
-        <mat-option *ngFor="let topic of topics" [value]="topic.name">
-          {{topic.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <label style="color: white; margin-left: 5px; margin-top: 0.5em">TOPICS</label>
+
+    <div class="col-md-12" id="side_center">
+    <ul style="list-style-type: none;padding: 0 ">
+      <li *ngFor="let topic of topics;">
+        <input  class="form-check-input" name="topics" type="radio" id="{{topic.name}}_topic">
+        <label  class="republican-check" id="topic_{{topic.name}}" for="{{topic.name}}_topic" (click)="selectTopic($event)">{{topic.name}}</label>
+      </li>
+    </ul>
+    </div>
 
   </div>
+
   <div class="col-md-4">
     <div class="form-check" id="side_republican">
       <ul style="list-style-type: none;padding: 0 ">
@@ -48,22 +44,18 @@
           <img id="left_republican_{{democrat.id}}"  class="democratic-img" src="{{democrat.pic}}" alt="{{democrat.name}}">
           <label  class="republican-check" id="rep_label_{{democrat.id}}" for="{{democrat.id}}" (mouseover)='highlightDebaterPic("republican",democrat.id)' (mouseleave)='highlightDebaterPic("republican",democrat.id)' (click)="selectRepublican($event)">{{democrat.name}}</label>
         </li>
-<!--        <li *ngFor="let debater of republicans;">-->
-<!--          <input  class="form-check-input" type="checkbox" id="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)'>-->
-<!--          <label class="republican-check" id="label_{{debater.id}}" for="{{debater.id}}" (mouseover)='highlightDebaterPic("republican",debater.id)' (mouseleave)='highlightDebaterPic("republican",debater.id)' (click)="selectRepublican($event)">{{debater.name}}</label>-->
-<!--        </li>-->
       </ul>
     </div>
   </div>
 
 </div>
-<div class="row">
-  <div class="col-md-4">
+<!--<div class="row">-->
+<!--  <div class="col-md-4">-->
 
-  </div>
-  <div class="col-md-4">
-    <button type="button" class="btn btn-success" id="save_btn"><i class="fas fa-share-square"></i></button>
-  </div>
-  <div class="col-md-4">
-  </div>
-</div>
+<!--  </div>-->
+<!--  <div class="col-md-4">-->
+<!--    <button type="button" class="btn btn-success" id="save_btn"><i class="fas fa-share-square"></i></button>-->
+<!--  </div>-->
+<!--  <div class="col-md-4">-->
+<!--  </div>-->
+<!--</div>-->

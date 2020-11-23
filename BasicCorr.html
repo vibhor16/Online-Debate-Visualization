@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Create a div where the graph will take place -->
+<div id="interaction_summary"></div>
+<style>
+  #interaction_summary{
+    margin:5em;
+  }
+</style>
+<script>
+
+$( document ).ready(function() {
+  renderSummary();
+});
+
+  function renderSummary(){
+      var totalInitiated = [];
+      var totalReceivedTmp = {};
+      var totalReceived = [];
+      
+
+      var axisFontSize = 20;
+      var labelFontSize = 10;
+
+      var divW = 600;
+      var divH = 400;
+    // Graph dimension
+    var margin = {top: 80, right: 100, bottom: 80, left: 100},
+        width = divW - margin.left - margin.right,
+        height = divH - margin.top - margin.bottom
+
+    
+    // Create the svg area
+    var svg = d3.select("#interaction_summary")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+
+        // (5) [{…}, {…}, {…}, {…}, {…}, columns: Array(6)]
+// 0: {"": "Bernie", Bernie: "-1", Biden: "2", Kamala: "4", Cory: "5", …}
+// 1: {"": "Biden", Bernie: "15", Biden: "-1", Kamala: "15", Cory: "6", …}
+// 2: {"": "Kamala", Bernie: "0", Biden: "1", Kamala: "-1", Cory: "10", …}
+// 3: {"": "Cory", Bernie: "10", Biden: "2", Kamala: "3", Cory: "18", …}
+// 4: {"": "booker", Bernie: "24", Biden: "3", Kamala: "5", Cory: "6", …}
+// columns: (6) ["", "Bernie", "Biden", "Kamala", "Cory", "booker"]
+// length: 5
+    
+var rows = [];
+rows.push({"": "Bernie", Bernie: "0", Biden: "2", Kamala: "4", Cory: "5", booker:"10"});
+rows.push({"": "Biden", Bernie: "15", Biden: "0", Kamala: "15", Cory: "6",booker:"10"});
+rows.push({"": "Kamala", Bernie: "0", Biden: "1", Kamala: "0", Cory: "10",booker:"10"});
+rows.push({"": "Cory", Bernie: "10", Biden: "2", Kamala: "3", Cory: "18",booker:"10"});
+rows.push({"": "booker", Bernie: "24", Biden: "3", Kamala: "5", Cory: "6",booker:"10"});
+
+
+    // d3.csv("./basicCorrData.csv", function(error, rows) {
+    
+      // Going from wide to long format
+      var data = [];
+      var max = 0, min = 10000;
+      rows.forEach(function(d) {
+        var x = d[""];
+        delete d[""];
+        var initiated = 0;
+        var tempI = {};
+
+        for (prop in d) {
+          var y = prop,
+            value = d[prop];
+            initiated += +value == -1 ? 0:+value;
+
+            if(!totalReceivedTmp.hasOwnProperty(prop)){
+              totalReceivedTmp[prop] = 0;
+            }
+            totalReceivedTmp[prop] += +value==-1?0:+value;
+            data.push({
+              x: y,
+              y: x,
+              value: +value
+            });
+        }
+
+        max = Math.max(max, initiated);
+        min = Math.min(min, initiated);
+        tempI["x"] = x;
+        tempI["value"] = initiated;
+        totalInitiated.push(tempI);
+      });
+
+      for(prop in totalReceivedTmp){
+          var tempR = {};
+          tempR["x"] = prop;
+          tempR["value"] = totalReceivedTmp[prop];
+          max = Math.max(max, totalReceivedTmp[prop]);
+          min = Math.min(min, totalReceivedTmp[prop]);
+          totalReceived.push(tempR);
+      }
+      var tempR = {x:"", value:0};
+      totalInitiated.push(tempR);
+      totalReceived.push(tempR);
+
+
+
+
+      var circleScale = 2/max;
+      // List of all variables and number of them
+      var domain = d3.set(data.map(function(d) { return d.x })).values()
+      domain.push("")
+      var num = Math.sqrt(data.length)
+
+    
+      // Create a color scale
+    var color = d3.scaleLinear().domain([0, max])
+  .range(["white", "blue"])
+    
+      // Create a size scale for bubbles on top right. Watch out: must be a rootscale!
+      var size = d3.scaleSqrt()
+        .domain([0, 1])
+        .range([0, 9]);
+    
+      // X scale
+      var x = d3.scalePoint()
+        .range([0, width])
+        .domain(domain)
+    
+      // Y scale
+      var y = d3.scalePoint()
+        .range([0, height])
+        .domain(domain)
+    
+
+      var xLinePad = (x(domain[1]) - x(domain[0]))/2;
+      var yLinePad = (y(domain[1]) - y(domain[0]))/2;
+
+      var xAxis = svg.append("text")
+                     .text("Actor")
+                     .style("font-size", axisFontSize)
+                    .style("text-align", "center")
+                    .style("fill", "black")
+                     .attr("transform", function(d) {
+                     return "translate( " + parseInt(x(domain[0]) -  (xLinePad *1.25))  +", " + height/2 + ") rotate(270)"
+                    });
+
+      var xAxisLabels = svg
+        .selectAll(".x-labels")
+        .data(domain)
+        .enter()
+        .append("text")
+        .attr("class", "x-labels")
+        .attr("y",function(d){
+          return y(d);
+        })
+        .attr("x",parseInt( -  (xLinePad * 2)))
+        .text(function(d){
+          return d;
+        })
+        .style("font-size", labelFontSize)
+      .style("text-align", "center");
+
+
+      var yAxisLabels = svg
+        .selectAll(".y-labels")
+        .data(domain)
+        .enter()
+        .append("text")
+        .attr("class", "y-labels")
+        .attr("y",function(d){
+          return  -  (yLinePad)*1.4;
+        })
+        .attr("x",function(d){
+          return x(d) - xLinePad/2;
+        })
+        .text(function(d){
+          return d;
+        })
+        .style("font-size", labelFontSize)
+      .style("text-align", "center");
+      // .style("fill", "black")
+      //   .attr("transform", function(d) {
+      //   return "translate( " + parseInt(x(domain[0]) -  (xLinePad *1.25))  +", " + parseInt(y(d.x)) + ")"
+      // });
+                  
+      var yAxis = svg.append("text")
+        .text("Recipient")
+        .style("font-size", axisFontSize)
+      .style("text-align", "center")
+      .style("fill", "black")
+        .attr("transform", function(d) {
+        return "translate( " + parseInt(x(domain[parseInt(num/2)-1]) + xLinePad) + ",-50)"
+      });
+
+
+      var initiatedLabel = svg.append("text")
+          .text("Total Initiated")
+          .style("font-size", axisFontSize)
+        .style("text-align", "center")
+        .style("fill", "black")
+          .attr("transform", function(d) {
+          return "translate( " + (x("") + xLinePad/2)  +", " + 0 + ") rotate(90)"
+        });
+
+
+      var receivedLabel = svg.append("text")
+          .text("Total Received")
+          .style("font-size", axisFontSize)
+        .style("text-align", "center")
+        .style("fill", "black")
+          .attr("transform", function(d) {
+          return "translate( " + parseInt(x(domain[parseInt(num/2) - 1])) + "," +  parseInt(height + 2*yLinePad) + ")"
+        });
+
+
+
+
+        // Border main cells
+      var verticalBorder = svg.selectAll(".borderx")
+        .data(domain)
+        .enter()
+        .append("line")
+          .attr("class", "borderx")
+          .style("stroke-width", 1)
+          .style("stroke", "black")
+          .attr("x1", function(d){
+            return x(d) -  xLinePad;
+          })
+          .attr("y1", function(d){
+            return -margin["top"]/3;
+          })
+          .attr("x2", function(d){
+            return x(d) - xLinePad;
+          })
+          .attr("y2", function(d){
+            return height-margin["bottom"]/3;
+          }); 
+
+      
+      var horizontalBorder = svg.selectAll(".bordery")
+        .data(domain)
+        .enter()
+        .append("line")
+          .attr("class", "bordery")
+          .style("stroke-width", 1)
+          .style("stroke", "black")
+          .attr("x1", function(d){
+            return -xLinePad;
+          })
+          .attr("y1", function(d){
+            return y(d) - margin["top"]/3;
+          })
+          .attr("x2", function(d){
+            return width - xLinePad;
+          })
+          .attr("y2", function(d){
+            return y(d) - margin["top"]/3;
+          }); 
+
+      // Border Received
+      var verticalBorderRec = svg.selectAll(".borderxR")
+        .data(domain)
+        .enter()
+        .append("line")
+          .attr("class", "borderxR")
+          .style("stroke-width", 1)
+          .style("stroke", "black")
+          .attr("x1", function(d){
+            return x(d) -  xLinePad;
+          })
+          .attr("y1", function(d){
+            return height - yLinePad/2;
+          })
+          .attr("x2", function(d){
+            return x(d) - xLinePad;
+          })
+          .attr("y2", function(d){
+            return height + yLinePad;
+          }); 
+
+      var domainRec = domain.slice(2);
+      // var horizontalBorderRec = svg.selectAll(".borderyR")
+      //   .data(domainRec)
+      //   .enter()
+      //   .append("line")
+      //     .attr("class", "borderyR")
+      //     .style("stroke-width", 1)
+      //     .style("stroke", "black")
+      //     .attr("x1", function(d){
+      //       return -xLinePad;
+      //     })
+      //     .attr("y1", function(d){
+      //       return y(d) + yLinePad;
+      //     })
+      //     .attr("x2", function(d){
+      //       return width - xLinePad;
+      //     })
+      //     .attr("y2", function(d){
+      //       return y(d) + yLinePad;
+      //     }); 
+      
+      // Border Initiated
+      var horizontalBorderIn = svg.selectAll(".borderxI")
+        .data(domain)
+        .enter()
+        .append("line")
+          .attr("class", "borderxI")
+          .style("stroke-width", 1)
+          .style("stroke", "black")
+          .attr("x1", function(d){
+            return x("") - xLinePad/2;
+          })
+          .attr("y1", function(d){
+            return y(d) - yLinePad;
+          })
+          .attr("x2", function(d){
+            return x("") + xLinePad/3;
+          })
+          .attr("y2", function(d){
+            return y(d) - yLinePad;
+          }); 
+
+      // var verticalBorderIn = svg.selectAll(".borderyI")
+      //   .data(domainRec)
+      //   .enter()
+      //   .append("line")
+      //     .attr("class", "borderyI")
+      //     .style("stroke-width", 1)
+      //     .style("stroke", "black")
+      //     .attr("x1", function(d){
+      //       return x(domainRec[0]) + x(d)/2.6;
+      //     })
+      //     .attr("y1", function(d){
+      //       return -yLinePad;
+      //     })
+      //     .attr("x2", function(d){
+      //       return x(domainRec[0]) + x(d)/2.6;
+      //     })
+      //     .attr("y2", function(d){
+      //       return height - yLinePad;
+      //     }); 
+
+
+
+      // Create one 'g' element for each cell of the correlogram
+      var cor = svg.selectAll(".cor")
+        .data(data)
+        .enter()
+        .append("g")
+          .attr("class", "cor")
+          .attr("transform", function(d) {
+            return "translate(" + x(d.x) + "," + y(d.y) + ")";
+          });
+
+      var cirInitiated = svg.selectAll(".cor1")
+        .data(totalInitiated)
+        .enter()
+        .append("g")
+          .attr("class", "cor1")
+          .attr("transform", function(d) {
+            return "translate(" + x("") + "," + y(d.x) + ")";
+          });
+
+      var cirReceived = svg.selectAll(".cor2")
+        .data(totalReceived)
+        .enter()
+        .append("g")
+          .attr("class", "cor2")
+          .attr("transform", function(d) {
+            return "translate(" + x(d.x) + "," + y("") + ")";
+          });
+    
+      // Low left part + Diagonal: Add the text with specific color
+      // cor
+      //   .filter(function(d){
+      //     var ypos = domain.indexOf(d.y);
+      //     var xpos = domain.indexOf(d.x);
+      //     return xpos <= ypos;
+      //   })
+      //   .append("text")
+      //     .attr("y", 5)
+      //     .attr("x", function(d){
+      //       return x(domain[0])
+      //     })
+
+      //     .text(function(d) {
+      //       if (d.x === d.y) {
+      //         return d.x;
+      //       } 
+      //       // else {
+      //       //   return d.value.toFixed(2);
+      //       // }
+      //     })
+      //     .style("font-size", 16)
+      //     .style("font-weight", "bold")
+      //     .style("fill", function(d){
+      //       if (d.x === d.y) {
+      //         return "#000";
+      //       } else {
+      //         return color(d.value);
+      //       }
+      //     });
+
+
+
+    
+    
+      // Up right part: add circles
+      cor
+        .filter(function(d){
+          var ypos = domain.indexOf(d.y);
+          var xpos = domain.indexOf(d.x);
+          return xpos != ypos;
+        })
+        //  .append("text")
+        //  .text(function(d){
+        //    return d.value;
+        //  })
+        //   // .attr("r", function(d){ return size(Math.abs(d.value)/3) })
+        //   .style("fill", function(d){
+        //     if (d.x === d.y) {
+        //       return "#000";
+        //     } else {
+        //       return color(d.value);
+        //     }
+        //   })
+        //   .style("opacity", 0.8);
+        .append("circle")
+          .attr("r", function(d){ return size(Math.abs(d.value) * circleScale) })
+          .style("fill", function(d){
+            if (d.x === d.y) {
+              return "#000";
+            } else {
+              return color(d.value);
+            }
+          })
+          .style("opacity", 0.8);
+
+
+        // Initiated
+        cirInitiated
+        .filter(function(d){
+          return d.x!="";
+        })
+        .append("circle")
+          .attr("r", function(d){ return size(Math.abs(d.value) * circleScale) })
+          .style("fill", function(d){
+              return color(d.value);
+          })
+          .style("opacity", 0.8);
+
+
+         // Received
+         cirReceived
+        .filter(function(d){
+          return d.x!="";
+        })
+        .append("circle")
+          .attr("r", function(d){ return size(Math.abs(d.value) * circleScale) })
+          .style("fill", function(d){
+              return color(d.value);
+          })
+          .style("opacity", 0.8);
+    
+        // })
+  }
+    
+    </script>

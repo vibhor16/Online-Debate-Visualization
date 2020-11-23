@@ -63,7 +63,6 @@ export class RightSectionTopicsNewComponent implements OnInit {
       var container = document.getElementById('topics-chart');
       var chart = new google.visualization.Timeline(container);
       var dataTable = new google.visualization.DataTable();
-      debugger;
       dataTable.addColumn({ type: 'string', id: 'Position' });
       dataTable.addColumn({ type: 'string', id: 'Name' });
       dataTable.addColumn({ type: 'string', role: 'tooltip'});

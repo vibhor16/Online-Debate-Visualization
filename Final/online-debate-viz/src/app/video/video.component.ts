@@ -27,7 +27,6 @@ export class VideoComponent implements OnInit {
 
     VideoObject.obj = this.youtube_player;
     let videoId = this.youtubeVideoURL.split("v=")[1];
-    console.log("this.youtubeVideoURL = " + this.youtubeVideoURL);
 
     if($("iframe").length > 0) {
       $("iframe").attr("src","https://www.youtube.com/embed/"+videoId);
@@ -52,6 +51,5 @@ export class VideoComponent implements OnInit {
   }
 
   record(str) {
-    console.log(str)
   }
 }

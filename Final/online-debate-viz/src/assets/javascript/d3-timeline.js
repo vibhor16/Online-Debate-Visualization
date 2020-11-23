@@ -177,7 +177,6 @@
         g.each(function (d, i) {
           d.forEach(function (datum, index) {
             datum.times.forEach(function (time, j) {
-              // debugger
               if(index === 0 && j === 0){
                 originTime = time.starting_time;               //Store the timestamp that will serve as origin
                 time.starting_time = 0;                        //Set the origin
