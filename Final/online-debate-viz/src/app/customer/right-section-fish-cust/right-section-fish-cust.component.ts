@@ -16,7 +16,7 @@ export class RightSectionFishCustComponent implements OnInit {
   ws: WebSocket;
   mainData: DataService;
   constructor(private data: DataService) {
-    console.log('constructor', data);
+    // console.log('constructor', data);
     // console.log(data);
 
     this.mainData = data;
@@ -35,7 +35,7 @@ export class RightSectionFishCustComponent implements OnInit {
   // constructor() { }
 
   onNewTagEntry(newEntry): void{
-    console.log('newEntry: ', newEntry);
+    // console.log('newEntry: ', newEntry);
     if(newEntry != '') {
 
       // {'democrats': ['1'], 'republican': ['2'], 'timestamp': '0.24', 'direction': 'to'}
@@ -73,14 +73,11 @@ export class RightSectionFishCustComponent implements OnInit {
 
   ngOnInit(): void {
     this.all_tag_entries_topics = [];
-    console.log("subscribing");
     this.data.currentFishMessage.subscribe(message => this.onNewTagEntry(message));
-    console.log("subscribed");
   }
 
   drawFishDiagram(all_tag_entries_topics): void {
     document.getElementById("mydiv").innerHTML = "";
-    console.log("hello");
     var margin = {top: 0, right: 20, bottom: 0, left: 130},
       width = document.getElementById("mydiv").clientWidth - margin.left - margin.right,
       height = document.getElementById("mydiv").clientHeight - margin.top - margin.bottom-50;
@@ -100,7 +97,7 @@ export class RightSectionFishCustComponent implements OnInit {
 
     var data = [];
     for (index=0;index < all_tag_entries_topics.length; index++){
-      console.log("preparing data", this.all_tag_entries_topics[index]);
+      // console.log("preparing data", this.all_tag_entries_topics[index]);
       var democrats = this.all_tag_entries_topics[index].democrats;
       var republican = this.all_tag_entries_topics[index].republican;
       var direction = this.all_tag_entries_topics[index].direction;
@@ -118,13 +115,11 @@ export class RightSectionFishCustComponent implements OnInit {
             temp_entry = [time
               , Utilities.getDebaterRecordById(democrats[i]).name
               , Utilities.getDebaterRecordById(republican[j]).name];
-            console.log("ppp", temp_entry);
             data.push(temp_entry);
           }else{
             temp_entry = [time
               , Utilities.getDebaterRecordById(republican[j]).name
               , Utilities.getDebaterRecordById(democrats[i]).name];
-            console.log("ppp", temp_entry);
             data.push(temp_entry);
           }
           previousTime = time;
@@ -138,18 +133,13 @@ export class RightSectionFishCustComponent implements OnInit {
     // var colors = ["red", "yellow", "green", "blue", "purple"];
 
 
-    console.log("people",people);
-    console.log(colors);
-    console.log("xxxx");
     // d3.scaleLinear
     var x = d3.scaleLinear()
       .range([0, width]);
-    console.log("x: ", x);
 
 
     var y = d3.scaleBand()
       .range([height, 0]);
-    console.log("y: ", y);
 
     var svg = d3.select("#mydiv").append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -159,7 +149,6 @@ export class RightSectionFishCustComponent implements OnInit {
       .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
 
-    console.log("svg: ", svg);
 
     //     var data = [
     // [0,"Bernie", "Elizabeth"],
@@ -184,8 +173,6 @@ export class RightSectionFishCustComponent implements OnInit {
       // d.sales = +d.sales;
     });
     data = data2
-    console.log("data is: ", data);
-    console.log(data);
 
     //   Scale the range of the data in the domains
     // x.domain(data.map(function(d) { return d.salesperson; }));
@@ -206,7 +193,7 @@ export class RightSectionFishCustComponent implements OnInit {
       .attr("orient", "auto")
       .append("path")
       .attr("d", "M 0 0 12 6 0 12 3 6")
-      .style("fill", "white");
+      .style("fill", "black");
     // path
     // svg.append("path")
     //       .attr("marker-end", "url(#triangle)")
@@ -232,8 +219,6 @@ export class RightSectionFishCustComponent implements OnInit {
       //     .attr("marker-end", "url(#triangle)");
 
       .attr("x1", function(d) {
-        console.log(d);
-        console.log(d.time);
         return x(d.time);
       })
       .attr("y1", function(d) { return pady+y(d.attacker)})
@@ -241,9 +226,6 @@ export class RightSectionFishCustComponent implements OnInit {
       .attr("y2", function(d) { return pady+y(d.victim)})
       .attr("stroke-width", 1)
       .attr("stroke", function(d) {
-        console.log(d.attacker);
-        console.log(people.indexOf(d.attacker ));
-        console.log(colors[people.indexOf(d.attacker)]);
         return myColor(people.indexOf(d.attacker));
       })
       .attr("stroke","white")

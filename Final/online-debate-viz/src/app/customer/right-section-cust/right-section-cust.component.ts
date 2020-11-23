@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+declare var $: any;
 @Component({
   selector: 'app-right-section-cust',
   templateUrl: './right-section-cust.component.html',
@@ -12,6 +13,10 @@ export class RightSectionCustComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+  switchGraph(): void{
+    $("#interaction_summary").toggle();
+    $("#rank_evolution").toggle();
   }
 
 }

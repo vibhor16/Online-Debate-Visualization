@@ -24,6 +24,10 @@ import { RightSectionFishCustComponent } from './customer/right-section-fish-cus
 import { RightSectionTopicsCustComponent } from './customer/right-section-topics-cust/right-section-topics-cust.component';
 import { RightSectionVideoCustComponent } from './customer/right-section-video-cust/right-section-video-cust.component';
 import { TopSectionCustComponent } from './customer/top-section-cust/top-section-cust.component';
+import { InteractionSummaryComponent } from './user-main/interaction-summary/interaction-summary.component';
+import { RankEvolutionComponent } from './user-main/rank-evolution/rank-evolution.component';
+import { InteractionSummaryCustComponent } from './customer/interaction-summary-cust/interaction-summary-cust.component';
+import { RankEvolutionCustComponent } from './customer/rank-evolution-cust/rank-evolution-cust.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,11 @@ import { TopSectionCustComponent } from './customer/top-section-cust/top-section
     RightSectionFishCustComponent,
     RightSectionTopicsCustComponent,
     RightSectionVideoCustComponent,
-    TopSectionCustComponent
+    TopSectionCustComponent,
+    InteractionSummaryComponent,
+    RankEvolutionComponent,
+    InteractionSummaryCustComponent,
+    RankEvolutionCustComponent
   ],
     imports: [
         BrowserModule,

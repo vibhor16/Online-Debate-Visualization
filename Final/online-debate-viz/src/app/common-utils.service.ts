@@ -180,13 +180,22 @@ export class DataService {
   private fishSource = new BehaviorSubject('');
   currentFishMessage = this.fishSource.asObservable();
 
+
   private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
   currentVideo = this.videoMsgSource.asObservable();
+
+  private defaultIntSumm = this.initializeIntSummaryObj();
+  private intSummSource = new BehaviorSubject(this.defaultIntSumm);
+  currentIntSummMessage = this.intSummSource.asObservable();
+
+  private defaultRankEvol = this.initializeRankEvolObj();
+  private intRankEvolSource = new BehaviorSubject(this.defaultRankEvol);
+  currentRankEvolMessage = this.intRankEvolSource.asObservable();
 
   constructor() { }
 
   changeMessage(tag_entry: any) {
-    console.log("tag_entry is: ", tag_entry);
+    // console.log("tag_entry is: ", tag_entry);
     this.messageSource.next(tag_entry);
   }
 
@@ -195,8 +204,24 @@ export class DataService {
   }
 
   changeFishEntry(new_fish_entry : any){
-    console.log("new_fish_entry is: ", new_fish_entry);
+    // console.log("new_fish_entry is: ", new_fish_entry);
     this.fishSource.next(new_fish_entry);
+  }
+
+  changeInteractionSummaryEntry(new_int_summary: any){
+    this.intSummSource.next(new_int_summary);
+  }
+
+  changeRankEvolutionEntry(new_rank_evol: any){
+    this.intRankEvolSource.next(new_rank_evol);
+  }
+
+  initializeIntSummaryObj() {
+    return '';
+  }
+
+  initializeRankEvolObj() {
+    return '';
   }
 
 }
