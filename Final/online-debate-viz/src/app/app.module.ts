@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopSectionComponent } from './user-main/top-section/top-section.component';
@@ -53,6 +53,7 @@ import { RankEvolutionCustComponent } from './customer/rank-evolution-cust/rank-
     RankEvolutionCustComponent
   ],
     imports: [
+        HttpClientModule,
         BrowserModule,
         VideoModule,
         BrowserAnimationsModule,

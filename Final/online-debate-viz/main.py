@@ -4,12 +4,29 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from pandas import DataFrame
 from fastapi.responses import StreamingResponse
 import io
+from typing import Any, Dict
+import json
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 NEUTRAL = "neutral"
 DEMOCRAT = "democrat"
 REPUBLICAN = "republican"
 
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:4200",
+    "http://127.0.0.1:8000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ConnectionManager:
     def __init__(self):
@@ -75,10 +92,10 @@ async def websocket_endpoint(websocket: WebSocket, tagger_type: str):
     try:
         while True:
             data = await websocket.receive_json()
-            print(data)
-            print("tagger_type: " + tagger_type)
+            # print(data)
+            # print("tagger_type: " + tagger_type)
             if type(data) is dict:
-                print(data['category'])
+                # print(data['category'])
                 if NEUTRAL == data['category']:
                     interactionList = interactionListNeutral
                 elif DEMOCRAT == data['category']:
@@ -117,3 +134,22 @@ async def getInteractions(category: str):
                                  )
     response.headers["Content-Disposition"] = "attachment; filename=export.csv"
     return response
+
+#request: Dict[Any, Any]
+@app.post("/saveFile/")
+async def saveFile(data: Dict[Any, Any]):
+    # print("hello!")
+    # print(data)
+    # path = "my.txt"
+    # path = "C:/Users/gagan/Downloads/democrat/" + path
+    out_file = open(data['path'], "w")
+    json.dump(data['data'], out_file, indent=6)
+    out_file.close()
+    return data['path']
+
+@app.get("/getFile/{path}")
+async def getFile(path: str):
+    path = "C:/Users/gagan/Downloads/democrat/" + path
+    out_file = open(path, "r")
+    my_dict = json.loads(out_file.read())
+    return my_dict

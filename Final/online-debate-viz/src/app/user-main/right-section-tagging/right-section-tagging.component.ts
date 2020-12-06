@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ElementFinder } from 'protractor';
 import { GET_DEBATERS_JSON, VideoObject, Utilities, DataService } from 'src/app/common-utils.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 declare var $: any;
 
@@ -27,7 +29,13 @@ export class RightSectionTaggingComponent implements OnInit {
   interactionSummaryEntries: any[];
   rankEvolutionEntries: any[];
   globalEloRanks:any;
-  constructor(private data: DataService) {
+  entryList: any[];
+  interactionSummaryEntriesList: any[];
+  rankEvolutionEntriesList: any[];
+  fishEntryList: any[];
+  baseURL: string = "http://127.0.0.1:8000/";
+  
+  constructor(private data: DataService, private http: HttpClient) {
 
     this.client_id = Date.now();
     this.wsNeutral = new WebSocket(`ws://localhost:8000/ws/neutral`);
@@ -42,8 +50,22 @@ export class RightSectionTaggingComponent implements OnInit {
     this.interactionSummaryMatrix = [];
     this.rankEvolutionEntries = [];
     this.globalEloRanks = [];
+    this.entryList = [];
+    this.interactionSummaryEntriesList = [];
+    this.rankEvolutionEntriesList = [];
+    this.fishEntryList = [];
+  
   }
 
+  saveFile(): void{
+    var tp =  JSON.stringify(this.entryList);
+    this.http.post<any>(this.baseURL + 'saveFile', {'data':tp,'path':'C:/Users/gagan/Downloads/democrat/my.txt'}).subscribe(
+            res => {
+              console.log("aaaaaaaaaaaaaaa");
+              console.log(res);
+            });
+  }
+  
   ngOnInit(): void {
     this.topics = Utilities.topics;
     const debaters = GET_DEBATERS_JSON();
@@ -369,6 +391,10 @@ export class RightSectionTaggingComponent implements OnInit {
       this.data.changeFishEntry(fishEntry, this.data.taggerType);
       this.data.changeInteractionSummaryEntry(this.interactionSummaryEntries);
       this.data.changeRankEvolutionEntry(this.rankEvolutionEntries);
+    
+      this.entryList.push(entry);
+      this.fishEntryList.push(fishEntry);
+      this.saveFile();
 
       if ("democrat" == this.data.taggerType){
         this.wsDemocrat.send(JSON.stringify(entry));
