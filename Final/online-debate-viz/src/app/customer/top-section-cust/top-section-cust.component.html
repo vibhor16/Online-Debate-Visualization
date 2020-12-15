@@ -1,28 +1,25 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" id="top-nav-bar">
-  <img id="mainLogo" src="../../../assets/images/logo.png" style="width: 10em">
-  <ul class="navbar-nav navbar-left" style="height: 100%; margin-left: 11em">
-    <li class="nav-item blue_border_bottom">
-      <a id="nav-home" class="nav-link " href="#">HOME</a>
+  <ul class="navbar-nav" style="height: 100%; ">
+    <li>
+      <label id="ticker">Choose</label>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="topSection btn btn-primary" (click)="getTaggedData('democrat', 0)">Democrat</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="topSection btn btn-secondary" (click)="getTaggedData('neutral', 1)">Neutral</button>
+    </li>
+    <li class="nav-item">
+      <button type="button" class="topSection btn btn-danger" (click)="getTaggedData('republican', 2)">Republican</button>
     </li>
     <li>
-      <div class="md-form mt-0">
-        <i class="fa fa-search fa-lg" id="search-icon"></i>
-<!--        <i class="fa fa-times fa-lg" id="search-clear" (click)="clearSearchBox()"></i>-->
-        <input id="input_video_url" class="form-control mr-sm-2" type="text" placeholder="Enter video URL" (keypress)="playYoutubeVide($event)">
-      </div>
-    </li>
-    <li class="nav-item userName" style="margin-left: 10em">
-      <i class="fa fa-user fa-1x" style="color: white; margin-left: 1.3em"></i>
-      <!-- <a id="nav-home2" class="nav-link " href="#" style="color: white">Viewer1</a> -->
-      <input id="tagger_type" class="form-control mr-sm-2" type="text" placeholder="Enter tagger type" (keypress)="recordTaggerType()">
-    
+      <select id="user-id-select" class="form-control mr-sm-2">
+        <option>Select a Tagger</option>
+      </select>
     </li>
   </ul>
-  <!--  </div>-->
+  <img id="mainLogo" src="../../../assets/images/logo.png" style="width: 15em;margin-left: 56%;">
 </nav>
-<div class="row" style="margin-top: 1em">
 
-  <div class="col-md-2">
-  </div>
-</div>
+
 

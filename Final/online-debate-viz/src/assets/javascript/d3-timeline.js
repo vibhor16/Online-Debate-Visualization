@@ -153,7 +153,7 @@
         .attr("color", "black")
         .attr("fill", backgroundColor instanceof Function ? backgroundColor(datum, index) : backgroundColor)
         .attr("fill", "black")
-      
+
       ;
     };
 
@@ -510,7 +510,6 @@
               throw "width of the timeline is not set. As of Firefox 27, timeline().with(x) needs to be explicitly set in order to render";
             }
           } catch (err) {
-            console.log( err );
           }
         } else if (!(width && gParentSize.width)) {
           try {

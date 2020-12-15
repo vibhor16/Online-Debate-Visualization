@@ -16,33 +16,39 @@ export class RightSectionTopicsCustComponent implements OnInit {
 
   onNewTagEntry(newEntry): void{
     if(newEntry != '') {
+      this.refreshGraph();
+      // const temp = newEntry.replace('[','').replace(']','').replaceAll('\'','').split(',');
+      const tempAll = newEntry;
 
-      const thisEntry = [];
+      for(let i=0;i<tempAll.length;i++) {
+        const temp = tempAll[i];
+        const topic = temp[0].trim();
+        const debater = temp[1].trim();
+        const tooltip = temp[2].trim();
+        const start = new Date(temp[3].trim());
+        const end = new Date(temp[4].trim());
 
-      const temp = newEntry.replace('[','').replace(']','').replaceAll('\'','').split(',');
-      const topic = temp[0].trim();
-      const debater = temp[1].trim();
-      const tooltip = temp[2].trim();
-      const start = new Date(temp[3].trim());
-      const end = new Date(temp[4].trim());
-
-      thisEntry.push(topic);
-      thisEntry.push(debater);
-      thisEntry.push(tooltip);
-      thisEntry.push(start);
-      thisEntry.push(end);
-      this.all_tag_entries_topics.push(thisEntry);
-      this.drawTimeline(this.all_tag_entries_topics);
+        const thisEntry = [];
+        thisEntry.push(topic);
+        thisEntry.push(debater);
+        thisEntry.push(tooltip);
+        thisEntry.push(start);
+        thisEntry.push(end);
+        this.all_tag_entries_topics.push(thisEntry);
+        this.drawTimeline(this.all_tag_entries_topics);
+      }
     }
   }
 
   ngOnInit(): void {
+    this.refreshGraph();
+    this.data.currentMessage.subscribe(message => this.onNewTagEntry(message));
+  }
+
+  refreshGraph(): void {
     this.all_tag_entries_topics = [];
     let presentTopics = this.remainingTopics();
-
-
     for(let i=0;i<Utilities.topicNames.length;i++) {
-
       let thisTopic = Utilities.topicNames[i];
       if(!presentTopics.includes(thisTopic)){
         let newEntry = [
@@ -56,7 +62,6 @@ export class RightSectionTopicsCustComponent implements OnInit {
       }
     }
     this.drawTimeline(this.all_tag_entries_topics);
-    this.data.currentMessage.subscribe(message => this.onNewTagEntry(message));
   }
 
   remainingTopics(){

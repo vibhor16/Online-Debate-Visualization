@@ -16,7 +16,7 @@ export class TopSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.data.currentVideo.subscribe( message => this.youtubeVideoURL = message);
-    $("#input_video_url").val(this.youtubeVideoURL);
+    // $("#input_video_url").val(this.youtubeVideoURL);
   }
 
   clearSearchBox() {
@@ -25,8 +25,8 @@ export class TopSectionComponent implements OnInit {
 
   playYoutubeVide(event) {
     if(event.which == 13) {
-      let videoURL = $("#input_video_url").val();
-      this.data.changeVideoURL(videoURL);
+      // let videoURL = $("#input_video_url").val();
+      // this.data.changeVideoURL(videoURL);
     }
 
     // let videoId = videoURL.split("v=")[1];
@@ -34,10 +34,16 @@ export class TopSectionComponent implements OnInit {
     // $("iframe").attr("src", newURL);
   }
 
-  recordTaggerType(){
-    this.data.taggerType = $("#tagger_type").val();  
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAA");
-    console.log(this.data.taggerType);
+  recordTaggerType(type, idx){
+
+    for(let i=0;i<3;i++){
+      $($(".topSection")[i]).removeClass("highlightBtn");
+    }
+    $($(".topSection")[idx]).addClass("highlightBtn");
+    $('#tagging-overlay-main').hide();
+
+    this.data.taggerType = type;
+    this.data.taggerID = $("#user-id-input").val();
   }
 }
 

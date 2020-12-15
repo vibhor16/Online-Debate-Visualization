@@ -7,6 +7,8 @@ import io
 from typing import Any, Dict
 import json
 from fastapi.middleware.cors import CORSMiddleware
+import pathlib
+import os
 
 app = FastAPI()
 NEUTRAL = "neutral"
@@ -73,11 +75,11 @@ idToNameMap = {"1": "Amy Klobuchar",
                "2": "Cory Booker",
                "3": "Pete Buttigieg",
                "4": "Bernie Sanders",
-               "5": "Joseph R. Biden",
-               "6": "Elizabeth Warren",
+               "5": "Joseph Biden",
+               "6": "Elizabeth",
                "7": "Kamala Harris",
                "8": "Andrew Yang",
-               "9": "Beto O'Rourke",
+               "9": "Beto",
                "10": "Julián Castro"}
 
 interactionList = []
@@ -138,18 +140,39 @@ async def getInteractions(category: str):
 #request: Dict[Any, Any]
 @app.post("/saveFile/")
 async def saveFile(data: Dict[Any, Any]):
-    # print("hello!")
-    # print(data)
-    # path = "my.txt"
-    # path = "C:/Users/gagan/Downloads/democrat/" + path
-    out_file = open(data['path'], "w")
+
+    filePath = str(pathlib.Path().absolute()) + '/tagging_output' + str(data['path'])
+    print("Current filepath =  ",filePath)
+
+    if os.path.exists(filePath):
+      print("Removed - ",filePath)
+      os.remove(filePath)
+    else:
+      print("The file does not exist = ", filePath)
+
+    out_file = open(filePath, "w")
     json.dump(data['data'], out_file, indent=6)
     out_file.close()
-    return data['path']
+    return filePath
 
-@app.get("/getFile/{path}")
-async def getFile(path: str):
-    path = "C:/Users/gagan/Downloads/democrat/" + path
+@app.post("/getFile/")
+async def getFile(data: Dict[Any, Any]):
+
+    path = str(pathlib.Path().absolute()) + "/tagging_output" + str(data['path'])
+    print("Reading Current filepath =  ",path)
     out_file = open(path, "r")
-    my_dict = json.loads(out_file.read())
+    content = out_file.read()
+    my_dict = json.loads(content)
     return my_dict
+
+
+@app.post("/getAllUsers/")
+async def getFile(data: Dict[Any, Any]):
+    type = str(pathlib.Path().absolute()) + "/tagging_output/" + str(data['tagger_type'])
+    arr = os.listdir(type)
+    users = []
+    for fileName in arr:
+      userId = fileName.split(".")[0].split("_")[1]
+      if userId not in users:
+        users.append(userId)
+    return users

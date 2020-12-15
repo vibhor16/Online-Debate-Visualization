@@ -50,12 +50,18 @@ export class InteractionSummaryCustComponent implements OnInit {
         });
       rankEvolObj.push(tmp);
     }
-    console.log(intSumObject);
     this.data.changeInteractionSummaryEntry(intSumObject);
     this.data.changeRankEvolutionEntry(rankEvolObj);
   }
 
   onNewTagEntry(message): void{
+    // Add 'd' key in the message entries
+    for(let i=0;i<message.length;i++){
+      let thisMsg = message[i];
+      let dVal = Object.entries(thisMsg)[i][0];
+      message[i]['d'] = dVal;
+    }
+
     $('#interaction_summary').html('');
     this.renderSummary(message);
   }
@@ -64,6 +70,11 @@ export class InteractionSummaryCustComponent implements OnInit {
     if (rows.length == 0) {
       return;
     }
+
+    if(typeof(rows) == "string")
+      // @ts-ignore
+        rows = JSON.parse(rows.toString().replaceAll("'","\""));
+
 
     const totalInitiated = [];
     const totalReceivedTmp = {};
@@ -103,8 +114,8 @@ export class InteractionSummaryCustComponent implements OnInit {
     const data = [];
     let max = 0, min = 10000;
     rows.forEach(function(d) {
-      const x = d[''];
-      delete d[''];
+      const x = d['d'];
+      delete d['d'];
       let initiated = 0;
       const tempI = {};
 

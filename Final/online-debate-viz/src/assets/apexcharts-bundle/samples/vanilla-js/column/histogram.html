@@ -9,21 +9,21 @@
     <link href="../../assets/styles.css" rel="stylesheet" />
 
     <style>
-      
+
         #box {
       max-width: 800px;
       margin: 35px auto;
     }
-    
+
     #timeline-chart .apexcharts-toolbar {
       opacity: 1;
       border: 0;
     }
-    
+
     .selection {
       opacity: 0;
     }
-      
+
     </style>
 
     <script>
@@ -41,11 +41,11 @@
         )
     </script>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+
   </head>
 
   <body>
@@ -57,7 +57,7 @@
       </div>
 
     <script>
-      
+
         var options = {
           series: [{
           data: [4, 3, 10, 9, 29, 19, 22]
@@ -73,12 +73,12 @@
                 return selectedIndex.map(function(s) {
                   return arraySelected.push(chart.w.globals.series[0][s])
                 })
-        
+
               });
               arraySelected = arraySelected.reduce(function(acc, curr) {
                 return acc + curr;
               } , 0)
-        
+
               document.querySelector("#selected-count").innerHTML = arraySelected
             }
           }
@@ -120,14 +120,13 @@
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-      
-      
+
+
         chart.addEventListener("dataPointSelection", function(e, opts) {
-        console.log(e, opts)
       })
-      
+
     </script>
 
-    
+
   </body>
 </html>

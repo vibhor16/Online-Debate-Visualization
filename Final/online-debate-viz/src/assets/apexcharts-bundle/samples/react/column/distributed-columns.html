@@ -9,7 +9,7 @@
     <link href="../../assets/styles.css" rel="stylesheet" />
 
     <style>
-      
+
         #chart {
       max-width: 650px;
       margin: 35px auto;
@@ -17,7 +17,7 @@
     #chart .apexcharts-xaxis-label {
       font-weight: bold;
     }
-      
+
     </style>
 
     <script>
@@ -35,14 +35,14 @@
         )
     </script>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/react@16.12/umd/react.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom@16.12/umd/react-dom.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prop-types@15.7.2/prop-types.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-apexcharts@1.3.6/dist/react-apexcharts.iife.min.js"></script>
-    
+
 
     <script>
     var colors = [
@@ -59,7 +59,7 @@
   </head>
 
   <body>
-    
+
     <div id="app"></div>
 
     <div id="html">
@@ -74,7 +74,7 @@
           super(props);
 
           this.state = {
-          
+
             series: [{
               data: [21, 22, 10, 28, 16, 21, 13, 30]
             }],
@@ -84,7 +84,6 @@
                 type: 'bar',
                 events: {
                   click: function(chart, w, e) {
-                    // console.log(chart, w, e)
                   }
                 }
               },
@@ -110,7 +109,7 @@
                   ['Peter', 'Brown'],
                   ['Mary', 'Evans'],
                   ['David', 'Wilson'],
-                  ['Lily', 'Roberts'], 
+                  ['Lily', 'Roberts'],
                 ],
                 labels: {
                   style: {
@@ -120,12 +119,12 @@
                 }
               }
             },
-          
-          
+
+
           };
         }
 
-      
+
 
         render() {
           return (
@@ -143,6 +142,6 @@
       ReactDOM.render(React.createElement(ApexChart), domContainer);
     </script>
 
-    
+
   </body>
 </html>

@@ -208,7 +208,6 @@ export class RankEvolutionComponent implements OnInit {
     let xAxis = d3.axisBottom(xScale).tickFormat(function(d) {
       let minutes = Math.floor(d / 60);
       let seconds = +((d % 60)).toFixed(0);
-      console.log()
       return (seconds == 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
 
     });

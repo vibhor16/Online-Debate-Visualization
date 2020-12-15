@@ -15,7 +15,6 @@ export class RightSectionFishComponent implements OnInit {
   // constructor() { }
 
   onNewTagEntry(newEntry): void{
-    console.log("newEntry: ", newEntry);
     if(newEntry != '') {
       this.all_tag_entries_topics.push(newEntry);
       this.drawFishDiagram(this.all_tag_entries_topics);
@@ -30,7 +29,6 @@ export class RightSectionFishComponent implements OnInit {
 
   drawFishDiagram(all_tag_entries_topics): void {
     document.getElementById("mydiv").innerHTML = "";
-    console.log("hello");
     var margin = {top: 0, right: 20, bottom: 0, left: 95},
     width = document.getElementById("mydiv").clientWidth - margin.left - margin.right,
     height = document.getElementById("mydiv").clientHeight - margin.top - margin.bottom-50;
@@ -114,27 +112,28 @@ export class RightSectionFishComponent implements OnInit {
   // [35,"Trump", "Bernie"],
   // [33, "Kamala", "Bernie"],
   // [45, "Kamala", "Bernie"]];
-  var data2 = []
+  var data2 = [];
   //   if (error) throw error;
 
     // format the data
     data.forEach(function(d) {
       data2.push({time:d[0], attacker:d[1], victim: d[2]})
-      // console.log(data2)
-      // d.sales = +d.sales;
     });
-  data = data2
+  data = data2;
 
-  //   Scale the range of the data in the domains
+
+    //   Scale the range of the data in the domains
     // x.domain(data.map(function(d) { return d.salesperson; }));
-    x.domain([0, 120]);
+
+    const maxX = parseInt(d3.max(data, function(d) { return +d.time;} ));
+    x.domain([0,maxX]);
   //   y.domain([0, d3.max(data, function(d) { return d.sales; })]);
     y.domain(people);
 
     // append the rectangles for the bar chart
     var pady = (height - y(people[0]))/2;
 
-    
+
     const temptry = svg.selectAll(".bar")
     .data(data)
     .enter();
@@ -156,47 +155,22 @@ export class RightSectionFishComponent implements OnInit {
       .attr("y1", function(d) { return pady+y(d.attacker)})
       .attr("x2", function(d) { return x(d.time); })
       .attr("y2", function(d) { return pady+y(d.victim)})
-      .attr("stroke-width", 1)
-      // .append("circle").attr("cx", function(d) {
-      //   // console.log(d);
-      //   // console.log(d.time);
-      //   return x(d.time);
-      // }).attr("cy", function(d) { return pady+y(d.attacker)})
-      // .attr("r", 10)
-      // .style("fill", "red")
-      // .append("circle").attr("cx", function(d) { return x(d.time); })
-      // .attr("cy", function(d) { return pady+y(d.victim)})
-      // .attr("r", 10)
-      // .style("fill", "blue")
-      
-      // .attr("stroke", function(d) {
-          // debugger
-          // console.log(d.attacker);
-          // console.log(people.indexOf(d.attacker ));
-          // console.log(colors[people.indexOf(d.attacker)]);
-          // return myColor(people.indexOf(d.attacker));
-      // })
-      // .attr("stroke","black");
-      // .attr("marker-end", "url(#circle)");
+      .attr("stroke-width", 1);
 
 
       temptry.append("circle").attr("cx", function(d) {
-        // console.log(d);
-        // console.log(d.time);
         return x(d.time);
       }).attr("cy", function(d) { return pady+y(d.attacker)})
       .attr("r", 3)
       .style("fill", "red");
 
       temptry.append("circle").attr("cx", function(d) {
-        // console.log(d);
-        // console.log(d.time);
         return x(d.time);
       }).attr("cy", function(d) { return pady+y(d.victim)})
       .attr("r", 3)
       .style("fill", "blue");
-      
-      
+
+
       svg.selectAll(".bar-axis")
         .data(people)
         .enter().append("rect")
@@ -225,7 +199,7 @@ export class RightSectionFishComponent implements OnInit {
         yaxis.selectAll("line").style("stroke","white");
 
         yaxis.selectAll("path").style("stroke","white");
-        
+
   }
 
   ngAfterContentInit(): void {

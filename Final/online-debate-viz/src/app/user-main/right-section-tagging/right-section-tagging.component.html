@@ -1,6 +1,8 @@
 <div class="row" style="padding-left: 1em; ">
   <div style="padding-top: 1em; display: flex">
-    <label style="color: white; margin-left: 5px">TAGGER</label>
+    <label style="color: black; margin-left: 5px">TAGGER</label>
+
+    <button type="button" class="btn btn-success" id="test_btn">Test</button>
     <button type="button" class="btn btn-success" id="play_btn"><i class="fa fa-play"></i></button>
     <button type="button" class="btn btn-success" id="pause_btn"><i class="fa fa-pause"></i></button>
   </div>
@@ -21,20 +23,25 @@
   </div>
   <div class="col-md-4" >
       <label id="tag_time">00:00</label>
-     <button type="button" class="btn btn-success" id="save_btn">ATTACK &nbsp;<i class="far fa-hand-rock"></i></button>
+    <button type="button" class="btn btn-success" (click)="saveFile()" id="save_tags_btn">Save Work <i class="far fa-save"></i></button>
+    <button type="button" class="btn btn-success" id="save_btn">ATTACK &nbsp;<i class="far fa-hand-rock"></i></button>
 
-    <label style="color: white; margin-left: 5px; margin-top: 0.5em">TOPICS</label>
+    <label style="color: black; margin-left: 5px; margin-top: 0.5em">TOPICS</label>
 
     <div class="col-md-12" id="side_center">
-    <ul style="list-style-type: none;padding: 0 ">
-      <li *ngFor="let topic of topics;">
-        <input  class="form-check-input" name="topics" type="radio" id="{{topic.name}}_topic">
-        <label  class="republican-check" id="topic_{{topic.name}}" for="{{topic.name}}_topic" (click)="selectTopic($event)">{{topic.name}}</label>
-      </li>
-    </ul>
+        <ul style="list-style-type: none;padding: 0 ">
+          <li *ngFor="let topic of topics;">
+            <input  class="form-check-input" name="topics" type="radio" id="{{topic.name}}_topic">
+            <label  class="republican-check" id="topic_{{topic.name}}" for="{{topic.name}}_topic" (click)="selectTopic($event)">{{topic.name}}</label>
+          </li>
+        </ul>
     </div>
 
+
+
   </div>
+
+
 
   <div class="col-md-4">
     <div class="form-check" id="side_republican">

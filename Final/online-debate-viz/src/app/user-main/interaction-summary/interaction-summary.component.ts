@@ -66,8 +66,8 @@ export class InteractionSummaryComponent implements OnInit {
     const data = [];
     let max = 0, min = 10000;
     rows.forEach(function(d) {
-        const x = d[''];
-        delete d[''];
+        const x = d['d'];
+        delete d['d'];
         let initiated = 0;
         const tempI = {};
 

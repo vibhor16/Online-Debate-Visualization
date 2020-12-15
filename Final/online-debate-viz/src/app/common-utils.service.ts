@@ -132,13 +132,13 @@ export class Utilities {
       },
       {
         "id": 5,
-        "name": "Joseph R. Biden",
+        "name": "Joseph Biden",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/biden.png",
         "party": "democratic"
       },
       {
         "id": 6,
-        "name": "Elizabeth Warren",
+        "name": "Elizabeth",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/warren.png",
         "party": "democratic"
       },
@@ -156,7 +156,7 @@ export class Utilities {
       },
       {
         "id": 9,
-        "name": "Beto O'Rourke",
+        "name": "Beto",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/orourke.png",
         "party": "democratic"
       },
@@ -193,32 +193,23 @@ export class DataService {
   currentRankEvolMessage = this.intRankEvolSource.asObservable();
 
   taggerType = "neutral";
+  taggerID = "default-tagger";
 
-
-  constructor() { 
+  constructor() {
   }
 
   changeMessage(tag_entry: any, tagger_type : any) {
-    console.log("BBBBBBBBBB");
-    console.log(this.taggerType);
-    console.log(tagger_type);
     if(this.taggerType == tagger_type){
-      console.log("tag_entry is: ", tag_entry);
       this.messageSource.next(tag_entry);
     }
   }
-  
+
   changeVideoURL(newURL: any){
     this.videoMsgSource.next(newURL);
   }
 
   changeFishEntry(new_fish_entry : any, tagger_type : any){
-    console.log("BBBBBBBBBB");
-    console.log(this.taggerType);
-    console.log(tagger_type);
-
-    if(this.taggerType == tagger_type){  
-      console.log("new_fish_entry is: ", new_fish_entry);
+    if(this.taggerType == tagger_type){
       this.fishSource.next(new_fish_entry);
     }
   }

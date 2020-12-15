@@ -28,13 +28,11 @@ export class RightSectionTaggingComponent implements OnInit {
   interactionSummaryMatrix: any[];
   interactionSummaryEntries: any[];
   rankEvolutionEntries: any[];
-  globalEloRanks:any;
+  globalEloRanks: any;
   entryList: any[];
-  interactionSummaryEntriesList: any[];
-  rankEvolutionEntriesList: any[];
   fishEntryList: any[];
-  baseURL: string = "http://127.0.0.1:8000/";
-  
+  baseURL = 'http://127.0.0.1:8000/';
+
   constructor(private data: DataService, private http: HttpClient) {
 
     this.client_id = Date.now();
@@ -51,27 +49,59 @@ export class RightSectionTaggingComponent implements OnInit {
     this.rankEvolutionEntries = [];
     this.globalEloRanks = [];
     this.entryList = [];
-    this.interactionSummaryEntriesList = [];
-    this.rankEvolutionEntriesList = [];
     this.fishEntryList = [];
-  
+
   }
 
-  saveFile(): void{
-    var tp =  JSON.stringify(this.entryList);
-    this.http.post<any>(this.baseURL + 'saveFile', {'data':tp,'path':'C:/Users/gagan/Downloads/democrat/my.txt'}).subscribe(
-            res => {
-              console.log("aaaaaaaaaaaaaaa");
-              console.log(res);
-            });
+  saveFile(): void {
+    const taggerType = this.data.taggerType;
+    let path1 = '';
+    let path2 = '';
+    let path3 = '';
+    let path4 = '';
+    if (taggerType === 'democrat') {
+       path1 = '/democrat/entryList_'+this.data.taggerID+'.txt';
+       path2 = '/democrat/fishEntry_'+this.data.taggerID+'.txt';
+       path3 = '/democrat/interaction_'+this.data.taggerID+'.txt';
+       path4 = '/democrat/rankEvolution_'+this.data.taggerID+'.txt';
+    } else if (taggerType === 'republican') {
+      path1 = '/republican/entryList_'+this.data.taggerID+'.txt';
+      path2 = '/republican/fishEntry_'+this.data.taggerID+'.txt';
+      path3 = '/republican/interaction_'+this.data.taggerID+'.txt';
+      path4 = '/republican/rankEvolution_'+this.data.taggerID+'.txt';
+    } else {
+      path1 = '/neutral/entryList_'+this.data.taggerID+'.txt';
+      path2 = '/neutral/fishEntry_'+this.data.taggerID+'.txt';
+      path3 = '/neutral/interaction_'+this.data.taggerID+'.txt';
+      path4 = '/neutral/rankEvolution_'+this.data.taggerID+'.txt';
+    }
+
+    const tp1 =  JSON.stringify(this.entryList);
+    this.http.post<any>(this.baseURL + 'saveFile', {data: tp1, path: path1}).subscribe();
+
+    const tp2 =  JSON.stringify(this.fishEntryList);
+    this.http.post<any>(this.baseURL + 'saveFile', {data: tp2, path: path2}).subscribe();
+
+    const tp3 =  JSON.stringify(this.interactionSummaryEntries);
+    this.http.post<any>(this.baseURL + 'saveFile', {data: tp3, path: path3}).subscribe();
+
+    const tp4 =  JSON.stringify(this.rankEvolutionEntries);
+    this.http.post<any>(this.baseURL + 'saveFile', {data: tp4, path: path4}).subscribe();
+
+    const saveSuccess = "Success! Tags are saved as - \n" + path1 + "\n" + path2 + "\n" + path3 + "\n" + path4 + "\n";
+    alert(saveSuccess);
   }
-  
+
   ngOnInit(): void {
     this.topics = Utilities.topics;
     const debaters = GET_DEBATERS_JSON();
     this.democrats = debaters['democrats'];
     this.republicans = debaters['republicans'];
 
+    $('#test_btn').on('click', () => {
+      // $('#left').css('visibility', 'hidden');
+      this.testBtn();
+    });
     $('#play_btn').prop('disabled', false);
     $('#pause_btn').prop('disabled', true);
     this.disableTaggingSection(true);
@@ -91,58 +121,32 @@ export class RightSectionTaggingComponent implements OnInit {
       this.addToTaggedEntriesObject();
     });
 
-    // $('.tag_direction').on('click', () => {
-    //
-    //   const direction = this.getAttackDirection();
-    //   if (direction == 'from'){
-    //     $('#tag_direction_left').hide();
-    //     $('#tag_direction_right').show();
-    //   } else {
-    //     $('#tag_direction_right').hide();
-    //     $('#tag_direction_left').show();
-    //   }
-    //
-    // });
-
-    // Initialize interaction summary and rank evolution
     this.initIntSummAndRankEvol(debaters);
   }
 
-//
-// (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-// 0: {Amy: -1, Cory: 0, Pete: 1, Bernie: 0, Joseph: 0, …}
-// 1: {Amy: 0, Cory: -1, Pete: 0, Bernie: 0, Joseph: 0, …}
-// 2: {Amy: 0, Cory: 0, Pete: -1, Bernie: 0, Joseph: 0, …}
-// 3: {Amy: 0, Cory: 0, Pete: 0, Bernie: -1, Joseph: 0, …}
-// 4: {Amy: 0, Cory: 0, Pete: 0, Bernie: 0, Joseph: -1, …}
-// 5: {Amy: 0, Cory: 0, Pete: 0, Bernie: 0, Joseph: 0, …}
-// 6: {Amy: 0, Cory: 0, Pete: 0, Bernie: 0, Joseph: 0, …}
-// 7: {Amy: 0, Cory: 0, Pete: 0, Bernie: 0, Joseph: 0, …}
-// 8: {Amy: 0, Cory: 0, Pete: 0, Bernie: 0, Joseph: 0, …}
-// 9: {Amy: 0, Cory: 0, Pete: 0, Bernie: 0, Joseph: 0, …}
-
-
   initIntSummAndRankEvol(debaters): void{
-    let allMembers = [];
-    let intSumObject = [];
-    for(let id in debaters.democrats){
-      let tmp = {};
+    const allMembers = [];
+    const intSumObject = [];
+    for (const id in debaters.democrats){
+      const tmp = {};
       allMembers.push(debaters.democrats[id].name);
-      for(let id2 in debaters.democrats){
-        let name = debaters.democrats[id2].name.split(' ')[0];
-        if(id == id2)
+      for (const id2 in debaters.democrats){
+        const name = debaters.democrats[id2].name.split(' ')[0];
+        if (id == id2) {
           tmp[name] = -1;
-        else
+        }
+        else {
           tmp[name] = 0;
+        }
       }
       intSumObject.push(tmp);
     }
 
-    let rankEvolObj = [];
-    for(let id in allMembers) {
+    const rankEvolObj = [];
+    for (const id in allMembers) {
       // take first name as key
-      let member = allMembers[id];
-      let tmp = {
+      const member = allMembers[id];
+      const tmp = {
         name : member,
         values : []
       };
@@ -153,7 +157,6 @@ export class RightSectionTaggingComponent implements OnInit {
         });
       rankEvolObj.push(tmp);
     }
-    console.log(intSumObject);
     this.data.changeInteractionSummaryEntry(intSumObject);
     this.data.changeRankEvolutionEntry(rankEvolObj);
   }
@@ -193,7 +196,7 @@ export class RightSectionTaggingComponent implements OnInit {
     let entry = {};
     const democrats = [];
     const fishEntry = {};
-    let allMembers = [];
+    const allMembers = [];
 
     $('.democrats-check').each(function() {
 
@@ -228,6 +231,7 @@ export class RightSectionTaggingComponent implements OnInit {
  }
 
     else if (this.topicSelected == null) {
+      alert('topic is null = ' + this.topicSelected);
  }
       // alert("Select a topic from the list!");
     else {
@@ -264,49 +268,36 @@ export class RightSectionTaggingComponent implements OnInit {
         endTime
       ];
 
-      // debugger;
-      this.data.changeMessage(entry, this.data.taggerType);
-      this.data.changeFishEntry(fishEntry, this.data.taggerType);
-
-      // if ("democrat" == this.data.taggerType){
-      //   this.wsDemocrat.send(JSON.stringify(entry));
-      //   this.wsDemocrat.send(JSON.stringify(fishEntry));  
-      // }else if("republican" == this.data.taggerType){
-      //   this.wsRepublican.send(JSON.stringify(entry));
-      //   this.wsRepublican.send(JSON.stringify(fishEntry));  
-      // }else{
-      //   this.wsNeutral.send(JSON.stringify(entry));
-      //   this.wsNeutral.send(JSON.stringify(fishEntry));  
-      // }
 
 
       // Interaction summary object
 
-      if(this.interactionSummaryMatrix.length == 0){
-        for(let id in allMembers) {
-          let tmp = [];
-          for(let i=0; i<allMembers.length;i++){
+      if (this.interactionSummaryMatrix.length == 0){
+        for (const id in allMembers) {
+          const tmp = [];
+          for (let i = 0; i < allMembers.length; i++){
             tmp.push(0);
           }
           tmp[id] = -1;
           this.interactionSummaryMatrix.push(tmp);
         }
       }
-      for(let dId in democrats){
-          for(let rId in republicans){
-            if(democrats[dId] != republicans[rId])
-              this.interactionSummaryMatrix[parseInt(democrats[dId])-1][parseInt(republicans[rId])-1] += 1;
+      for (const dId in democrats){
+          for (const rId in republicans){
+            if (democrats[dId] != republicans[rId]) {
+              this.interactionSummaryMatrix[parseInt(democrats[dId]) - 1][parseInt(republicans[rId]) - 1] += 1;
+            }
           }
         }
 
       this.interactionSummaryEntries = [];
-      for(let id in allMembers){
-        let temp = {};
-        let attacker = allMembers[id].split(' ')[0];
-        temp[""] = attacker;
-        for(let id2 in allMembers) {
-          let recipient = allMembers[id2].split(' ')[0];
-          if(attacker == recipient){
+      for (const id in allMembers){
+        const temp = {};
+        const attacker = allMembers[id].split(' ')[0];
+        temp['d'] = attacker;
+        for (const id2 in allMembers) {
+          const recipient = allMembers[id2].split(' ')[0];
+          if (attacker == recipient){
             temp[recipient] = -1;
           } else {
             temp[recipient] = this.interactionSummaryMatrix[id][id2];
@@ -318,11 +309,11 @@ export class RightSectionTaggingComponent implements OnInit {
       // Rank Evolution object
 
       // Initialise the rank evolution object
-      if(this.rankEvolutionEntries.length == 0){
-        for(let id in allMembers) {
+      if (this.rankEvolutionEntries.length == 0){
+        for (const id in allMembers) {
           // take first name as key
-          let member = allMembers[id];
-          let tmp = {
+          const member = allMembers[id];
+          const tmp = {
             name : member,
             values : []
           };
@@ -334,13 +325,13 @@ export class RightSectionTaggingComponent implements OnInit {
           this.rankEvolutionEntries.push(tmp);
         }
       }
-      let thisAttack = [];
-      for(let dId in democrats) {
-        for (let rId in republicans) {
-          if(democrats[dId] != republicans[rId]){
-            let tmp = {};
-            let attacker = allMembers[parseInt(democrats[dId])-1];
-            let victim = allMembers[parseInt(republicans[rId])-1];
+      const thisAttack = [];
+      for (const dId in democrats) {
+        for (const rId in republicans) {
+          if (democrats[dId] != republicans[rId]){
+            const tmp = {};
+            const attacker = allMembers[parseInt(democrats[dId]) - 1];
+            const victim = allMembers[parseInt(republicans[rId]) - 1];
             tmp['Attacker'] = attacker;
             tmp['Victim'] = victim;
             thisAttack.push(tmp);
@@ -352,7 +343,7 @@ export class RightSectionTaggingComponent implements OnInit {
       // Amy Klobuchar: 1050
       // Andrew Yang: 1000
       // Bernie Sanders: 1000
-      // Beto O'Rourke: 1000
+      // Beto: 1000
       // Cory Booker: 1000
       // Elizabeth Warren: 1000
       // Joseph R. Biden: 1000
@@ -361,7 +352,7 @@ export class RightSectionTaggingComponent implements OnInit {
       // Pete Buttigieg: 950
 
       let eloRanks = [{}];
-      if(this.globalEloRanks.length == 0){
+      if (this.globalEloRanks.length == 0){
         allMembers.forEach(function(d) {
           eloRanks[0][d] = 1000;
         });
@@ -369,15 +360,15 @@ export class RightSectionTaggingComponent implements OnInit {
       } else {
         eloRanks = this.globalEloRanks;
       }
-     let newEloRanks =  this.computeEloRanks(thisAttack, allMembers, eloRanks);
+      const newEloRanks =  this.computeEloRanks(thisAttack, allMembers, eloRanks);
       this.globalEloRanks = newEloRanks;
-     for(let id in allMembers){
-       let name = allMembers[id];
-       for(let id2 in this.rankEvolutionEntries){
+      for (const id in allMembers){
+       const name = allMembers[id];
+       for (const id2 in this.rankEvolutionEntries){
          // Get that record
-         if(this.rankEvolutionEntries[id2].name === name){
+         if (this.rankEvolutionEntries[id2].name === name){
 
-           this.rankEvolutionEntries[id2]['values']
+           this.rankEvolutionEntries[id2].values
              .push({
              rank : newEloRanks[0][name],
              date2 : parseInt(VideoObject.currentTime)
@@ -391,44 +382,46 @@ export class RightSectionTaggingComponent implements OnInit {
       this.data.changeFishEntry(fishEntry, this.data.taggerType);
       this.data.changeInteractionSummaryEntry(this.interactionSummaryEntries);
       this.data.changeRankEvolutionEntry(this.rankEvolutionEntries);
-    
+
       this.entryList.push(entry);
       this.fishEntryList.push(fishEntry);
-      this.saveFile();
 
-      if ("democrat" == this.data.taggerType){
-        this.wsDemocrat.send(JSON.stringify(entry));
-        this.wsDemocrat.send(JSON.stringify(fishEntry)); 
-        this.wsDemocrat.send(JSON.stringify(this.interactionSummaryEntries));
-        this.wsDemocrat.send(JSON.stringify(this.rankEvolutionEntries));
-   
-      }else if("republican" == this.data.taggerType){
-        this.wsRepublican.send(JSON.stringify(entry));
-        this.wsRepublican.send(JSON.stringify(fishEntry)); 
-        this.wsRepublican.send(JSON.stringify(this.interactionSummaryEntries));
-        this.wsRepublican.send(JSON.stringify(this.rankEvolutionEntries));
- 
-      }else{
-        this.wsNeutral.send(JSON.stringify(entry));
-        this.wsNeutral.send(JSON.stringify(fishEntry));  
-        this.wsNeutral.send(JSON.stringify(this.interactionSummaryEntries));
-        this.wsNeutral.send(JSON.stringify(this.rankEvolutionEntries));
-
-      }
-      
     }
   }
 
+
+  testBtn(): void{
+    const that = this;
+    $('#play_btn').click();
+    this.playerElem.seekTo(VideoObject.currentTime + 10, true);
+    setTimeout(function(){
+      $('#pause_btn').click();
+      $('#tagging-overlay').hide();
+      const a = Math.floor(Math.random() * 9) + 1;
+      let b = Math.floor(Math.random() * 9) + 1;
+
+      if (a == b){
+        b = (b + 1) % 10;
+      }
+
+      $('#demo_label_' + a).addClass('selectDemocrat');
+      $('#rep_label_' + b).addClass('selectRepublican');
+      that.topicSelected = 'Economy';
+      $('#save_btn').click();
+    }, 1000);
+
+  }
+
   computeEloRanks(props, participants, eloRanks) {
-    if(props.length > 0 ) {
-      var const_K = 100;
+    if (props.length > 0 ) {
+      const const_K = 100;
 
 
 
-      for(var i=0; i < props.length; i++) {
-        var d = props[i];
-        var x = JSON.parse(JSON.stringify(eloRanks[eloRanks.length-1]));
-        var newElos = this.computeEloScore(x[d.Attacker], x[d.Victim], const_K);
+      for (let i = 0; i < props.length; i++) {
+        const d = props[i];
+        const x = JSON.parse(JSON.stringify(eloRanks[eloRanks.length - 1]));
+        const newElos = this.computeEloScore(x[d.Attacker], x[d.Victim], const_K);
         x[d.Attacker] = newElos.win;
         x[d.Victim] = newElos.lose;
         eloRanks[0] = x;
@@ -438,22 +431,22 @@ export class RightSectionTaggingComponent implements OnInit {
   }
 
   computeEloScore(eloW, eloL, k) {
-    var eloDiff = Math.abs(eloW - eloL) //Elo Winner - Loser
-    var zScore = eloDiff/(200*Math.sqrt(2));
-    var pWin = this.pnorm(zScore);
+    const eloDiff = Math.abs(eloW - eloL); // Elo Winner - Loser
+    const zScore = eloDiff / (200 * Math.sqrt(2));
+    const pWin = this.pnorm(zScore);
 
-    var newEloW = 0;
-    var newEloL = 0;
+    let newEloW = 0;
+    let newEloL = 0;
 
-    if(eloW > eloL) {
-      //Higher Rated Wins
-      newEloW = eloW + (1-pWin)*k;
-      newEloL = eloL - (1-pWin)*k;
+    if (eloW > eloL) {
+      // Higher Rated Wins
+      newEloW = eloW + (1 - pWin) * k;
+      newEloL = eloL - (1 - pWin) * k;
     }
     else {
-      //Lower Rated Wins
-      newEloW = eloW + pWin*k;
-      newEloL = eloL - pWin*k;
+      // Lower Rated Wins
+      newEloW = eloW + pWin * k;
+      newEloL = eloL - pWin * k;
     }
     return {win: newEloW, lose: newEloL};
   }
@@ -462,49 +455,49 @@ export class RightSectionTaggingComponent implements OnInit {
     // Algorithm AS66 Applied Statistics (1973) vol22 no.3
     // Computes P(Z<z)
     z = parseFloat(z);
-    var upper = false;
-    var ltone = 7.0;
-    var utzero = 18.66;
-    var con = 1.28;
-    var a1 = 0.398942280444;
-    var a2 = 0.399903438504;
-    var a3 = 5.75885480458;
-    var a4 = 29.8213557808;
-    var a5 = 2.62433121679;
-    var a6 = 48.6959930692;
-    var a7 = 5.92885724438;
-    var b1 = 0.398942280385;
-    var b2 = 3.8052e-8;
-    var b3 = 1.00000615302;
-    var b4 = 3.98064794e-4;
-    var b5 = 1.986153813664;
-    var b6 = 0.151679116635;
-    var b7 = 5.29330324926;
-    var b8 = 4.8385912808;
-    var b9 = 15.1508972451;
-    var b10 = 0.742380924027;
-    var b11 = 30.789933034;
-    var b12 = 3.99019417011;
+    let upper = false;
+    const ltone = 7.0;
+    const utzero = 18.66;
+    const con = 1.28;
+    const a1 = 0.398942280444;
+    const a2 = 0.399903438504;
+    const a3 = 5.75885480458;
+    const a4 = 29.8213557808;
+    const a5 = 2.62433121679;
+    const a6 = 48.6959930692;
+    const a7 = 5.92885724438;
+    const b1 = 0.398942280385;
+    const b2 = 3.8052e-8;
+    const b3 = 1.00000615302;
+    const b4 = 3.98064794e-4;
+    const b5 = 1.986153813664;
+    const b6 = 0.151679116635;
+    const b7 = 5.29330324926;
+    const b8 = 4.8385912808;
+    const b9 = 15.1508972451;
+    const b10 = 0.742380924027;
+    const b11 = 30.789933034;
+    const b12 = 3.99019417011;
 
-    var alnorm = 0;
-    if(z < 0) {
+    let alnorm = 0;
+    if (z < 0) {
       upper = !upper;
       z = -z;
     }
 
-    if(z<=ltone || upper && z<=utzero) {
-      var y = 0.5*z*z;
-      if(z>con) {
-        alnorm=b1*Math.exp(-y)/(z-b2+b3/(z+b4+b5/(z-b6+b7/(z+b8-b9/(z+b10+b11/(z+b12))))));
+    if (z <= ltone || upper && z <= utzero) {
+      const y = 0.5 * z * z;
+      if (z > con) {
+        alnorm = b1 * Math.exp(-y) / (z - b2 + b3 / (z + b4 + b5 / (z - b6 + b7 / (z + b8 - b9 / (z + b10 + b11 / (z + b12))))));
       }
       else {
-        alnorm=0.5-z*(a1-a2*y/(y+a3-a4/(y+a5+a6/(y+a7))));
+        alnorm = 0.5 - z * (a1 - a2 * y / (y + a3 - a4 / (y + a5 + a6 / (y + a7))));
       }
     }
     else {
-      alnorm=0;
+      alnorm = 0;
     }
-    if(!upper) alnorm=1-alnorm;
+    if (!upper) { alnorm = 1 - alnorm; }
     return(alnorm);
   }
 
@@ -537,7 +530,7 @@ export class RightSectionTaggingComponent implements OnInit {
 
   selectTopic(el){
 
-    $('#side_center label').css('background', '#19569f')
+    $('#side_center label').css('background', '#19569f');
     this.topicSelected = el.target.id.split('_')[1];
     $('#' + el.target.id).css('background', 'red');
   }

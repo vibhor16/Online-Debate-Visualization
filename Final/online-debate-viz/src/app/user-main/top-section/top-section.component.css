@@ -1,0 +1,21 @@
+#ticker {
+  position: relative;
+  left: 0px; top: 0px;
+  margin-top: 1.5em;
+  margin-left: 1em;
+  color: white;
+  font-size: 1.5em;
+}
+@keyframes myfirst {
+  0%   { left: 0px; top: 0px;}
+  50%  { left: 10px; top: 0px;}
+  100% {left: 0px; top: 0px;}
+}
+.disableTicker{
+  animation: none;
+  -webkit-animation: none;
+}
+.enableTicker{
+  /*animation: myfirst 0.5s infinite;*/
+}
+

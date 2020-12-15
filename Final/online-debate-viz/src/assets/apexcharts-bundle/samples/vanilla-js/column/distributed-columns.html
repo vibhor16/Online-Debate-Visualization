@@ -9,7 +9,7 @@
     <link href="../../assets/styles.css" rel="stylesheet" />
 
     <style>
-      
+
         #chart {
       max-width: 650px;
       margin: 35px auto;
@@ -17,7 +17,7 @@
     #chart .apexcharts-xaxis-label {
       font-weight: bold;
     }
-      
+
     </style>
 
     <script>
@@ -35,9 +35,9 @@
         )
     </script>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    
+
 
     <script>
     var colors = [
@@ -57,7 +57,7 @@
      <div id="chart"></div>
 
     <script>
-      
+
         var options = {
           series: [{
           data: [21, 22, 10, 28, 16, 21, 13, 30]
@@ -67,7 +67,6 @@
           type: 'bar',
           events: {
             click: function(chart, w, e) {
-              // console.log(chart, w, e)
             }
           }
         },
@@ -93,7 +92,7 @@
             ['Peter', 'Brown'],
             ['Mary', 'Evans'],
             ['David', 'Wilson'],
-            ['Lily', 'Roberts'], 
+            ['Lily', 'Roberts'],
           ],
           labels: {
             style: {
@@ -106,10 +105,10 @@
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-      
-      
+
+
     </script>
 
-    
+
   </body>
 </html>
