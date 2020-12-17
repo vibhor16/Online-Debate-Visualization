@@ -266,7 +266,7 @@ export class RankEvolutionCustComponent implements OnInit {
       .data(data)
       .enter()
       .append('circle')
-      .attr('cx', width - margin / 2 - 90)
+      .attr('cx', width - margin / 2 - 80)
       .attr('cy', function(d, i){ return 10 + i * 25; }) // 100 is where the first dot appears. 25 is the distance between dots
       .attr('r', 7)
       .style('fill', function(d, i){ return color(i); });
@@ -276,7 +276,7 @@ export class RankEvolutionCustComponent implements OnInit {
       .data(data)
       .enter()
       .append('text')
-      .attr('x', width - margin / 2 - 80)
+      .attr('x', width - margin / 2 - 70)
       .attr('y', function(d, i){ return 10 + i * 25; }) // 100 is where the first dot appears. 25 is the distance between dots
       .style('fill', function(d, i){ return color(i); })
       .text(function(d){ return d.name; })

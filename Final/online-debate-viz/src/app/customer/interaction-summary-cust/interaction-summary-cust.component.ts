@@ -346,25 +346,6 @@ export class InteractionSummaryCustComponent implements OnInit {
       });
 
     const domainRec = domain.slice(2);
-    // let horizontalBorderRec = svg.selectAll(".borderyR")
-    //   .data(domainRec)
-    //   .enter()
-    //   .append("line")
-    //     .attr("class", "borderyR")
-    //     .style("stroke-width", 1)
-    //     .style("stroke", "black")
-    //     .attr("x1", function(d){
-    //       return -xLinePad;
-    //     })
-    //     .attr("y1", function(d){
-    //       return y(d) + yLinePad;
-    //     })
-    //     .attr("x2", function(d){
-    //       return width - xLinePad;
-    //     })
-    //     .attr("y2", function(d){
-    //       return y(d) + yLinePad;
-    //     });
 
     // Border Initiated
     const horizontalBorderIn = svg.selectAll('.borderxI')
@@ -387,27 +368,6 @@ export class InteractionSummaryCustComponent implements OnInit {
         return y(d) - yLinePad;
       });
 
-    // let verticalBorderIn = svg.selectAll(".borderyI")
-    //   .data(domainRec)
-    //   .enter()
-    //   .append("line")
-    //     .attr("class", "borderyI")
-    //     .style("stroke-width", 1)
-    //     .style("stroke", "black")
-    //     .attr("x1", function(d){
-    //       return x(domainRec[0]) + x(d)/2.6;
-    //     })
-    //     .attr("y1", function(d){
-    //       return -yLinePad;
-    //     })
-    //     .attr("x2", function(d){
-    //       return x(domainRec[0]) + x(d)/2.6;
-    //     })
-    //     .attr("y2", function(d){
-    //       return height - yLinePad;
-    //     });
-
-
 
     // Create one 'g' element for each cell of the correlogram
     const cor = svg.selectAll('.cor')
@@ -416,7 +376,7 @@ export class InteractionSummaryCustComponent implements OnInit {
       .append('g')
       .attr('class', 'cor')
       .attr('transform', function(d) {
-        return 'translate(' + x(d.x) + ',' + y(d.y) + ')';
+        return 'translate(' + parseInt(x(d.x)) + ',' + parseInt(String(y(d.y) - 8)) + ')';
       });
 
     const cirInitiated = svg.selectAll('.cor1')
@@ -437,34 +397,7 @@ export class InteractionSummaryCustComponent implements OnInit {
         return 'translate(' + x(d.x) + ',' + y('') + ')';
       });
 
-    // Low left part + Diagonal: Add the text with specific color
-    // cor
-    //   .filter(function(d){
-    //     let ypos = domain.indexOf(d.y);
-    //     let xpos = domain.indexOf(d.x);
-    //     return xpos <= ypos;
-    //   })
-    //   .append("text")
-    //   .attr("y", 5)
-    //   .attr("x", 0)
-    //
-    //   .text(function(d) {
-    //     if (d.x === d.y) {
-    //       return d.x;
-    //     }
-    //     // else {
-    //     //   return d.value.toFixed(2);
-    //     // }
-    //   })
-    //   .style("font-size", 16)
-    //   .style("font-weight", "bold")
-    //   .style("fill", function(d){
-    //     if (d.x === d.y) {
-    //       return "#000";
-    //     } else {
-    //       return color(d.value);
-    //     }
-    //   });
+
 
 
     // Up right part: add circles
@@ -474,19 +407,7 @@ export class InteractionSummaryCustComponent implements OnInit {
         const xpos = domain.indexOf(d.x);
         return xpos != ypos;
       })
-      //  .append("text")
-      //  .text(function(d){
-      //    return d.value;
-      //  })
-      //   // .attr("r", function(d){ return size(Math.abs(d.value)/3) })
-      //   .style("fill", function(d){
-      //     if (d.x === d.y) {
-      //       return "#000";
-      //     } else {
-      //       return color(d.value);
-      //     }
-      //   })
-      //   .style("opacity", 0.8);
+
       .append('circle')
       .attr('r', function(d){ return size(Math.abs(d.value) * circleScale); })
       .style('fill', function(d){

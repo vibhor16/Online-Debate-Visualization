@@ -90,13 +90,6 @@ export class RightSectionTopicsCustComponent implements OnInit {
       dataTable.addColumn({ type: 'date', id: 'End' });
       dataTable.addRows(all_entries);
 
-
-      // dataTable.addRows([
-      //   [ 'President', 'George Washington', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
-      //   [ 'President', 'John Adams', new Date(1797, 2, 4), new Date(1801, 2, 4) ],
-      //   [ 'Secretary of State', 'James Madison', new Date(1801, 4, 2), new Date(1809, 2, 3)]
-      // ]);
-
       var options = {
         timeline: { colorByRowLabel: true,
           rowLabelStyle: {color: 'white' },

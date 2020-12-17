@@ -20,21 +20,6 @@ export class TopSectionCustComponent implements OnInit {
     $("#user-id-select").hide();
   }
 
-  clearSearchBox() {
-    $("#input_video_url").val('');
-  }
-
-  playYoutubeVide(event) {
-    if(event.which == 13) {
-      // let videoURL = $("#input_video_url").val();
-      // this.data.changeVideoURL(videoURL);
-    }
-
-    // let videoId = videoURL.split("v=")[1];
-    // let newURL = "https://www.youtube.com/embed/" + videoId;
-    // $("iframe").attr("src", newURL);
-  }
-
   getTaggedData(type, idx){
     this.data.taggerType = type;
     for(let i=0;i<3;i++){
@@ -47,10 +32,14 @@ export class TopSectionCustComponent implements OnInit {
     let uniqueTaggers = ['Select a Tagger'];
     this.http.post<any>(this.baseURL + 'getAllUsers', {tagger_type: type}).subscribe(
       res => {
-        uniqueTaggers.push(res);
+
+        for(let i=0;i<res.length;i++){
+          uniqueTaggers.push(res[i]);
+        }
         $("#user-id-select").show();
         $.each(uniqueTaggers, function(idx, val) {
-          $dropdown.append($("<option />").val(val).text(val));
+          console.log("val = " + val);
+          $dropdown.append($("<option/>").val(val).text(val));
         });
       });
 
@@ -94,25 +83,26 @@ export class TopSectionCustComponent implements OnInit {
       res => {
         res = JSON.parse(res);
         this.data.changeMessage(res, this.data.taggerType);
+
+        this.http.post<any>(this.baseURL + 'getFile', {path: path2}).subscribe(
+          res => {
+            res = JSON.parse(res);
+            this.data.changeFishEntry(res, this.data.taggerType);
+
+            this.http.post<any>(this.baseURL + 'getFile', {path: path3}).subscribe(
+              res => {
+                res = JSON.parse(res);
+                this.data.changeInteractionSummaryEntry(res);
+
+                this.http.post<any>(this.baseURL + 'getFile', {path: path4}).subscribe(
+                  res => {
+                    res = JSON.parse(res);
+                    this.data.changeRankEvolutionEntry(res);
+                  });
+              });
+          });
       });
 
-    this.http.post<any>(this.baseURL + 'getFile', {path: path2}).subscribe(
-      res => {
-        res = JSON.parse(res);
-        this.data.changeFishEntry(res, this.data.taggerType);
-      });
-
-    this.http.post<any>(this.baseURL + 'getFile', {path: path3}).subscribe(
-      res => {
-        res = JSON.parse(res);
-        this.data.changeInteractionSummaryEntry(res);
-      });
-
-    this.http.post<any>(this.baseURL + 'getFile', {path: path4}).subscribe(
-      res => {
-        res = JSON.parse(res);
-        this.data.changeRankEvolutionEntry(res);
-      });
   }
 
 }

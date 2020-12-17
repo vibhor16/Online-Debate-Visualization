@@ -59,6 +59,7 @@ export class RightSectionFishCustComponent implements OnInit {
 
   onNewTagEntry(newEntry): void{
     if(newEntry != '') {
+      this.all_tag_entries_topics = [];
       for(let i=0;i<newEntry.length;i++) {
         this.all_tag_entries_topics.push(newEntry[i]);
         this.drawFishDiagram(this.all_tag_entries_topics);
@@ -103,9 +104,6 @@ export class RightSectionFishCustComponent implements OnInit {
       for(i=0; i< democrats.length; i++){
         for(j=0; j<republican.length; j++){
           var temp_entry = [];
-          // if(time == previousTime){
-          //   time = parseFloat(time) + 2;
-          // }
           if("to" == direction){
             temp_entry = [time
               , Utilities.getDebaterRecordById(democrats[i]).name
@@ -117,21 +115,14 @@ export class RightSectionFishCustComponent implements OnInit {
               , Utilities.getDebaterRecordById(democrats[i]).name];
             data.push(temp_entry);
           }
-          // previousTime = time;
         }
       }
 
     }
 
-    // var people = ["Bernie","Elizabeth", "Trump", "Obama", "Kamala"];
-
-    // var colors = ["red", "yellow", "green", "blue", "purple"];
-
-
     // d3.scaleLinear
     var x = d3.scaleLinear()
             .range([0, width]);
-
 
     var y = d3.scaleBand()
             .range([height, 0]);
@@ -143,7 +134,6 @@ export class RightSectionFishCustComponent implements OnInit {
       .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
-
 
   var data2 = [];
     // format the data
@@ -204,25 +194,13 @@ export class RightSectionFishCustComponent implements OnInit {
         .attr("y", function(d) { return pady+y(d)})
         .attr("height", 1);
 
-    // add the x Axis
-    // svg.append("g")
-    //     .attr("transform", "translate(0," + height + ")")
-    //     .call(d3.axisBottom(x));
-
     // add the y Axis
     let yaxis = svg.append("g")
         .call(d3.axisLeft(y));
-
         yaxis.selectAll("text").style("stroke","black");
-
         yaxis.selectAll("line").style("stroke","white");
-
         yaxis.selectAll("path").style("stroke","white");
 
-  }
-
-  ngAfterContentInit(): void {
-    this.drawFishDiagram(this.all_tag_entries_topics);
   }
 
   Colors = [

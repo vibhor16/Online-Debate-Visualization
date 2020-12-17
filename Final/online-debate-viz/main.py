@@ -80,7 +80,8 @@ idToNameMap = {"1": "Amy Klobuchar",
                "7": "Kamala Harris",
                "8": "Andrew Yang",
                "9": "Beto",
-               "10": "Julián Castro"}
+               "10": "Julián Castro",
+               "11": "Mike Bloomberg"}
 
 interactionList = []
 interactionListDemocrat = []
@@ -175,4 +176,5 @@ async def getFile(data: Dict[Any, Any]):
       userId = fileName.split(".")[0].split("_")[1]
       if userId not in users:
         users.append(userId)
+
     return users

@@ -21,25 +21,7 @@ export function GET_DEBATERS_JSON() {
 
   results["democrats"] = democrats;
   results["republicans"] = republicans;
-
-  // $.ajax({
-  //     url: '../assets/json/debaters.json',
-  //     dataType: 'json',
-  //     async: false,
-  //     success: function(result){
-  //       $.each(result['profiles'], function(i, field){
-  //         if(field.party == "democratic")
-  //           democrats.push(field);
-  //         else
-  //           republicans.push(field);
-  //       });
-  //
-  //       results["democrats"] = democrats;
-  //       results["republicans"] = republicans;
-  //     }
-  //   });
-
-    return results;
+  return results;
 }
 
 export class VideoObject {
@@ -165,6 +147,12 @@ export class Utilities {
         "name": "Julián Castro",
         "pic": "https://static01.nyt.com/newsgraphics/2019/08/17/dnc-candidate-announcement-2/c86a7c0d5d477f0a14b1eb7b7c64cdd04297cf51/castro.png",
         "party": "democratic"
+      },
+      {
+        "id": 11,
+        "name": "Mike Bloomberg",
+        "pic": "https://static01.nyt.com/newsgraphics/2020/01/06/candidate-videos-vi/58b5fcfb508762d11fb31d5c9920af4e88ea503d/bloomberg.png",
+        "party": "democratic"
       }
     ]
   };
@@ -181,7 +169,7 @@ export class DataService {
   currentFishMessage = this.fishSource.asObservable();
 
 
-  private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=F_TYe2wdaGg');
+  private videoMsgSource = new BehaviorSubject('https://www.youtube.com/watch?v=JKj4ziW6Euo');
   currentVideo = this.videoMsgSource.asObservable();
 
   private defaultIntSumm = this.initializeIntSummaryObj();
