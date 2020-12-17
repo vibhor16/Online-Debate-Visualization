@@ -29,7 +29,7 @@ export class RightSectionFishComponent implements OnInit {
 
   drawFishDiagram(all_tag_entries_topics): void {
     document.getElementById("mydiv").innerHTML = "";
-    var margin = {top: 0, right: 20, bottom: 0, left: 95},
+    var margin = {top: 0, right: 20, bottom: 40, left: 95},
     width = document.getElementById("mydiv").clientWidth - margin.left - margin.right,
     height = document.getElementById("mydiv").clientHeight - margin.top - margin.bottom-50;
 
@@ -130,6 +130,15 @@ export class RightSectionFishComponent implements OnInit {
   //   y.domain([0, d3.max(data, function(d) { return d.sales; })]);
     y.domain(people);
 
+    svg.selectAll(".time-axis").remove();
+    // Draw the axis
+
+    svg
+    .append("g")
+    .attr("class","time-axis")
+    .attr("transform", "translate(0,"+height+")")      // This controls the vertical position of the Axis
+    .call(d3.axisBottom(x).ticks(10).tickFormat(function(d) { return Math.floor(d/60)+":"+(d%60);}));
+
     // append the rectangles for the bar chart
     var pady = (height - y(people[0]))/2;
 
@@ -186,9 +195,9 @@ export class RightSectionFishComponent implements OnInit {
 
 
     // add the x Axis
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+    // svg.append("g")
+    //     .attr("transform", "translate(0," + height + ")")
+    //     .call(d3.axisBottom(x));
 
     // add the y Axis
     let yaxis = svg.append("g")
